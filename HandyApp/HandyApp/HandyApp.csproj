@@ -11,8 +11,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Acr.Core" Version="3.0.1" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
+    <PackageReference Include="Acr.XamForms" Version="4.0.1" />
     <PackageReference Include="LiveXAML" Version="2.1.59" />
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.8055-pre1" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.0.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.0.0.62955-pre2" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Pages\ListAdapters.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
