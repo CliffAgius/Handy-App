@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Xamarin.Forms;
 using Acr.UserDialogs;
 using System.Reactive.Linq;
 using ReactiveUI;
@@ -19,10 +18,9 @@ namespace HandyApp.ViewModels
         public ObservableList<ScanResultViewModel> Devices { get; } = new ObservableList<ScanResultViewModel>();
         public ObservableCollection<IAdapter> Adapters { get; } = new ObservableCollection<IAdapter>();
         private readonly IUserDialogs dialogs;
-        IAdapterScanner adapterScanner;
+        readonly IAdapterScanner adapterScanner;
         IAdapter adapter;
         IDisposable scan;
-        IDevice device;
 
         public ICommand ScanCommand { get; }
         public ICommand ItemTappedCommand { get; private set; }
@@ -44,7 +42,7 @@ namespace HandyApp.ViewModels
 
             CrossBleAdapter.Current.WhenStatusChanged().Subscribe(status => { IsBusy = adapter.IsScanning; });
 
-            this.ScanCommand = ReactiveCommand.Create(() =>
+            ScanCommand = ReactiveCommand.Create(() =>
             {
                 if (IsScanning)
                 {
@@ -92,11 +90,11 @@ namespace HandyApp.ViewModels
                 }
             });
 
-            this.OpenSettings = ReactiveCommand.Create(() =>
+            OpenSettings = ReactiveCommand.Create(() =>
             {
-                if (this.adapter.Features.HasFlag(AdapterFeatures.OpenSettings))
+                if (adapter.Features.HasFlag(AdapterFeatures.OpenSettings))
                 {
-                    this.adapter.OpenSettings();
+                    adapter.OpenSettings();
                 }
                 else
                 {
@@ -104,7 +102,7 @@ namespace HandyApp.ViewModels
                 }
             });
 
-            this.ItemTappedCommand = ReactiveCommand.Create<ScanResultViewModel>(async SelectedDevice =>
+            ItemTappedCommand = ReactiveCommand.Create<ScanResultViewModel>(async SelectedDevice =>
             {
                 var pickedDevice = SelectedDevice.Device;
                 await App.NavigateToAsync(new DeviceConnectionView(pickedDevice), true).ConfigureAwait(false);
@@ -117,20 +115,19 @@ namespace HandyApp.ViewModels
                    .FindAdapters()
                    .ObserveOn(RxApp.MainThreadScheduler)
                    .Subscribe(
-                       this.Adapters.Add,
+                       Adapters.Add,
                        ex => dialogs.Alert(ex.ToString(), "Error"),
-                       async () =>
+                       () =>
                        {
-                           this.IsBusy = false;
-                           switch (this.Adapters.Count)
+                           IsBusy = false;
+                           switch (Adapters.Count)
                            {
                                case 0:
                                    dialogs.Alert("No BluetoothLE Adapters Found");
                                    break;
 
                                case 1:
-                                   adapter = this.Adapters.First();
-                                   //await navigationService.NavToAdapter(adapter);
+                                   adapter = Adapters.First();
                                    break;
                            }
                        }
@@ -139,10 +136,10 @@ namespace HandyApp.ViewModels
 
         void ToggleAdapter()
         {
-            if (this.adapter.CanControlAdapterState())
+            if (adapter.CanControlAdapterState())
             {
-                var poweredOn = this.adapter.Status == AdapterStatus.PoweredOn;
-                this.adapter.SetAdapterState(!poweredOn);
+                var poweredOn = adapter.Status == AdapterStatus.PoweredOn;
+                adapter.SetAdapterState(!poweredOn);
             }
             else
             {
