@@ -2,52 +2,14 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
        xmlns:local="clr-namespace:HandyApp"
-       RouteHost="companyname.com"
+       RouteHost="HandyApp.com"
        RouteScheme="app"
        Route="HandyApp"
-       FlyoutBehavior="Disabled"
+       FlyoutBehavior="Flyout"
        Title="HandyApp"
        x:Class="HandyApp.AppShell">
 
-    <!--
-        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        XXXXXXXX|                            |XXXXXXXX
-        XXXXXXX'                              'XXXXXXX
-        XXXXXx.                                .xNXXXX
-        XXXNo.        ,ll;.        .;ll,        .oNXXX
-        XXX|.         ,OXNo.      .oNXO,          cXXX
-        XX|            'XXNx.    .xNXX'            |XX
-        X|              .xXXX.  .XXXx.              |X
-        |                .xXXOllOXXx.                |
-        |                .xXXXccXXXx.                |
-        X|              .XXXx.  .xXXX.              |X
-        XXc            ,OXNd.    .dNXO,            cXX
-        XXXl.         ;XXXo.      .oNXX;         .lXXX
-        XXXNd.        'cc,          ,cc'        .dNXXX
-        XXXXXx.                                .xXXXXX
-        XXXXXXO'                              'OXXXXXX
-        XXXXXXXX|                            |XXXXXXXX
-        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-        Shell is an all new way to quickly get started with your application. There are 3 levels to a Shell app:
-        * ShellItem: populates the Flyout menu along with special menu items
-        * ShellSection: groups of 1 or more ContentPage displayed as bottom tabs
-        * ShellContent: a ContentPage host. Multiple ShellContent within a ShellSection are navigable by top tabs
-
-        For more details about building apps with Shell, visit these resources:
-        * MSDN Article: https://aka.ms/xf-msdn
-        * Preview Documentation: https://aka.ms/xf-shell-docs
-        * Blog Introduction: https://aka.ms/xf-40-blog
-
-        PLEASE give us feedback on your experience: good, bad, and ugly.
-        https://www.surveymonkey.com/r/VTJNWTM
-
-        Thanks for trying out this preview! 
-
-        - David Ortinau, Senior Program Manager for Mobile Dev Tools [david.ortinau@microsoft.com]
-    -->
-
-    <!-- 
+       <!-- 
         Styles and Resources 
     
     -->
@@ -69,41 +31,25 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <!-- Your Pages -->
-    <ShellItem>
-        <ShellContent>
-            <local:MainPage/>
-        </ShellContent>
-    </ShellItem>
-
-    <!-- Optional Templates 
-    // These may be provided inline as below or as separate classes.
-
-    // This header appears at the top of the Flyout.
     <Shell.FlyoutHeader>
-		<DataTemplate>
-            <Grid>ContentHere</Grid>
-        </DataTemplate>
-	</Shell.FlyoutHeader>
+        <StackLayout Padding="0,20,0,10"
+                     BackgroundColor="White">
+            <!--<Image Source="{local:ImageResource HandyApp.Images.logo.jpg}"
+                   Aspect="AspectFit"
+                   VerticalOptions="StartAndExpand"
+                   HorizontalOptions="FillAndExpand" />-->
+        </StackLayout>
+    </Shell.FlyoutHeader>
 
-    // ItemTemplate is for ShellItems as displayed in a Flyout
-    <Shell.ItemTemplate>
-        <DataTemplate>
-            <ContentView>
-                Bindable Properties: Title, Icon
-            </ContentView>
-        </DataTemplate>
-    </Shell.ItemTemplate>
-
-    // MenuItemTemplate is for MenuItems as displayed in a Flyout
-    <Shell.MenuItemTemplate>
-        <DataTemplate>
-            <ContentView>
-                Bindable Properties: Text, Icon
-            </ContentView>
-        </DataTemplate>
-    </Shell.MenuItemTemplate>
-
-    -->
+    <!-- Your Pages -->
+    <ShellItem Route="main"
+               Title="Home"
+               Shell.TabBarIsVisible="True"
+               Shell.NavBarIsVisible="True">
+        <ShellSection>
+            <ShellContent Title="Home"
+                          ContentTemplate="{DataTemplate local:ListAdapters}" />
+        </ShellSection>
+    </ShellItem>
 
 </Shell>

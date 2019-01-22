@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HandyApp.Pages
+namespace HandyApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListAdapters : ContentPage
