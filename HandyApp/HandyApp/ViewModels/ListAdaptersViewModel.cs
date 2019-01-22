@@ -10,6 +10,7 @@ using ReactiveUI;
 using Acr.Collections;
 using System.Linq;
 using System.Reactive.Disposables;
+using HandyApp.Views;
 
 namespace HandyApp.ViewModels
 {
@@ -21,6 +22,7 @@ namespace HandyApp.ViewModels
         IAdapterScanner adapterScanner;
         IAdapter adapter;
         IDisposable scan;
+        IDevice device;
 
         public ICommand ScanCommand { get; }
         public ICommand ItemTappedCommand { get; private set; }
@@ -32,9 +34,6 @@ namespace HandyApp.ViewModels
         public ListAdaptersViewModel()
         {
             adapterScanner = CrossBleAdapter.AdapterScanner;
-            ItemTappedCommand = ReactiveCommand.Create<ScanResultViewModel>(x => {
-                var test = "d";
-            });
             GetAdapter();
             if (adapter.Status != AdapterStatus.PoweredOn)
             {
@@ -105,11 +104,11 @@ namespace HandyApp.ViewModels
                 }
             });
 
-        }
-
-        private void HandleItemTapped(ScanResultViewModel obj)
-        {
-            throw new NotImplementedException();
+            this.ItemTappedCommand = ReactiveCommand.Create<ScanResultViewModel>(async SelectedDevice =>
+            {
+                var pickedDevice = SelectedDevice.Device;
+                await App.NavigateToAsync(new DeviceConnectionView(pickedDevice), true).ConfigureAwait(false);
+            });
         }
 
         void GetAdapter()

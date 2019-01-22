@@ -10,16 +10,6 @@ namespace HandyApp.ViewModels
 {
     public abstract class ViewModel : ReactiveObject, INotifyPropertyChanged
     {
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        //public void RaisePropertyChanged(params string[] propertyNames)
-        //{
-        //    foreach (var propertyName in propertyNames)
-        //    {
-        //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        //    }
-        //}
-
         public bool IsBusy { get; set; }
 
         protected CompositeDisposable DestroyWith { get; } = new CompositeDisposable();

@@ -47,8 +47,8 @@
                Shell.TabBarIsVisible="True"
                Shell.NavBarIsVisible="True">
         <ShellSection>
-            <ShellContent Title="Home"
-                          ContentTemplate="{DataTemplate local:ListAdapters}" />
+            <ShellContent Title="BT Adapters" FlyoutIcon="BT.png"
+                          ContentTemplate="{DataTemplate local:ListAdaptersView}" />
         </ShellSection>
     </ShellItem>
 

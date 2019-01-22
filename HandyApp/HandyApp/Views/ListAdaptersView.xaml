@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:Acr.XamForms;assembly=Acr.XamForms"
+             xmlns:converter="clr-namespace:HandyApp.Convertors"
+             x:Class="HandyApp.ListAdaptersView"
+             Title="List BT Devices">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:TappedItemEventArgsToTappedItemConverter x:Key="ItemTappedConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Scan"
+                     Command="{Binding ScanCommand}"
+                     Icon="bluetooth.png" />
+        <ToolbarItem Text="Settings"
+                     Command="{Binding OpenSettings}"
+                     Icon="settings.png" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <ActivityIndicator IsVisible="{Binding IsScanning}"
+                                   IsRunning="{Binding IsScanning}"
+                                   VerticalOptions="Center" />
+                <ListView ItemsSource="{Binding Devices}" IsPullToRefreshEnabled="True"
+                          RefreshCommand="{Binding ScanCommand}"
+                          IsRefreshing="{Binding IsScanning, Mode=OneTime}">
+                    <ListView.Behaviors>
+                        <behaviors:ItemTappedCommandBehavior Command="{Binding ItemTappedCommand}" />
+                    </ListView.Behaviors>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
