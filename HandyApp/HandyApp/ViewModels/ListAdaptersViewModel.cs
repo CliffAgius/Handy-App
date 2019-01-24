@@ -10,6 +10,7 @@ using Acr.Collections;
 using System.Linq;
 using System.Reactive.Disposables;
 using HandyApp.Views;
+using Xamarin.Forms;
 
 namespace HandyApp.ViewModels
 {
@@ -17,10 +18,10 @@ namespace HandyApp.ViewModels
     {
         public ObservableList<ScanResultViewModel> Devices { get; } = new ObservableList<ScanResultViewModel>();
         public ObservableCollection<IAdapter> Adapters { get; } = new ObservableCollection<IAdapter>();
-        private readonly IUserDialogs dialogs;
         readonly IAdapterScanner adapterScanner;
         IAdapter adapter;
         IDisposable scan;
+        IUserDialogs Dialogs;
 
         public ICommand ScanCommand { get; }
         public ICommand ItemTappedCommand { get; private set; }
@@ -29,84 +30,106 @@ namespace HandyApp.ViewModels
         public string SelectedDevice { get; set; }
         public string AdapterName { get; set; }
 
-        public ListAdaptersViewModel()
+        public ListAdaptersViewModel(IUserDialogs dialogs)
         {
-            adapterScanner = CrossBleAdapter.AdapterScanner;
-            GetAdapter();
-            if (adapter.Status != AdapterStatus.PoweredOn)
+            try
             {
-                ToggleAdapter();
-            }
-
-            AdapterName = adapter.Status.ToString();
-
-            CrossBleAdapter.Current.WhenStatusChanged().Subscribe(status => { IsBusy = adapter.IsScanning; });
-
-            ScanCommand = ReactiveCommand.Create(() =>
-            {
-                if (IsScanning)
+                IsScanning = false;
+                Dialogs = dialogs;
+                adapterScanner = CrossBleAdapter.AdapterScanner;
+                GetAdapter();
+                if (adapter.Status != AdapterStatus.PoweredOn)
                 {
-                    scan?.Dispose();
-                    IsScanning = false;
+                    ToggleAdapter();
                 }
-                else
+
+                AdapterName = adapter.Status.ToString();
+
+                CrossBleAdapter.Current.WhenStatusChanged().Subscribe(status => { IsBusy = adapter.IsScanning; });
+
+                ScanCommand = ReactiveCommand.Create(() =>
                 {
-                    Devices.Clear();
+                    if (IsScanning)
+                    {
+                        scan?.Dispose();
+                        IsScanning = false;
+                    }
+                    else
+                    {
+                        Devices.Clear();
 
-                    IsScanning = true;
-                    scan = adapter
-                        .Scan()
-                        .Buffer(TimeSpan.FromSeconds(1))
-                        .ObserveOn(RxApp.MainThreadScheduler)
-                        .Subscribe(
-                            results =>
-                            {
-                                var list = new List<ScanResultViewModel>();
-                                foreach (var result in results)
+                        IsScanning = true;
+                        scan = adapter
+                            .Scan()
+                            .Buffer(TimeSpan.FromSeconds(1))
+                            .ObserveOn(RxApp.MainThreadScheduler)
+                            .Subscribe(
+                                results =>
                                 {
-                                    var dev = Devices.FirstOrDefault(x => x.Uuid.Equals(result.Device.Uuid));
+                                    var list = new List<ScanResultViewModel>();
+                                    foreach (var result in results)
+                                    {
+                                        var dev = Devices.FirstOrDefault(x => x.Uuid.Equals(result.Device.Uuid));
 
-                                    if (dev != null)
-                                    {
-                                        dev.TrySet(result);
-                                    }
-                                    else
-                                    {
-                                        dev = new ScanResultViewModel();
-                                        dev.TrySet(result);
-                                        if (dev.Name != null)
+                                        if (dev != null)
                                         {
-                                            //Check there is a name to display otherwise no point adding to the list...
-                                            list.Add(dev);
+                                            dev.TrySet(result);
+                                        }
+                                        else
+                                        {
+                                            dev = new ScanResultViewModel();
+                                            dev.TrySet(result);
+                                            if (dev.Name != null)
+                                            {
+                                                //Check there is a name to display otherwise no point adding to the list...
+                                                list.Add(dev);
+                                            }
                                         }
                                     }
-                                }
-                                if (list.Any())
-                                    Devices.AddRange(list);
-                            },
-                            ex => dialogs.Alert(ex.ToString(), "ERROR")
-                        )
-                        .DisposeWith(DeactivateWith);
-                }
-            });
+                                    if (list.Any())
+                                        Devices.AddRange(list);
+                                },
+                                ex => Dialogs.Alert(ex.ToString(), "ERROR")
+                            )
+                            .DisposeWith(DeactivateWith);
+                    }
+                });
 
-            OpenSettings = ReactiveCommand.Create(() =>
-            {
-                if (adapter.Features.HasFlag(AdapterFeatures.OpenSettings))
+                OpenSettings = ReactiveCommand.Create(() =>
                 {
-                    adapter.OpenSettings();
-                }
-                else
-                {
-                    dialogs.Alert("Cannot open bluetooth settings");
-                }
-            });
+                    if (adapter.Features.HasFlag(AdapterFeatures.OpenSettings))
+                    {
+                        adapter.OpenSettings();
+                    }
+                    else
+                    {
+                        Dialogs.Alert("Cannot open bluetooth settings");
+                    }
+                });
 
-            ItemTappedCommand = ReactiveCommand.Create<ScanResultViewModel>(async SelectedDevice =>
+                ItemTappedCommand = ReactiveCommand.Create<ScanResultViewModel>(async SelectedDevice =>
+                {
+                    try
+                    {
+                        //Save the selected device to the Global Device holder...
+                        App.device = SelectedDevice.Device;
+                        //Dispose of the Scanner so that it stop scanning...
+                        scan.Dispose();
+                        //Navigate to the Device View...
+                        await App.NavigateToAsync(new DeviceConnectionView()).ConfigureAwait(false);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Dialogs.Alert($"Sorry the navigation has failed. {ex.Message}");
+                    }
+                });
+            }
+            catch (Exception ex)
             {
-                var pickedDevice = SelectedDevice.Device;
-                await App.NavigateToAsync(new DeviceConnectionView(pickedDevice), true).ConfigureAwait(false);
-            });
+                Dialogs.Alert($"Sorry there is a fault - {ex.Message}");
+            }
+
         }
 
         void GetAdapter()
@@ -116,14 +139,14 @@ namespace HandyApp.ViewModels
                    .ObserveOn(RxApp.MainThreadScheduler)
                    .Subscribe(
                        Adapters.Add,
-                       ex => dialogs.Alert(ex.ToString(), "Error"),
+                       ex => Dialogs.Alert(ex.ToString(), "Error"),
                        () =>
                        {
                            IsBusy = false;
                            switch (Adapters.Count)
                            {
                                case 0:
-                                   dialogs.Alert("No BluetoothLE Adapters Found");
+                                   Dialogs.Alert("No BluetoothLE Adapters Found");
                                    break;
 
                                case 1:
@@ -143,7 +166,7 @@ namespace HandyApp.ViewModels
             }
             else
             {
-                dialogs.Alert("Cannot change bluetooth adapter state");
+                Dialogs.Alert("Cannot change bluetooth adapter state");
             }
         }
 

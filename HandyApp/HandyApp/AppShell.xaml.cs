@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HandyApp.Views;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -12,6 +13,8 @@ namespace HandyApp
         public AppShell()
         {
             InitializeComponent();
+
+            Routing.RegisterRoute("deviceconnection", typeof(DeviceConnectionView));
         }
 
         internal async Task CloseFlyoutAsync()

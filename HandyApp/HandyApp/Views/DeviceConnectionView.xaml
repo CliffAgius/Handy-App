@@ -1,13 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:Acr.XamForms;assembly=Acr.XamForms"
+             xmlns:converter="clr-namespace:HandyApp.Convertors"
              x:Class="HandyApp.Views.DeviceConnectionView"
-             Title="BT Device">
+             Title="{Binding DeviceName}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:TappedItemEventArgsToTappedItemConverter x:Key="ItemTappedConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Scan"
+                     Command="{Binding PairToDevice}"
+                     Icon="bluetooth.png" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="BT Device details and connection..."
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Enter UART Command:" />
+                <Entry x:Name="entry"
+                       Text=""
+                       Placeholder="UART Command"
+                       PlaceholderColor="LightGray"
+                       IsSpellCheckEnabled="False" />
+            </StackLayout>
+            <Button Text="SEND"
+                    Command="{Binding UARTCommand}"
+                    CommandParameter="{Binding Source={x:Reference entry}, Path=Text}"
+                    HorizontalOptions="Center" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

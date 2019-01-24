@@ -1,4 +1,4 @@
-﻿using Plugin.BluetoothLE;
+﻿using Acr.UserDialogs;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,10 +7,10 @@ namespace HandyApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DeviceConnectionView : ContentPage
     {
-        public DeviceConnectionView(IDevice device)
+        public DeviceConnectionView()
         {
             InitializeComponent();
-            BindingContext = new ViewModels.DeviceConnectionViewModel(device);
+            BindingContext = new ViewModels.DeviceConnectionViewModel(UserDialogs.Instance);
         }
     }
 }

@@ -1,7 +1,8 @@
-﻿using Xamarin.Forms;
+﻿using Acr.UserDialogs;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HandyApp
+namespace HandyApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListAdaptersView : ContentPage
@@ -9,8 +10,9 @@ namespace HandyApp
         public ListAdaptersView()
         {
             InitializeComponent();
-
-            BindingContext = new ViewModels.ListAdaptersViewModel();
+            //Asign the Navigation root so that the Nav system knows wher to start from...
+            App.NavigationRoot = this;
+            BindingContext = new ViewModels.ListAdaptersViewModel(UserDialogs.Instance);
         }
     }
 }

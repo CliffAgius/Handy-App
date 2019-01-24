@@ -1,18 +1,17 @@
-﻿using System;
+﻿using Plugin.BluetoothLE;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace HandyApp
 {
     public partial class App : Application
     {
         private static NavigableElement navigationRoot;
+        public static IDevice device { get; set; }
 
         public App()
         {
             InitializeComponent();
-
             MainPage = new AppShell();
         }
 

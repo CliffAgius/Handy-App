@@ -2,9 +2,9 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
        xmlns:local="clr-namespace:HandyApp"
-       RouteHost="HandyApp.com"
+       Route="handyapp"
+       RouteHost="casoftware.com"
        RouteScheme="app"
-       Route="HandyApp"
        FlyoutBehavior="Flyout"
        Title="HandyApp"
        x:Class="HandyApp.AppShell">
@@ -34,22 +34,23 @@
     <Shell.FlyoutHeader>
         <StackLayout Padding="0,20,0,10"
                      BackgroundColor="White">
-            <!--<Image Source="{local:ImageResource HandyApp.Images.logo.jpg}"
+            <Image Source="{local:ImageResource HandyApp.Images.OKHand.png}"
                    Aspect="AspectFit"
                    VerticalOptions="StartAndExpand"
-                   HorizontalOptions="FillAndExpand" />-->
+                   HorizontalOptions="FillAndExpand" />
         </StackLayout>
     </Shell.FlyoutHeader>
 
     <!-- Your Pages -->
     <ShellItem Route="main"
-               Title="Home"
+               FlyoutIcon="bluetooth.png"
+               Title="BT Connection"
                Shell.TabBarIsVisible="True"
                Shell.NavBarIsVisible="True">
         <ShellSection>
-            <ShellContent Title="BT Adapters" FlyoutIcon="BT.png"
-                          ContentTemplate="{DataTemplate local:ListAdaptersView}" />
+            <ShellContent Title="BT Adapters"
+                          FlyoutIcon="bluetooth.png"
+                          ContentTemplate="{DataTemplate local:Views.ListAdaptersView}" />
         </ShellSection>
     </ShellItem>
-
 </Shell>
