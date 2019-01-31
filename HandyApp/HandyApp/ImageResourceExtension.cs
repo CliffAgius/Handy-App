@@ -8,7 +8,7 @@ using Xamarin.Forms;
 namespace HandyApp
 {
     /// <summary>
-    /// DO NOT FORGET THAT YOU NEED TO MAKE THE IMAGE FILES "Embedded Resource Files" for thsi reflection system to find them...
+    /// DO NOT FORGET THAT YOU NEED TO MAKE THE IMAGE FILES "Embedded Resource Files" for this reflection system to find them...
     /// </summary>
     [ContentProperty(nameof(Source))]
     public class ImageResourceExtension : IMarkupExtension

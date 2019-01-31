@@ -11,6 +11,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\okhand.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\okhand.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Acr.Core" Version="3.0.1" />
     <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
     <PackageReference Include="Acr.XamForms" Version="4.0.1" />
@@ -24,7 +32,6 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Images\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +45,9 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Views\DeviceConnectionView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\HandControlView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ListAdaptersView.xaml">

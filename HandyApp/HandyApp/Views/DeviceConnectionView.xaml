@@ -20,18 +20,25 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Enter UART Command:" />
-                <Entry x:Name="entry"
-                       Text=""
-                       Placeholder="UART Command"
-                       PlaceholderColor="LightGray"
-                       IsSpellCheckEnabled="False" />
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Enter UART Command:" />
+                    <Entry x:Name="entry"
+                           Text=""
+                           Placeholder="UART Command"
+                           PlaceholderColor="LightGray"
+                           IsSpellCheckEnabled="False" />
+                </StackLayout>
+                <Button Text="SEND"
+                        Command="{Binding UARTCommand}"
+                        CommandParameter="{Binding Source={x:Reference entry}, Path=Text}"
+                        HorizontalOptions="Center" />
             </StackLayout>
-            <Button Text="SEND"
-                    Command="{Binding UARTCommand}"
-                    CommandParameter="{Binding Source={x:Reference entry}, Path=Text}"
-                    HorizontalOptions="Center" />
+            <StackLayout>
+                <ListView x:Name="listView"
+                          ItemsSource="{Binding BTDataRcvd}">
+                </ListView>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
