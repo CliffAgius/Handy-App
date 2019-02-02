@@ -143,16 +143,8 @@ namespace HandyApp.ViewModels
                        () =>
                        {
                            IsBusy = false;
-                           switch (Adapters.Count)
-                           {
-                               case 0:
-                                   Dialogs.Alert("No BluetoothLE Adapters Found");
-                                   break;
-
-                               case 1:
-                                   adapter = Adapters.First();
-                                   break;
-                           }
+                           if (Adapters.Count == 0) Dialogs.Alert("No BluetoothLE Adapters Found");
+                           else adapter = Adapters.First();
                        }
                    );
         }
