@@ -1,4 +1,5 @@
-﻿using System;
+using Syncfusion.ListView.XForms.iOS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,7 +25,8 @@ namespace HandyApp.iOS
         {
 
             global::Xamarin.Forms.Forms.SetFlags("Shell_Experimental", "Visual_Experimental", "CollectionView_Experimental");
-            global::Xamarin.Forms.Forms.Init();
+global::Xamarin.Forms.Forms.Init();
+SfListViewRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

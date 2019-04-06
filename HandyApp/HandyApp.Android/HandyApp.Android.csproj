@@ -72,6 +72,9 @@
     <PackageReference Include="ReactiveUI.XamForms">
       <Version>10.0.0-preview.3</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfListView">
+      <Version>17.1.0.38</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.ViewPager">
       <Version>28.0.0.1</Version>
     </PackageReference>

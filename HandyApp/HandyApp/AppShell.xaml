@@ -62,8 +62,12 @@
                           ContentTemplate="{DataTemplate local:Views.ListAdaptersView}" />
         </ShellSection>
     </ShellItem>
-    <ShellContent Title="Grips"
+    <ShellContent Title="Grip Selection"
                   FlyoutIcon="hand.png"
                   Icon="hand.png"
                   ContentTemplate="{DataTemplate local:Views.HandControlView}" />
+    <ShellContent Title="Grip Order"
+                  FlyoutIcon="hand_okay.png"
+                  Icon="hand_okay.png"
+                  ContentTemplate="{DataTemplate local:Views.GripListView}" />
 </Shell>
