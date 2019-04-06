@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandyApp.Views.HandControlView"
+             Title="Grips">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0"
+                   Grid.ColumnSpan="2" FontSize="Medium" TextColor="Blue">Select a button to toggle that grip.</Label>
+            <Button Grid.Row="1"
+                    Grid.Column="0"
+                    FontSize="Large"
+                    Text="Fist"></Button>
+            <Button Grid.Row="1"
+                    Grid.Column="1"
+                    FontSize="Large"
+                    Text="Palm"></Button>
+            <Button Grid.Row="2"
+                    Grid.Column="0" FontSize="Large"
+                    Text="Tripod" ></Button>
+            <Button Grid.Row="2"
+                    Grid.Column="1" FontSize="Large"
+                    Text="Pinch"></Button>
+            <Button Grid.Row="3"
+                    Grid.Column="0" FontSize="Large"
+                    Text="Point"></Button>
+            <Button Grid.Row="3"
+                    Grid.Column="1" FontSize="Large"
+                    Text="FANCY One"></Button>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

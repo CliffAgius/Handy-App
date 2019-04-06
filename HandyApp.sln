@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandyApp.Android", "HandyAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandyApp.iOS", "HandyApp\HandyApp.iOS\HandyApp.iOS.csproj", "{26BCA0ED-1BA4-46E1-B594-F0FBB692EF8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandyApp", "HandyApp\HandyApp\HandyApp.csproj", "{26DB3914-2DDB-4C85-A9B9-B8913A33D69B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandyApp", "HandyApp\HandyApp\HandyApp.csproj", "{26DB3914-2DDB-4C85-A9B9-B8913A33D69B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

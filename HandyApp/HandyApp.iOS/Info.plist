@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
+  <dict>
     <key>UIDeviceFamily</key>
     <array>
-        <integer>1</integer>
-        <integer>2</integer>
+      <integer>1</integer>
+      <integer>2</integer>
     </array>
     <key>UISupportedInterfaceOrientations</key>
     <array>
-        <string>UIInterfaceOrientationPortrait</string>
-        <string>UIInterfaceOrientationLandscapeLeft</string>
-        <string>UIInterfaceOrientationLandscapeRight</string>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
     <key>UISupportedInterfaceOrientations~ipad</key>
     <array>
-        <string>UIInterfaceOrientationPortrait</string>
-        <string>UIInterfaceOrientationPortraitUpsideDown</string>
-        <string>UIInterfaceOrientationLandscapeLeft</string>
-        <string>UIInterfaceOrientationLandscapeRight</string>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationPortraitUpsideDown</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
     <key>MinimumOSVersion</key>
     <string>9.0</string>
@@ -34,5 +34,25 @@
     <string>HandyApp</string>
     <key>XSAppIconAssets</key>
     <string>Assets.xcassets/AppIcon.appiconset</string>
-</dict>
+
+    <!--Added for BT to work...-->
+    <key>UIBackgroundModes</key>
+    <array>
+      <!--for connecting to devices (client)-->
+      <string>bluetooth-central</string>
+
+      <!--for server configurations if needed-->
+      <string>bluetooth-peripheral</string>
+    </array>
+
+    <!--To add a description to the Bluetooth request message (on iOS 10 this is required!)-->
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>YOUR CUSTOM MESSAGE</string>
+
+    <!--Needed to make the Materials font pack work-->
+    <key>UIAppFonts</key>
+    <array>
+      <string>materialdesignicons-webfont.ttf</string>
+    </array>
+  </dict>
 </plist>

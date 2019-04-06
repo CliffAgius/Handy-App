@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:synfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandyApp.Views.GripListView">
+
+    <StackLayout>
+        <synfusion:SfListView x:Name="listView" 
+                         ItemsSource="{Binding GripsCollection}"  ItemSize="60"  
+                         DragStartMode="OnHold" HorizontalOptions="CenterAndExpand">
+            <synfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="#262728" Padding="10" Margin="5">
+                        <Label TextColor="#474747" FontSize="Medium" Text="{Binding GripName}" HorizontalTextAlignment="Center" />
+                    </Frame>
+                </DataTemplate>
+            </synfusion:SfListView.ItemTemplate>
+        </synfusion:SfListView>
+        <Button Text="Save" TextColor="White" BackgroundColor="#2164a8" Padding="40" Margin="30" VerticalOptions="End" HorizontalOptions="Center"/>
+    </StackLayout>
+</ContentPage>

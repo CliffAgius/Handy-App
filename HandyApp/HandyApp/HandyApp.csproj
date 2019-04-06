@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -11,20 +11,49 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\okhand.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\okhand.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Acr.Core" Version="3.0.1" />
     <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
     <PackageReference Include="Acr.XamForms" Version="4.0.1" />
     <PackageReference Include="LiveXAML" Version="2.1.59" />
+    <PackageReference Include="Plugin.BluetoothLE" Version="6.2.3" />
+    <PackageReference Include="ReactiveUI.Fody" Version="10.0.0-preview.3" />
+    <PackageReference Include="ReactiveUI.XamForms" Version="10.0.0-preview.3" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.1.0.38" />
     <PackageReference Include="Xamarin.Forms" Version="4.0.0.62955-pre2" />
     <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Compile Update="Views\ListAdaptersView.xaml.cs">
+      <DependentUpon>ListAdaptersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GripListView.xaml.cs">
+      <DependentUpon>GripListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Pages\ListAdapters.xaml">
+    <EmbeddedResource Update="Views\DeviceConnectionView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\HandControlView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ListAdaptersView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\GripListView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
