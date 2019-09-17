@@ -12,7 +12,7 @@ namespace HandyApp
         public App()
         {
             //Register Syncfusion license
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("ODU4MDRAMzEzNzJlMzEyZTMwTFZaM1FGV0VGY3Rkb2ZzTjQ4RzFPMU1nTHJzWk5GR2pOcXh5Wm5iSXVRWT0=");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTQ0MTgxQDMxMzcyZTMyMmUzMHBFSmJzcDM1Z0podkVNYWl2bnYweEh2eE5YVytlN1RnanhabHhvN1lRbW89");
 
             InitializeComponent();
             MainPage = new AppShell();
