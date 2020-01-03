@@ -1,4 +1,5 @@
-﻿using Plugin.BluetoothLE;
+﻿using HandyApp.Views;
+using Plugin.BluetoothLE;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -12,7 +13,7 @@ namespace HandyApp
         public App()
         {
             //Register Syncfusion license
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTQ0MTgxQDMxMzcyZTMyMmUzMHBFSmJzcDM1Z0podkVNYWl2bnYweEh2eE5YVytlN1RnanhabHhvN1lRbW89");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTcyNDY0QDMxMzcyZTMzMmUzMGpQaEhtTXRBQnNreTdHZ2dDNmRJQWdpZlY2Y01lK3VDZXp4MHl5NHBZb2s9");
 
             InitializeComponent();
             MainPage = new AppShell();

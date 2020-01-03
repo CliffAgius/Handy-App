@@ -2,6 +2,7 @@
 using HandyApp.Models;
 using System;
 using System.Collections.ObjectModel;
+using Xamarin.Forms;
 
 namespace HandyApp.ViewModels
 {
