@@ -12,8 +12,6 @@ namespace HandyApp.Views
         public HomeView()
         {
             InitializeComponent();
-            //Asign the Navigation root so that the Nav system knows wher to start from...
-            App.NavigationRoot = this;
         }
     }
 }

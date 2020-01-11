@@ -1,4 +1,4 @@
-﻿using Plugin.BluetoothLE;
+﻿//using Plugin.BluetoothLE;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +8,7 @@ namespace HandyApp.ViewModels
 {
     public class ScanResultViewModel
     {
-        public IDevice Device { get; set; }
+        //public IDevice Device { get; set; }
 
         public string Name { get; set; }
         public bool IsConnected { get;set; }
@@ -21,42 +21,42 @@ namespace HandyApp.ViewModels
         public int TxPower { get; set; }
 
 
-        public bool TrySet(IScanResult result)
-        {
-            var response = false;
+        //public bool TrySet(IScanResult result)
+        //{
+        //    var response = false;
 
-            if (this.Uuid == Guid.Empty)
-            {
-                this.Device = result.Device;
-                this.Uuid = this.Device.Uuid;
+        //    if (this.Uuid == Guid.Empty)
+        //    {
+        //        this.Device = result.Device;
+        //        this.Uuid = this.Device.Uuid;
 
-                response = true;
-            }
+        //        response = true;
+        //    }
 
-            try
-            {
-                if (this.Uuid == result.Device.Uuid)
-                {
-                    response = true;
+        //    try
+        //    {
+        //        if (this.Uuid == result.Device.Uuid)
+        //        {
+        //            response = true;
 
-                    this.Name = result.Device.Name;
-                    this.Rssi = result.Rssi;
+        //            this.Name = result.Device.Name;
+        //            this.Rssi = result.Rssi;
 
-                    var ad = result.AdvertisementData;
-                    this.ServiceCount = ad.ServiceUuids?.Length ?? 0;
-                    this.IsConnectable = ad.IsConnectable;
-                    this.LocalName = ad.LocalName;
-                    this.TxPower = ad.TxPower;
-                    this.ManufacturerData = ad.ManufacturerData == null
-                        ? null
-                        : BitConverter.ToString(ad.ManufacturerData);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.ToString());
-            }
-            return response;
-        }
+        //            var ad = result.AdvertisementData;
+        //            this.ServiceCount = ad.ServiceUuids?.Length ?? 0;
+        //            this.IsConnectable = ad.IsConnectable;
+        //            this.LocalName = ad.LocalName;
+        //            this.TxPower = ad.TxPower;
+        //            this.ManufacturerData = ad.ManufacturerData == null
+        //                ? null
+        //                : BitConverter.ToString(ad.ManufacturerData);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.ToString());
+        //    }
+        //    return response;
+        //}
     }
 }
