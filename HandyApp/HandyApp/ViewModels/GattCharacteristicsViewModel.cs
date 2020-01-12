@@ -1,19 +1,10 @@
-﻿using Acr;
-using Acr.UserDialogs;
-//using Plugin.BluetoothLE;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Text;
-using System.Threading;
-using Xamarin.Forms;
-using ReactiveUI;
+﻿//using Plugin.BluetoothLE;
+
+using MvvmHelpers;
 
 namespace HandyApp.ViewModels
 {
-    public class GattCharacteristicViewModel : ViewModel
+    public class GattCharacteristicViewModel : BaseViewModel
     {
         //IDisposable watcher;
 

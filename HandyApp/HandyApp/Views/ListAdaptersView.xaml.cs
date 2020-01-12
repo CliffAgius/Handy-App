@@ -1,4 +1,6 @@
 ﻿using Acr.UserDialogs;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,6 +12,7 @@ namespace HandyApp.Views
         public ListAdaptersView()
         {
             InitializeComponent();
+
             BindingContext = new ViewModels.ListAdaptersViewModel(UserDialogs.Instance);
         }
     }

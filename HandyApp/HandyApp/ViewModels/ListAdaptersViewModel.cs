@@ -1,177 +1,191 @@
 ﻿//using Plugin.BluetoothLE;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Acr.UserDialogs;
-using System.Reactive.Linq;
-using ReactiveUI;
-//using Acr.Collections;
-using System.Linq;
-using System.Reactive.Disposables;
-using HandyApp.Views;
 using Xamarin.Forms;
+using Plugin.BLE;
+using Plugin.BLE.Abstractions.Contracts;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using MvvmHelpers;
+using Xamarin.Essentials;
+using Plugin.BLE.Abstractions.EventArgs;
+using System.Linq;
+using Plugin.Permissions.Abstractions;
+using System.Threading;
+using Plugin.Permissions;
 
 namespace HandyApp.ViewModels
 {
-    public class ListAdaptersViewModel : ViewModel
+    public class ListAdaptersViewModel : BaseViewModel
     {
-        //public ObservableList<ScanResultViewModel> Devices { get; } = new ObservableList<ScanResultViewModel>();
-        //public ObservableCollection<IAdapter> Adapters { get; } = new ObservableCollection<IAdapter>();
-        //readonly IAdapterScanner adapterScanner;
-        //IAdapter adapter;
-        IDisposable scan;
         IUserDialogs Dialogs;
+        IBluetoothLE ble;
+        IAdapter Adapter;
+        public bool IsStateOn => ble.IsOn;
+        public bool IsRefreshing => Adapter.IsScanning;
 
-        public ICommand ScanCommand { get; }
-        public ICommand ItemTappedCommand { get; private set; }
-        public ICommand OpenSettings { get; }
+        public ICommand StartScanBtn { get; private set; }
+        public ICommand StopScanBtn { get; private set; }
 
-        public string SelectedDevice { get; set; }
-        public string AdapterName { get; set; }
+        public BluetoothState BluetoothState { get; set; }
+
+        public ObservableCollection<DeviceListItemViewModel> Devices { get; set; } = new ObservableCollection<DeviceListItemViewModel>();
 
         public ListAdaptersViewModel(IUserDialogs dialogs)
         {
-            //try
-            //{
-            //    IsScanning = false;
-            //    Dialogs = dialogs;
-            //    adapterScanner = CrossBleAdapter.AdapterScanner;
-            //    GetAdapter();
-            //    if (adapter.Status != AdapterStatus.PoweredOn)
-            //    {
-            //        ToggleAdapter();
-            //    }
+            Dialogs = dialogs;
+            ble = CrossBluetoothLE.Current;
+            Adapter = CrossBluetoothLE.Current.Adapter;
+            BluetoothState = ble.State;
+            IsScanning = Adapter.IsScanning.ToString();
 
-            //    AdapterName = adapter.Status.ToString();
+            //Events
+            Adapter.DeviceDiscovered += OnDeviceDiscovered;
+            ble.StateChanged += OnStateChanged;
 
-            //    CrossBleAdapter.Current.WhenStatusChanged().Subscribe(status => { IsBusy = adapter.IsScanning; });
-
-            //    ScanCommand = ReactiveCommand.Create(() =>
-            //    {
-            //        if (IsScanning)
-            //        {
-            //            scan?.Dispose();
-            //            IsScanning = false;
-            //        }
-            //        else
-            //        {
-            //            Devices.Clear();
-
-            //            IsScanning = true;
-            //            scan = adapter
-            //                .Scan()
-            //                .Buffer(TimeSpan.FromSeconds(1))
-            //                .ObserveOn(RxApp.MainThreadScheduler)
-            //                .Subscribe(
-            //                    results =>
-            //                    {
-            //                        var list = new List<ScanResultViewModel>();
-            //                        foreach (var result in results)
-            //                        {
-            //                            var dev = Devices.FirstOrDefault(x => x.Uuid.Equals(result.Device.Uuid));
-
-            //                            if (dev != null)
-            //                            {
-            //                                dev.TrySet(result);
-            //                            }
-            //                            else
-            //                            {
-            //                                dev = new ScanResultViewModel();
-            //                                dev.TrySet(result);
-            //                                if (dev.Name != null)
-            //                                {
-            //                                    //Check there is a name to display otherwise no point adding to the list...
-            //                                    list.Add(dev);
-            //                                }
-            //                            }
-            //                        }
-            //                        if (list.Any())
-            //                            Devices.AddRange(list);
-            //                    },
-            //                    ex => Dialogs.Alert(ex.ToString(), "ERROR")
-            //                )
-            //                .DisposeWith(DeactivateWith);
-            //        }
-            //    });
-
-            //    OpenSettings = ReactiveCommand.Create(() =>
-            //    {
-            //        if (adapter.Features.HasFlag(AdapterFeatures.OpenSettings))
-            //        {
-            //            adapter.OpenSettings();
-            //        }
-            //        else
-            //        {
-            //            Dialogs.Alert("Cannot open bluetooth settings");
-            //        }
-            //    });
-
-            //    ItemTappedCommand = ReactiveCommand.Create<ScanResultViewModel>(async SelectedDevice =>
-            //    {
-            //        try
-            //        {
-            //            //Save the selected device to the Global Device holder...
-            //            App.device = SelectedDevice.Device;
-            //            //Dispose of the Scanner so that it stop scanning...
-            //            scan.Dispose();
-            //            //Navigate to the Device View...
-            //            await App.NavigateToAsync(new DeviceConnectionView()).ConfigureAwait(false);
-
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            Dialogs.Alert($"Sorry the navigation has failed. {ex.Message}");
-            //        }
-            //    });
-            //}
-            //catch (Exception ex)
-            //{
-            //    Dialogs.Alert($"Sorry there is a fault - {ex.Message}");
-            //}
-
+            //Set-up the commands...
+            StartScanBtn = new Command(async () => await StartScan().ConfigureAwait(false));
+            StopScanBtn = new Command(async () => await StopScan().ConfigureAwait(false));
         }
 
-        void GetAdapter()
+        private void OnStateChanged(object sender, BluetoothStateChangedArgs e)
         {
-            //adapterScanner
-            //       .FindAdapters()
-            //       .ObserveOn(RxApp.MainThreadScheduler)
-            //       .Subscribe(
-            //           Adapters.Add,
-            //           ex => Dialogs.Alert(ex.ToString(), "Error"),
-            //           () =>
-            //           {
-            //               IsBusy = false;
-            //               switch (Adapters.Count)
-            //               {
-            //                   case 0:
-            //                       Dialogs.Alert("No BluetoothLE Adapters Found");
-            //                       break;
-
-            //                   case 1:
-            //                       adapter = Adapters.First();
-            //                       break;
-            //               }
-            //           }
-            //       );
+            OnPropertyChanged(nameof(BluetoothState));
+            OnPropertyChanged(nameof(StateText));
+            Debug.WriteLine($"The bluetooth state changed to {e.NewState}");
+            Dialogs.Toast($"BT Connection state has changed - {BluetoothState.ToString()}");
         }
 
-        void ToggleAdapter()
+        private void OnDeviceDiscovered(object sender, DeviceEventArgs args)
         {
-            //if (adapter.CanControlAdapterState())
-            //{
-            //    var poweredOn = adapter.Status == AdapterStatus.PoweredOn;
-            //    adapter.SetAdapterState(!poweredOn);
-            //}
-            //else
-            //{
-            //    Dialogs.Alert("Cannot change bluetooth adapter state");
-            //}
+            AddOrUpdateDevice(args.Device);
+        }
+
+        private void AddOrUpdateDevice(IDevice device)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                var vm = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
+                if (vm != null)
+                {
+                    vm.Update();
+                }
+                else
+                {
+                    Devices.Add(new DeviceListItemViewModel(device));
+                }
+            });
+        }
+
+
+        private async Task StopScan()
+        {
+            try
+            {
+                if (Adapter.IsScanning)
+                {
+                    IsBusy = false;
+                    OnPropertyChanged(nameof(IsScanning));
+                    await Adapter.StopScanningForDevicesAsync();
+                    Debug.WriteLine("adapter.StopScanningForDevices()");
+                    Dialogs.Toast($"Stopped Scanning For Devices... IsScanning - {Adapter.IsScanning}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Dialogs.Toast($"Error - {ex.Message}");
+            }
+        }
+
+        private async Task StartScan()
+        {
+            try
+            {
+                if (Xamarin.Forms.Device.RuntimePlatform == Device.Android)
+                {
+                    var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+                    if (status != PermissionStatus.Granted)
+                    {
+                        var permissionResult = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
+
+                        if (permissionResult.First().Value != PermissionStatus.Granted)
+                        {
+                            Dialogs.Toast("Permission denied. Not scanning.");
+                            CrossPermissions.Current.OpenAppSettings();
+                            return;
+                        }
+                    }
+                }
+
+                if (IsStateOn && (!Devices.Any()) && !IsRefreshing)
+                {
+                    ScanForDevices();
+                }
+            }
+            catch (Exception ex)
+            {
+                Dialogs.Toast($"Error - {ex.Message}");
+            }
+        }
+
+        private async void ScanForDevices()
+        {
+            Devices.Clear();
+
+            foreach (var connectedDevice in Adapter.ConnectedDevices)
+            {
+                //update rssi for already connected evices (so tha 0 is not shown in the list)
+                try
+                {
+                    await connectedDevice.UpdateRssiAsync();
+                }
+                catch (Exception ex)
+                {
+                    Dialogs.Toast($"Failed to update RSSI for {connectedDevice.Name}");
+                }
+
+                AddOrUpdateDevice(connectedDevice);
+            }
+
+            Adapter.ScanMode = ScanMode.LowLatency;
+            await Adapter.StartScanningForDevicesAsync();
+        }
+
+        private string GetStateText()
+        {
+            switch (ble.State)
+            {
+                case BluetoothState.Unknown:
+                    return "Unknown BLE state.";
+                case BluetoothState.Unavailable:
+                    return "BLE is not available on this device.";
+                case BluetoothState.Unauthorized:
+                    return "You are not allowed to use BLE.";
+                case BluetoothState.TurningOn:
+                    return "BLE is warming up, please wait.";
+                case BluetoothState.On:
+                    return "BLE is on.";
+                case BluetoothState.TurningOff:
+                    return "BLE is turning off. That's sad!";
+                case BluetoothState.Off:
+                    return "BLE is off. Turn it on!";
+                default:
+                    return "Unknown BLE state.";
+            }
         }
 
         public string Title { get; private set; }
-        public bool IsScanning { get; private set; }
-
+        public string IsScanning { get; private set; }
+        private string _stateText;
+        public string StateText
+        {
+            get
+            {
+                _stateText = GetStateText();
+                return _stateText;
+            }
+        }
     }
 }

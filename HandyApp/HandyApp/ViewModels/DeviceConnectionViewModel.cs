@@ -1,14 +1,11 @@
 ﻿using Acr.UserDialogs;
-using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using MvvmHelpers;
 using System;
-using System.Reactive.Linq;
-using System.Text;
 using System.Windows.Input;
 
 namespace HandyApp.ViewModels
 {
-    public class DeviceConnectionViewModel : ViewModel
+    public class DeviceConnectionViewModel : BaseViewModel
     {
         //private IDevice Hand;
         //private IUserDialogs Dialogs;
@@ -18,7 +15,6 @@ namespace HandyApp.ViewModels
         public string DeviceName { get; set; }
         private Guid DeviceId { get; set; }
 
-        [Reactive] public string ConnectText { get; private set; } = "Connect";
 
         //public ObservableList<String> BTDataRcvd { get; private set; } = new ObservableList<String>();
 

@@ -4,12 +4,14 @@ namespace HandyApp
 {
     public partial class App : Application
     {
-        private static NavigableElement navigationRoot;
-
         public App()
         {
             //Register Syncfusion license
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTQ0MTgxQDMxMzcyZTMyMmUzMHBFSmJzcDM1Z0podkVNYWl2bnYweEh2eE5YVytlN1RnanhabHhvN1lRbW89");
+
+            Device.SetFlags(new[] { 
+                "SwipeView_Experimental"
+            });
 
             InitializeComponent();
             MainPage = new AppShell();

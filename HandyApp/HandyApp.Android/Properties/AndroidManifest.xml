@@ -4,7 +4,6 @@
 	<application android:label="HandyApp.Android"></application>
 	<uses-permission android:name="android.permission.BLUETOOTH" />
 	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-	<uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
 	<!--this is necessary for Android v6+ to get the device name and address-->
 	<uses-permission android:name="android.permission.LOCATION_HARDWARE" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

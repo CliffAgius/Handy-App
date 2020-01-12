@@ -16,10 +16,10 @@
             Command="{Binding ScanCommand}"
             Icon="bluetooth.png"
             Text="Scan" />
-        <ToolbarItem
+        <!--<ToolbarItem
             Command="{Binding OpenSettings}"
             Icon="settings.png"
-            Text="Settings" />
+            Text="Settings" />-->
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -29,6 +29,7 @@
                     IsRunning="{Binding IsScanning}"
                     IsVisible="{Binding IsScanning}"
                     VerticalOptions="Center" />
+                <Button Command="{Binding StartScanBtn}" Text="Start Scanning" />
                 <ListView
                     IsPullToRefreshEnabled="True"
                     IsRefreshing="{Binding IsScanning, Mode=OneTime}"
@@ -41,7 +42,16 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <Button Command="{Binding StopScanBtn}" Text="Stop Scanning" />
             </StackLayout>
+            <Label
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="{Binding StateText}" />
+            <Label
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="{Binding IsScanning}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
