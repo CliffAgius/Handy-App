@@ -33,6 +33,40 @@ namespace HandyApp.ViewModels
 
         public ObservableCollection<DeviceListItemViewModel> Devices { get; set; } = new ObservableCollection<DeviceListItemViewModel>();
 
+        public DeviceListItemViewModel SelectedDevice
+        {
+            get => null;
+            set
+            {
+                if (value != null)
+                {
+                    HandleSelectedDevice(value);
+                }
+
+                OnPropertyChanged();
+            }
+        }
+
+        private async void HandleSelectedDevice(DeviceListItemViewModel device)
+        {
+            if (device.IsConnected)
+            {
+                try
+                {
+                    IsBusy = true;
+                    await device.Device.UpdateRssiAsync();
+
+                    IsBusy = false;
+                    Dialogs.Toast($"RSSI updated {device.Rssi}", TimeSpan.FromSeconds(1));
+                }
+                catch (Exception ex)
+                {
+                    IsBusy = false;
+                    Dialogs.Toast($"Failed to update rssi. Exception: {ex.Message}");
+                }
+            }
+        }
+
         public ListAdaptersViewModel(IUserDialogs dialogs)
         {
             Dialogs = dialogs;

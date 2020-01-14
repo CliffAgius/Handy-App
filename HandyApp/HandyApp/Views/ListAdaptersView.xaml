@@ -34,7 +34,8 @@
                     IsPullToRefreshEnabled="True"
                     IsRefreshing="{Binding IsScanning, Mode=OneTime}"
                     ItemsSource="{Binding Devices}"
-                    RefreshCommand="{Binding ScanCommand}">
+                    RefreshCommand="{Binding ScanCommand}"
+                    SelectedItem="{Binding SelectedDevice, Mode=TwoWay}">
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
