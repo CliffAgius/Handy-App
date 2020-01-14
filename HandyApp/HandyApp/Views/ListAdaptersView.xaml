@@ -27,7 +27,7 @@
             <StackLayout>
                 <ActivityIndicator
                     IsRunning="{Binding IsScanning}"
-                    IsVisible="{Binding IsScanning}"
+                    IsVisible="True"
                     VerticalOptions="Center" />
                 <Button Command="{Binding StartScanBtn}" Text="Start Scanning" />
                 <ListView
@@ -49,10 +49,6 @@
                 FontSize="18"
                 HorizontalTextAlignment="Center"
                 Text="{Binding StateText}" />
-            <Label
-                FontSize="18"
-                HorizontalTextAlignment="Center"
-                Text="{Binding IsScanning}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -65,6 +65,10 @@ namespace HandyApp.ViewModels
                     Dialogs.Toast($"Failed to update rssi. Exception: {ex.Message}");
                 }
             }
+            else
+            {
+                await Adapter.ConnectToDeviceAsync(device.Device);
+            }
         }
 
         public ListAdaptersViewModel(IUserDialogs dialogs)
@@ -73,21 +77,26 @@ namespace HandyApp.ViewModels
             ble = CrossBluetoothLE.Current;
             Adapter = CrossBluetoothLE.Current.Adapter;
             BluetoothState = ble.State;
-            IsScanning = Adapter.IsScanning.ToString();
+            IsScanning = Adapter.IsScanning;
 
             //Events
             Adapter.DeviceDiscovered += OnDeviceDiscovered;
             ble.StateChanged += OnStateChanged;
+            Adapter.ScanTimeoutElapsed += Adapter_ScanTimeoutElapsed;
 
             //Set-up the commands...
             StartScanBtn = new Command(async () => await StartScan().ConfigureAwait(false));
             StopScanBtn = new Command(async () => await StopScan().ConfigureAwait(false));
         }
 
+        private async void Adapter_ScanTimeoutElapsed(object sender, EventArgs e)
+        {
+            await StopScan().ConfigureAwait(false);
+        }
+
         private void OnStateChanged(object sender, BluetoothStateChangedArgs e)
         {
             OnPropertyChanged(nameof(BluetoothState));
-            OnPropertyChanged(nameof(StateText));
             Debug.WriteLine($"The bluetooth state changed to {e.NewState}");
             Dialogs.Toast($"BT Connection state has changed - {BluetoothState.ToString()}");
         }
@@ -108,7 +117,10 @@ namespace HandyApp.ViewModels
                 }
                 else
                 {
-                    Devices.Add(new DeviceListItemViewModel(device));
+                    if (!string.IsNullOrWhiteSpace(device.Name))
+                    {
+                        Devices.Add(new DeviceListItemViewModel(device));
+                    }
                 }
             });
         }
@@ -120,12 +132,12 @@ namespace HandyApp.ViewModels
             {
                 if (Adapter.IsScanning)
                 {
-                    IsBusy = false;
-                    OnPropertyChanged(nameof(IsScanning));
                     await Adapter.StopScanningForDevicesAsync();
                     Debug.WriteLine("adapter.StopScanningForDevices()");
-                    Dialogs.Toast($"Stopped Scanning For Devices... IsScanning - {Adapter.IsScanning}");
+                    Dialogs.Toast($"Stopped Scanning For Devices...");
                 }
+                IsBusy = false;
+                IsScanning = false;
             }
             catch (Exception ex)
             {
@@ -137,7 +149,7 @@ namespace HandyApp.ViewModels
         {
             try
             {
-                if (Xamarin.Forms.Device.RuntimePlatform == Device.Android)
+                if (Device.RuntimePlatform == Device.Android)
                 {
                     var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
                     if (status != PermissionStatus.Granted)
@@ -146,7 +158,7 @@ namespace HandyApp.ViewModels
 
                         if (permissionResult.First().Value != PermissionStatus.Granted)
                         {
-                            Dialogs.Toast("Permission denied. Not scanning.");
+                            Dialogs.Toast("Location Permission denied (please allow). Not scanning.");
                             CrossPermissions.Current.OpenAppSettings();
                             return;
                         }
@@ -166,25 +178,28 @@ namespace HandyApp.ViewModels
 
         private async void ScanForDevices()
         {
+            IsScanning = true;
             Devices.Clear();
 
             foreach (var connectedDevice in Adapter.ConnectedDevices)
             {
-                //update rssi for already connected evices (so tha 0 is not shown in the list)
+                //update rssi for already connected devices (so tha 0 is not shown in the list)
                 try
                 {
                     await connectedDevice.UpdateRssiAsync();
                 }
                 catch (Exception ex)
                 {
-                    Dialogs.Toast($"Failed to update RSSI for {connectedDevice.Name}");
+                    Dialogs.Toast($"Failed to update RSSI for {connectedDevice.Name} - {ex.Message}");
                 }
 
                 AddOrUpdateDevice(connectedDevice);
             }
 
             Adapter.ScanMode = ScanMode.LowLatency;
+            Adapter.ScanTimeout = 3000;
             await Adapter.StartScanningForDevicesAsync();
+            IsScanning = false;
         }
 
         private string GetStateText()
@@ -210,15 +225,23 @@ namespace HandyApp.ViewModels
             }
         }
 
-        public string Title { get; private set; }
-        public string IsScanning { get; private set; }
-        private string _stateText;
+        private bool isScanning;
+        public bool IsScanning
+        {
+            get => isScanning;
+            private set 
+            { 
+                isScanning = value;
+                OnPropertyChanged();
+            }
+        }
+        private string stateText;
         public string StateText
         {
             get
             {
-                _stateText = GetStateText();
-                return _stateText;
+                stateText = GetStateText();
+                return stateText;
             }
         }
     }
