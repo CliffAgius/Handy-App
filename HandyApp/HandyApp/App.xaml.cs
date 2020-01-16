@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-﻿using HandyApp.Views;
-using Plugin.BluetoothLE;
-using System.Threading.Tasks;
-=======
-﻿using Plugin.BLE.Abstractions.Contracts;
->>>>>>> bt-test
+using Plugin.BLE.Abstractions.Contracts;
 using Xamarin.Forms;
 
 namespace HandyApp

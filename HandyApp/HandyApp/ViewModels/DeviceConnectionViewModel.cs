@@ -26,6 +26,7 @@ namespace HandyApp.ViewModels
 
 
         public ObservableRangeCollection<string> BTDataRcvd { get; private set; } = new ObservableRangeCollection<string>();
+        private string rcvdDataString;
 
         Guid serviceGuid = Guid.Parse("6E400001-B5A3-F393-E0A9-E50E24DCCA9E");
         Guid writeGuid = Guid.Parse("6e400002-b5a3-f393-e0a9-e50e24dcca9e");
@@ -72,10 +73,13 @@ namespace HandyApp.ViewModels
             {
                 if (e.Characteristic?.Value is object)
                 {
-
                     var rcvdValue = Encoding.UTF8.GetString(e.Characteristic.Value);
-                    //var rcvdValue = await readCharacteristic.ReadAsync().ConfigureAwait(false);
-                    BTDataRcvd.Add(rcvdValue);
+                    rcvdDataString += rcvdValue;
+                    if (e.Characteristic.Value[e.Characteristic.Value.Length -1] == 10)
+                    {
+                        BTDataRcvd.Add(rcvdDataString);
+                        rcvdDataString = "";
+                    }
                 }
             });
         }

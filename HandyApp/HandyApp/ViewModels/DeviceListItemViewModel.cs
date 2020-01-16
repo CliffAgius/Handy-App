@@ -1,5 +1,4 @@
-﻿
-using MvvmHelpers;
+﻿using MvvmHelpers;
 using Plugin.BLE.Abstractions;
 using Plugin.BLE.Abstractions.Contracts;
 using System;
