@@ -1,4 +1,6 @@
 ﻿using Acr.UserDialogs;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,8 +12,7 @@ namespace HandyApp.Views
         public ListAdaptersView()
         {
             InitializeComponent();
-            //Asign the Navigation root so that the Nav system knows wher to start from...
-            App.NavigationRoot = this;
+
             BindingContext = new ViewModels.ListAdaptersViewModel(UserDialogs.Instance);
         }
     }

@@ -1,12 +1,13 @@
-﻿using Acr.Collections;
+﻿//using Acr.Collections;
 using HandyApp.Models;
+using MvvmHelpers;
 using System;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 
 namespace HandyApp.ViewModels
 {
-    public class GripListViewModel : ViewModel
+    public class GripListViewModel : BaseViewModel
     {
 
         public ObservableCollection<Grips> GripsCollection { get; private set; } = new ObservableCollection<Grips>();
