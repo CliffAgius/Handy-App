@@ -61,26 +61,10 @@
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.0.35</Version>
-<<<<<<< HEAD
-    </PackageReference>
-    <PackageReference Include="Acr.XamForms">
-      <Version>4.0.1</Version>
-=======
->>>>>>> bt-test
     </PackageReference>
     <PackageReference Include="Plugin.BLE">
       <Version>2.1.1</Version>
     </PackageReference>
-<<<<<<< HEAD
-    <PackageReference Include="ReactiveUI.Fody">
-      <Version>10.5.7</Version>
-    </PackageReference>
-    <PackageReference Include="ReactiveUI.XamForms">
-      <Version>10.5.7</Version>
-    </PackageReference>
-    <PackageReference Include="Syncfusion.Xamarin.SfListView">
-      <Version>17.3.0.28</Version>
-=======
     <PackageReference Include="Plugin.Permissions">
       <Version>3.0.0.12</Version>
     </PackageReference>
@@ -89,16 +73,11 @@
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfListView">
       <Version>17.4.0.41</Version>
->>>>>>> bt-test
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.ViewPager">
       <Version>28.0.0.3</Version>
     </PackageReference>
-<<<<<<< HEAD
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.991211" />
-=======
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991477" />
->>>>>>> bt-test
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
@@ -146,12 +125,7 @@
     <AndroidResource Include="Resources\drawable\bluetooth.xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <PackageReference Include="System.Reactive" Version="4.2.0" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.6.0" />
-=======
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.7.0" />
->>>>>>> bt-test
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Threading.Tasks.Extensions">
