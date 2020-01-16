@@ -1,9 +1,12 @@
-﻿using Xamarin.Forms;
+﻿using Plugin.BLE.Abstractions.Contracts;
+using Xamarin.Forms;
 
 namespace HandyApp
 {
     public partial class App : Application
     {
+        public static IDevice device { get; set; }
+
         public App()
         {
             //Register Syncfusion license

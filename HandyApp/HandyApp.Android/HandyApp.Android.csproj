@@ -69,7 +69,7 @@
       <Version>3.0.0.12</Version>
     </PackageReference>
     <PackageReference Include="Refractored.MvvmHelpers">
-      <Version>1.3.0</Version>
+      <Version>1.6.1-beta</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfListView">
       <Version>17.4.0.41</Version>

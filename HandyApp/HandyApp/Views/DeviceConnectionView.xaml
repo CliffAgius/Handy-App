@@ -12,13 +12,6 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Command="{Binding PairToDevice}"
-            Icon="bluetooth.png"
-            Text="Scan" />
-    </ContentPage.ToolbarItems>
-
     <ContentPage.Content>
         <StackLayout>
             <StackLayout>

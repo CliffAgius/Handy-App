@@ -49,26 +49,12 @@ namespace HandyApp.ViewModels
 
         private async void HandleSelectedDevice(DeviceListItemViewModel device)
         {
-            if (device.IsConnected)
-            {
-                try
-                {
-                    IsBusy = true;
-                    await device.Device.UpdateRssiAsync();
-
-                    IsBusy = false;
-                    Dialogs.Toast($"RSSI updated {device.Rssi}", TimeSpan.FromSeconds(1));
-                }
-                catch (Exception ex)
-                {
-                    IsBusy = false;
-                    Dialogs.Toast($"Failed to update rssi. Exception: {ex.Message}");
-                }
-            }
-            else
-            {
-                await Adapter.ConnectToDeviceAsync(device.Device);
-            }
+            //Set the selected Device to the one we are going to use...
+            App.device = device.Device;
+            //Stop scanning if it's still active...
+            await StopScan().ConfigureAwait(false);
+            //Navigate to the Connected Page...
+            await Shell.Current.GoToAsync("deviceconnection");
         }
 
         public ListAdaptersViewModel(IUserDialogs dialogs)
@@ -165,7 +151,7 @@ namespace HandyApp.ViewModels
                     }
                 }
 
-                if (IsStateOn && (!Devices.Any()) && !IsRefreshing)
+                if (IsStateOn && !IsRefreshing)
                 {
                     ScanForDevices();
                 }
@@ -229,8 +215,8 @@ namespace HandyApp.ViewModels
         public bool IsScanning
         {
             get => isScanning;
-            private set 
-            { 
+            private set
+            {
                 isScanning = value;
                 OnPropertyChanged();
             }
