@@ -63,5 +63,17 @@
             Icon="hand_okay.png">
             <ShellContent ContentTemplate="{DataTemplate local:Views.GripListView}" />
         </Tab>
+        <Tab
+            Title="Grip Builder"
+            FlyoutIcon="hand_okay.png"
+            Icon="hand_okay.png">
+            <ShellContent ContentTemplate="{DataTemplate local:Views.GripBuilder}" />
+        </Tab>
+        <Tab
+            Title="Settings"
+            FlyoutIcon="hand_okay.png"
+            Icon="hand_okay.png">
+            <ShellContent ContentTemplate="{DataTemplate local:Views.Settings}" />
+        </Tab>
     </FlyoutItem>
 </Shell>
