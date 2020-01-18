@@ -12,7 +12,9 @@
     <!--  Styles and Resources  -->
     <Shell.Resources>
         <ResourceDictionary>
-            <Style x:Key="BaseStyle" TargetType="Element">
+            <Style
+                x:Key="BaseStyle"
+                TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource NavigationPrimary}" />
                 <Setter Property="Shell.ForegroundColor" Value="{DynamicResource SystemWhite}" />
                 <Setter Property="Shell.TitleColor" Value="{DynamicResource SystemWhite}" />
@@ -23,13 +25,17 @@
                 <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource UnselectedColor}" />
                 <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource SystemWhite}" />
             </Style>
-            <Style BasedOn="{StaticResource BaseStyle}" TargetType="ShellItem" />
+            <Style
+                BasedOn="{StaticResource BaseStyle}"
+                TargetType="ShellItem" />
         </ResourceDictionary>
     </Shell.Resources>
 
     <!--  Flyout Header  -->
     <Shell.FlyoutHeader>
-        <StackLayout Padding="0,20,0,10" BackgroundColor="White">
+        <StackLayout
+            Padding="0,20,0,10"
+            BackgroundColor="White">
             <Image
                 Aspect="AspectFit"
                 HorizontalOptions="FillAndExpand"
@@ -45,19 +51,24 @@
         FlyoutIcon="bluetooth_blue.png"
         Shell.NavBarIsVisible="True"
         Shell.TabBarIsVisible="True">
-        <Tab Title="BT Connection" Icon="bluetooth.png">
+        <Tab
+            Title="BT Connection"
+            Icon="bluetooth.png">
             <Tab.FlyoutIcon>
                 <FontImageSource
                     FontFamily="{DynamicResource MaterialFontFamily}"
                     Glyph="{StaticResource BluetoothSettings}"
-                    Size="44"
-                    Color="Green" />
+                    Size="44" />
             </Tab.FlyoutIcon>
             <ShellContent ContentTemplate="{DataTemplate local:Views.ListAdaptersView}" />
         </Tab>
-        <Tab Title="Grip Selection" FlyoutIcon="hand.png">
+        <Tab
+            Title="Grip Selection"
+            FlyoutIcon="hand.png">
             <Tab.Icon>
-                <FontImageSource FontFamily="{DynamicResource MaterialFontFamily}" Glyph="{StaticResource HandPointingUp}" />
+                <FontImageSource
+                    FontFamily="{DynamicResource MaterialFontFamily}"
+                    Glyph="{StaticResource HandPointingUp}" />
             </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate local:Views.HandControlView}" />
         </Tab>

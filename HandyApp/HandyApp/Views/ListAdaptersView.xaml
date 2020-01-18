@@ -3,7 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converter="clr-namespace:HandyApp.Converters"
-    Title="List BT Devices"
+    Title="List BlueTooth Devices"
     Shell.TabBarIsVisible="False">
 
     <ContentPage.Resources>
@@ -15,11 +15,8 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout>
-                <ActivityIndicator
-                    IsRunning="{Binding IsScanning}"
-                    IsVisible="True"
-                    VerticalOptions="Center" />
                 <Button
+                    Margin="20,20,20,0"
                     Command="{Binding StartScanBtn}"
                     IsEnabled="{Binding IsScanning, Converter={StaticResource inverter}}"
                     Text="Start Scanning" />
@@ -36,7 +33,12 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <ActivityIndicator
+                    IsRunning="{Binding IsScanning}"
+                    IsVisible="True"
+                    VerticalOptions="Center" />
                 <Button
+                    Margin="20,0,20,20"
                     Command="{Binding StopScanBtn}"
                     IsEnabled="{Binding IsScanning}"
                     Text="Stop Scanning" />

@@ -15,6 +15,8 @@
 		public const string AirplaneOff = "\uf01e";
 		public const string AppleSafari = "\uf039";
 		public const string Apps = "\uf03b";
+		public const string ArrangeBringForward = "\uf03d";
+		public const string ArrangeSendBackward = "\uf03f";
 		public const string Archive = "\uf03c";
 		public const string ArrowBottomLeft = "\uf042";
 		public const string ArrowBottomRight = "\uf043";
@@ -80,6 +82,8 @@
 		public const string PowerStandby = "\uf905";
 		public const string Rabbit = "\uf906";
 		public const string Hand = "\ufa4e";
+		public const string HandLeft = "\ufe87";
+		public const string HandRight = "\ufe88"; 
 		public const string HandOkay = "\ufa4f";
 		public const string HandPeace = "\ufa50";
 		public const string HandPeaceVariant = "\ufa51";

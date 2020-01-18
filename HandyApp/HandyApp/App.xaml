@@ -5,23 +5,43 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <OnPlatform x:Key="MaterialFontFamily" x:TypeArguments="x:String">
-                <On Platform="iOS" Value="Material Design Icons" />
-                <On Platform="Android" Value="materialdesignicons-webfont.ttf#Material Design Icons" />
-                <On Platform="UWP" Value="Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+            <OnPlatform
+                x:Key="MaterialFontFamily"
+                x:TypeArguments="x:String">
+                <On
+                    Platform="iOS"
+                    Value="Material Design Icons" />
+                <On
+                    Platform="Android"
+                    Value="materialdesignicons-webfont.ttf#Material Design Icons" />
+                <On
+                    Platform="UWP"
+                    Value="Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
             </OnPlatform>
 
             <!--  Colors  -->
             <Color x:Key="SystemWhite">#000000</Color>
-
+            <Color x:Key="SystemBlue">#007AFF</Color>
+            <Color x:Key="SystemGreen">#34C759</Color>
+            <Color x:Key="SystemIndigo">#5856D6</Color>
+            <Color x:Key="SystemOrange">#FF9500</Color>
+            <Color x:Key="SystemPink">#FF2D55</Color>
+            <Color x:Key="SystemPurple">#AF52DE</Color>
+            <Color x:Key="SystemRed">#FF3B30</Color>
+            <Color x:Key="SystemTeal">#5AC8FA</Color>
+            <Color x:Key="SystemYellow">#5AC8FA</Color>
 
             <!--  Icons  -->
+            <x:String x:Key="ArrangeBringForward">&#xf03d;</x:String>
+            <x:String x:Key="ArrangeSendBackward">&#xf03f;</x:String>
             <x:String x:Key="HandOkay">&#xfa4f;</x:String>
             <x:String x:Key="HandPeace">&#xfa50;</x:String>
             <x:String x:Key="HandPeaceVariant">&#xfa51;</x:String>
             <x:String x:Key="HandPointingDown">&#xfa52;</x:String>
             <x:String x:Key="HandPointingLeft">&#xfa53;</x:String>
             <x:String x:Key="HandPointingUp">&#xfa54;</x:String>
+            <x:String x:Key="HandLeft">&#xfe87;</x:String>
+            <x:String x:Key="HandRight">&#xfe88;</x:String>
             <x:String x:Key="Bluetooth">&#xf0af;</x:String>
             <x:String x:Key="BluetoothConnect">&#xf0b1;</x:String>
             <x:String x:Key="BluetoothSettings">&#xf0b3;</x:String>
