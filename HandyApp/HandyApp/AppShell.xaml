@@ -3,10 +3,12 @@
     x:Class="HandyApp.AppShell"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:IconFonts="clr-namespace:HandyApp.Helpers"
     xmlns:local="clr-namespace:HandyApp"
     Title="HandyApp"
     FlyoutBehavior="Flyout"
+    FlyoutHeaderBehavior="Fixed"
+    Shell.NavBarIsVisible="True"
+    Shell.TabBarIsVisible="True"
     Visual="Material">
 
     <!--  Styles and Resources  -->
@@ -48,34 +50,23 @@
     <FlyoutItem
         Title="BT Connection"
         FlyoutDisplayOptions="AsMultipleItems"
-        FlyoutIcon="bluetooth_blue.png"
-        Shell.NavBarIsVisible="True"
-        Shell.TabBarIsVisible="True">
-        <Tab
-            Title="BT Connection"
-            Icon="bluetooth.png">
-            <Tab.FlyoutIcon>
-                <FontImageSource
-                    FontFamily="{DynamicResource MaterialFontFamily}"
-                    Glyph="{StaticResource BluetoothSettings}"
-                    Size="44" />
-            </Tab.FlyoutIcon>
-            <ShellContent ContentTemplate="{DataTemplate local:Views.ListAdaptersView}" />
-        </Tab>
-        <Tab
-            Title="Grip Selection"
-            FlyoutIcon="hand.png">
+        FlyoutIcon="bluetooth_blue.png">
+        <Tab Title="Grip Selection">
             <Tab.Icon>
                 <FontImageSource
                     FontFamily="{DynamicResource MaterialFontFamily}"
-                    Glyph="{StaticResource HandPointingUp}" />
+                    Glyph="{StaticResource HandPointingUp}"
+                    Color="{DynamicResource SystemBlue}" />
             </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate local:Views.HandControlView}" />
         </Tab>
-        <Tab
-            Title="Grip Order"
-            FlyoutIcon="hand_okay.png"
-            Icon="hand_okay.png">
+        <Tab Title="Grip Order">
+            <Tab.Icon>
+                <FontImageSource
+                    FontFamily="{DynamicResource MaterialFontFamily}"
+                    Glyph="{StaticResource ArrangeBringForward}"
+                    Color="{DynamicResource SystemBlue}" />
+            </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate local:Views.GripListView}" />
         </Tab>
         <Tab
@@ -84,11 +75,23 @@
             Icon="hand_okay.png">
             <ShellContent ContentTemplate="{DataTemplate local:Views.GripBuilder}" />
         </Tab>
-        <Tab
-            Title="Settings"
-            FlyoutIcon="hand_okay.png"
-            Icon="hand_okay.png">
-            <ShellContent ContentTemplate="{DataTemplate local:Views.Settings}" />
-        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="BT Connection">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="{DynamicResource MaterialFontFamily}"
+                Glyph="{StaticResource BluetoothSettings}"
+                Color="{DynamicResource SystemBlue}" />
+        </FlyoutItem.Icon>
+        <ShellContent ContentTemplate="{DataTemplate local:Views.ListAdaptersView}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Settings">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="{DynamicResource MaterialFontFamily}"
+                Glyph="{StaticResource Settings}"
+                Color="{DynamicResource SystemBlue}" />
+        </FlyoutItem.Icon>
+        <ShellContent ContentTemplate="{DataTemplate local:Views.Settings}" />
     </FlyoutItem>
 </Shell>
