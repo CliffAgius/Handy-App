@@ -91,7 +91,7 @@
                 Glyph="{StaticResource BluetoothSettings}"
                 Color="{DynamicResource SystemBlue}" />
         </FlyoutItem.Icon>
-        <ShellContent ContentTemplate="{DataTemplate local:Views.ListAdaptersView}" />
+        <ShellContent ContentTemplate="{DataTemplate local:Views.BTConnectionView}" />
     </FlyoutItem>
     <FlyoutItem Title="Settings">
         <FlyoutItem.Icon>
@@ -102,4 +102,30 @@
         </FlyoutItem.Icon>
         <ShellContent ContentTemplate="{DataTemplate local:Views.SettingsView}" />
     </FlyoutItem>
+
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <Grid VerticalOptions="End">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="0.8*" />
+                </Grid.ColumnDefinitions>
+                <Image
+                    Margin="0,100,0,0"
+                    HeightRequest="20"
+                    Source="{Binding Icon}" />
+                <Label
+                    Grid.Column="1"
+                    Margin="0,100,0,0"
+                    FontAttributes="Italic"
+                    Text="{Binding Text}"
+                    VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+
+    <MenuItem
+        Command="{Binding HelpCommand}"
+        Icon="{StaticResource Settings}"
+        Text="Settings" />
 </Shell>

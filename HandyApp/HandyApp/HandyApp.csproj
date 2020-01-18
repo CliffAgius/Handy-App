@@ -37,8 +37,8 @@
     <Compile Update="Views\GripBuilderView.xaml.cs">
       <DependentUpon>GripBuilderView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\ListAdaptersView.xaml.cs">
-      <DependentUpon>ListAdaptersView.xaml</DependentUpon>
+    <Compile Update="Views\BTConnectionView.xaml.cs">
+      <DependentUpon>BTConnectionView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\GripListView.xaml.cs">
       <DependentUpon>GripListView.xaml</DependentUpon>
@@ -58,7 +58,7 @@
     <EmbeddedResource Update="Views\HandControlView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ListAdaptersView.xaml">
+    <EmbeddedResource Update="Views\BTConnectionView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\GripListView.xaml">

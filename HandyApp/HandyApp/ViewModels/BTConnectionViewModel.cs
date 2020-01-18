@@ -1,5 +1,4 @@
-﻿//using Plugin.BluetoothLE;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Acr.UserDialogs;
@@ -13,13 +12,12 @@ using Xamarin.Essentials;
 using Plugin.BLE.Abstractions.EventArgs;
 using System.Linq;
 using Plugin.Permissions.Abstractions;
-using System.Threading;
 using Plugin.Permissions;
 using MvvmHelpers.Commands;
 
 namespace HandyApp.ViewModels
 {
-    public class ListAdaptersViewModel : BaseViewModel
+    public class BTConnectionViewModel : BaseViewModel
     {
         IUserDialogs Dialogs;
         IBluetoothLE ble;
@@ -56,10 +54,10 @@ namespace HandyApp.ViewModels
             //Stop scanning if it's still active...
             await StopScan().ConfigureAwait(false);
             //Navigate to the Connected Page...
-            await Shell.Current.GoToAsync("UARTControl");
+            await Shell.Current.GoToAsync("HandControl");
         }
 
-        public ListAdaptersViewModel(IUserDialogs dialogs)
+        public BTConnectionViewModel(IUserDialogs dialogs)
         {
             Dialogs = dialogs;
             ble = CrossBluetoothLE.Current;
