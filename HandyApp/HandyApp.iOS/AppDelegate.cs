@@ -25,6 +25,7 @@ namespace HandyApp.iOS
         {
 
             global::Xamarin.Forms.Forms.Init();
+            global::Xamarin.Forms.FormsMaterial.Init();
             SfListViewRenderer.Init();
             LoadApplication(new App());
 

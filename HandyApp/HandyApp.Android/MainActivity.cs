@@ -22,6 +22,7 @@ namespace HandyApp.Droid
             UserDialogs.Init(() => (this));
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
+            FormsMaterial.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
 

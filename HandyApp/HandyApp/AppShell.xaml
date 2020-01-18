@@ -6,11 +6,10 @@
     xmlns:IconFonts="clr-namespace:HandyApp.Helpers"
     xmlns:local="clr-namespace:HandyApp"
     Title="HandyApp"
-    FlyoutBehavior="Flyout">
+    FlyoutBehavior="Flyout"
+    Visual="Material">
 
-    <!--
-        Styles and Resources
-    -->
+    <!--  Styles and Resources  -->
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
@@ -28,6 +27,7 @@
         </ResourceDictionary>
     </Shell.Resources>
 
+    <!--  Flyout Header  -->
     <Shell.FlyoutHeader>
         <StackLayout Padding="0,20,0,10" BackgroundColor="White">
             <Image
