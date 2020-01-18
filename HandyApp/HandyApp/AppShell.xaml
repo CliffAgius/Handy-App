@@ -17,14 +17,14 @@
             <Style
                 x:Key="BaseStyle"
                 TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.BackgroundColor" Value="{DynamicResource NavigationPrimary}" />
                 <Setter Property="Shell.ForegroundColor" Value="{DynamicResource SystemWhite}" />
                 <Setter Property="Shell.TitleColor" Value="{DynamicResource SystemWhite}" />
-                <Setter Property="Shell.DisabledColor" Value="{StaticResource DisabledColor}" />
-                <Setter Property="Shell.UnselectedColor" Value="{StaticResource UnselectedColor}" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.DisabledColor" Value="{DynamicResource DisabledColor}" />
+                <Setter Property="Shell.UnselectedColor" Value="{DynamicResource UnselectedColor}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{DynamicResource NavigationPrimary}" />
                 <Setter Property="Shell.TabBarForegroundColor" Value="{DynamicResource SystemWhite}" />
-                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource UnselectedColor}" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{DynamicResource UnselectedColor}" />
                 <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource SystemWhite}" />
             </Style>
             <Style

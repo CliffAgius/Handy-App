@@ -11,7 +11,7 @@
             <Style
                 ApplyToDerivedTypes="True"
                 TargetType="ContentPage">
-                <Setter Property="rainbows:DebugRainbow.ShowColors" Value="false" />
+                <Setter Property="rainbows:DebugRainbow.ShowColors" Value="False" />
             </Style>
 
             <!--  Font Icons  -->
@@ -40,6 +40,7 @@
             <Color x:Key="SystemRed">#FF3B30</Color>
             <Color x:Key="SystemTeal">#5AC8FA</Color>
             <Color x:Key="SystemYellow">#5AC8FA</Color>
+            <Color x:Key="SystemGray">#8E8E93</Color>
 
             <!--  Icons  -->
             <x:String x:Key="ArrangeBringForward">&#xf03d;</x:String>

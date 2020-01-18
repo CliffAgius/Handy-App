@@ -37,9 +37,6 @@
     <Compile Update="Views\GripListView.xaml.cs">
       <DependentUpon>GripListView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
