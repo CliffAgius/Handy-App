@@ -1,4 +1,5 @@
-﻿using MvvmHelpers;
+﻿using Acr.UserDialogs;
+using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System.Windows.Input;
 
@@ -7,12 +8,15 @@ namespace HandyApp.ViewModels
     public class HandControlViewModel : BaseViewModel
     {
         public ICommand ButtonCommand;
+        IUserDialogs Dialogs;
 
-        public HandControlViewModel()
+        public HandControlViewModel(IUserDialogs dialogs)
         {
+            Dialogs = dialogs;
             if (App.BTService.Device is null)
             {
-                //We have no BT COnnection yet so goto the the Connection page first...
+                Dialogs.Alert("Not Connected please connect first...");
+                //We have no BT Connection yet so goto the the Connection page first...
                 AppShell.Current.GoToAsync("BTConnection");
             }
 
@@ -21,6 +25,7 @@ namespace HandyApp.ViewModels
 
         private async void ActionButtonCommand(string UARTCommand)
         {
+            Dialogs.Toast($"Actioning {UARTCommand} move command...");
             await App.BTService.SendUARTCommand(UARTCommand).ConfigureAwait(false);
         }
     }

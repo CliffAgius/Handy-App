@@ -6,98 +6,100 @@
     xmlns:local="clr-namespace:HandyApp"
     Title="Grips">
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Label
-                Grid.Row="0"
-                Grid.ColumnSpan="2"
-                Padding="0,10,0,10"
-                FontSize="Medium"
-                HorizontalOptions="Center"
-                TextColor="{DynamicResource SystemGray}">
-                Select a button to toggle that grip.
-            </Label>
-            <Button
-                Grid.Row="1"
-                Grid.Column="0"
-                Margin="20"
-                Padding="0,10,0,0"
-                Command="{Binding ButtonCommand}"
-                CommandParameter="G0"
-                ContentLayout="Top, 0"
-                CornerRadius="40"
-                FontSize="Medium"
-                ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                Text="Fist" />
-            <Button
-                Grid.Row="1"
-                Grid.Column="1"
-                Margin="20"
-                Padding="0,10,0,0"
-                Command="{Binding ButtonCommand}"
-                CommandParameter="G1"
-                ContentLayout="Top, 0"
-                CornerRadius="40"
-                FontSize="Medium"
-                ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                Text="Hook" />
-            <Button
-                Grid.Row="2"
-                Grid.Column="0"
-                Margin="20"
-                Padding="0,10,0,0"
-                Command="{Binding ButtonCommand}"
-                CommandParameter="G2"
-                ContentLayout="Top, 0"
-                CornerRadius="40"
-                FontSize="Medium"
-                ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                Text="Point" />
-            <Button
-                Grid.Row="2"
-                Grid.Column="1"
-                Margin="20"
-                Padding="0,10,0,0"
-                Command="{Binding ButtonCommand}"
-                CommandParameter="G3"
-                ContentLayout="Top, 0"
-                CornerRadius="40"
-                FontSize="Medium"
-                ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                Text="Pinch" />
-            <Button
-                Grid.Row="3"
-                Grid.Column="0"
-                Margin="20"
-                Padding="0,10,0,0"
-                Command="{Binding ButtonCommand}"
-                CommandParameter="G4"
-                ContentLayout="Top, 0"
-                CornerRadius="40"
-                FontSize="Medium"
-                ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                Text="Tripod" />
-            <Button
-                Grid.Row="3"
-                Grid.Column="1"
-                Margin="20"
-                Padding="0,10,0,0"
-                Command="{Binding ButtonCommand}"
-                CommandParameter="G5"
-                ContentLayout="Top, 0"
-                CornerRadius="40"
-                FontSize="Medium"
-                ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                Text="Finger Roll" />
-        </Grid>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Padding="0,10,0,10"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    TextColor="{DynamicResource SystemGray}">
+                    Select a button to toggle that grip.
+                </Label>
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="20"
+                    Padding="0,10,0,0"
+                    Command="{Binding ButtonCommand}"
+                    CommandParameter="G0"
+                    ContentLayout="Top, 0"
+                    CornerRadius="40"
+                    FontSize="Medium"
+                    ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
+                    Text="Fist" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="20"
+                    Padding="0,10,0,0"
+                    Command="{Binding ButtonCommand}"
+                    CommandParameter="G1"
+                    ContentLayout="Top, 0"
+                    CornerRadius="40"
+                    FontSize="Medium"
+                    ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
+                    Text="Hook" />
+                <Button
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="20"
+                    Padding="0,10,0,0"
+                    Command="{Binding ButtonCommand}"
+                    CommandParameter="G2"
+                    ContentLayout="Top, 0"
+                    CornerRadius="40"
+                    FontSize="Medium"
+                    ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
+                    Text="Point" />
+                <Button
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="20"
+                    Padding="0,10,0,0"
+                    Command="{Binding ButtonCommand}"
+                    CommandParameter="G3"
+                    ContentLayout="Top, 0"
+                    CornerRadius="40"
+                    FontSize="Medium"
+                    ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
+                    Text="Pinch" />
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Margin="20"
+                    Padding="0,10,0,0"
+                    Command="{Binding ButtonCommand}"
+                    CommandParameter="G4"
+                    ContentLayout="Top, 0"
+                    CornerRadius="40"
+                    FontSize="Medium"
+                    ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
+                    Text="Tripod" />
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="20"
+                    Padding="0,10,0,0"
+                    Command="{Binding ButtonCommand}"
+                    CommandParameter="G5"
+                    ContentLayout="Top, 0"
+                    CornerRadius="40"
+                    FontSize="Medium"
+                    ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
+                    Text="Finger Roll" />
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
