@@ -17,12 +17,11 @@
             <Style
                 x:Key="BaseStyle"
                 TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="{DynamicResource NavigationPrimary}" />
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource NavigationPrimary}" />
                 <Setter Property="Shell.ForegroundColor" Value="{DynamicResource SystemWhite}" />
                 <Setter Property="Shell.TitleColor" Value="{DynamicResource SystemWhite}" />
-                <Setter Property="Shell.DisabledColor" Value="{DynamicResource DisabledColor}" />
-                <Setter Property="Shell.UnselectedColor" Value="{DynamicResource UnselectedColor}" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{DynamicResource NavigationPrimary}" />
+                <Setter Property="Shell.DisabledColor" Value="{StaticResource DisabledColor}" />
+                <Setter Property="Shell.UnselectedColor" Value="{StaticResource UnselectedColor}" />
                 <Setter Property="Shell.TabBarForegroundColor" Value="{DynamicResource SystemWhite}" />
                 <Setter Property="Shell.TabBarUnselectedColor" Value="{DynamicResource UnselectedColor}" />
                 <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource SystemWhite}" />
@@ -73,7 +72,7 @@
             Title="Grip Builder"
             FlyoutIcon="hand_okay.png"
             Icon="hand_okay.png">
-            <ShellContent ContentTemplate="{DataTemplate local:Views.GripBuilder}" />
+            <ShellContent ContentTemplate="{DataTemplate local:Views.GripBuilderView}" />
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="BT Connection">
@@ -92,6 +91,6 @@
                 Glyph="{StaticResource Settings}"
                 Color="{DynamicResource SystemBlue}" />
         </FlyoutItem.Icon>
-        <ShellContent ContentTemplate="{DataTemplate local:Views.Settings}" />
+        <ShellContent ContentTemplate="{DataTemplate local:Views.SettingsView}" />
     </FlyoutItem>
 </Shell>
