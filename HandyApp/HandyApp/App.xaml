@@ -1,16 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HandyApp.App">
+<Application
+    x:Class="HandyApp.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <OnPlatform x:TypeArguments="x:String"
-                        x:Key="IconFont">
-                <On Platform="Android"
-                    Value="materialdesignicons-webfont.ttf#Material Design Icons" />
-                <On Platform="iOS"
-                    Value="materialdesignicons-webfont" />
+            <OnPlatform x:Key="MaterialFontFamily" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="Material Design Icons" />
+                <On Platform="Android" Value="materialdesignicons-webfont.ttf#Material Design Icons" />
+                <On Platform="UWP" Value="Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
             </OnPlatform>
+
+            <!--  Colors  -->
+            <Color x:Key="SystemWhite">#000000</Color>
+
+
+            <!--  Icons  -->
+            <x:String x:Key="HandOkay">&#xfa4f;</x:String>
+            <x:String x:Key="HandPeace">&#xfa50;</x:String>
+            <x:String x:Key="HandPeaceVariant">&#xfa51;</x:String>
+            <x:String x:Key="HandPointingDown">&#xfa52;</x:String>
+            <x:String x:Key="HandPointingLeft">&#xfa53;</x:String>
+            <x:String x:Key="HandPointingUp">&#xfa54;</x:String>
+            <x:String x:Key="Bluetooth">&#xf0af;</x:String>
+            <x:String x:Key="BluetoothConnect">&#xf0b1;</x:String>
+            <x:String x:Key="BluetoothSettings">&#xf0b3;</x:String>
+            <x:String x:Key="Settings">&#xf493;</x:String>
+
+            <!--  Shell  -->
+            <Color x:Key="ShellTabBarBackgroundColor">#F5F5F5</Color>
+            <Color x:Key="NavigationPrimary">#2196F3</Color>
+            <Color x:Key="DisabledColor">#B4FFFFFF</Color>
+            <Color x:Key="UnselectedColor">#95FFFFFF</Color>
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

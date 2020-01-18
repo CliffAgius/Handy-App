@@ -2,7 +2,7 @@
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace HandyApp.Convertors
+namespace HandyApp.Converters
 {
     class TappedItemEventArgsToTappedItemConverter : IValueConverter
     {

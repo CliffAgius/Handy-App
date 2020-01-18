@@ -1,4 +1,5 @@
-﻿using HandyApp.Views;
+﻿using HandyApp.Helpers;
+using HandyApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

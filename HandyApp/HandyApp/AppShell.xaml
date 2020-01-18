@@ -3,6 +3,7 @@
     x:Class="HandyApp.AppShell"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:IconFonts="clr-namespace:HandyApp.Helpers"
     xmlns:local="clr-namespace:HandyApp"
     Title="HandyApp"
     FlyoutBehavior="Flyout">
@@ -12,17 +13,16 @@
     -->
     <Shell.Resources>
         <ResourceDictionary>
-            <Color x:Key="NavigationPrimary">#2196F3</Color>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="Shell.ForegroundColor" Value="White" />
-                <Setter Property="Shell.TitleColor" Value="White" />
-                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
-                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.ForegroundColor" Value="{DynamicResource SystemWhite}" />
+                <Setter Property="Shell.TitleColor" Value="{DynamicResource SystemWhite}" />
+                <Setter Property="Shell.DisabledColor" Value="{StaticResource DisabledColor}" />
+                <Setter Property="Shell.UnselectedColor" Value="{StaticResource UnselectedColor}" />
                 <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White" />
-                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarTitleColor" Value="White" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{DynamicResource SystemWhite}" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource UnselectedColor}" />
+                <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource SystemWhite}" />
             </Style>
             <Style BasedOn="{StaticResource BaseStyle}" TargetType="ShellItem" />
         </ResourceDictionary>
@@ -45,16 +45,20 @@
         FlyoutIcon="bluetooth_blue.png"
         Shell.NavBarIsVisible="True"
         Shell.TabBarIsVisible="True">
-        <Tab
-            Title="BT Connection"
-            FlyoutIcon="bluetooth_blue.png"
-            Icon="bluetooth.png">
+        <Tab Title="BT Connection" Icon="bluetooth.png">
+            <Tab.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{DynamicResource MaterialFontFamily}"
+                    Glyph="{StaticResource BluetoothSettings}"
+                    Size="44"
+                    Color="Green" />
+            </Tab.FlyoutIcon>
             <ShellContent ContentTemplate="{DataTemplate local:Views.ListAdaptersView}" />
         </Tab>
-        <Tab
-            Title="Grip Selection"
-            FlyoutIcon="hand.png"
-            Icon="hand.png">
+        <Tab Title="Grip Selection" FlyoutIcon="hand.png">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{DynamicResource MaterialFontFamily}" Glyph="{StaticResource HandPointingUp}" />
+            </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate local:Views.HandControlView}" />
         </Tab>
         <Tab

@@ -2,25 +2,15 @@
     x:Class="HandyApp.Views.ListAdaptersView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:converter="clr-namespace:HandyApp.Convertors"
-    Title="List BT Devices">
+    xmlns:converter="clr-namespace:HandyApp.Converters"
+    Title="List BT Devices"
+    Shell.TabBarIsVisible="False">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converter:TappedItemEventArgsToTappedItemConverter x:Key="ItemTappedConverter" />
+            <converter:NegateBooleanConverter x:Key="inverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-
-    <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Command="{Binding ScanCommand}"
-            Icon="bluetooth.png"
-            Text="Scan" />
-        <!--<ToolbarItem
-            Command="{Binding OpenSettings}"
-            Icon="settings.png"
-            Text="Settings" />-->
-    </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <StackLayout>
@@ -29,7 +19,10 @@
                     IsRunning="{Binding IsScanning}"
                     IsVisible="True"
                     VerticalOptions="Center" />
-                <Button Command="{Binding StartScanBtn}" Text="Start Scanning" />
+                <Button
+                    Command="{Binding StartScanBtn}"
+                    IsEnabled="{Binding IsScanning, Converter={StaticResource inverter}}"
+                    Text="Start Scanning" />
                 <ListView
                     IsPullToRefreshEnabled="True"
                     IsRefreshing="{Binding IsScanning, Mode=OneTime}"
@@ -43,12 +36,16 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Button Command="{Binding StopScanBtn}" Text="Stop Scanning" />
+                <Button
+                    Command="{Binding StopScanBtn}"
+                    IsEnabled="{Binding IsScanning}"
+                    Text="Stop Scanning" />
             </StackLayout>
             <Label
                 FontSize="18"
                 HorizontalTextAlignment="Center"
-                Text="{Binding StateText}" />
+                Text="{Binding StateText}"
+                TextColor="Blue" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
