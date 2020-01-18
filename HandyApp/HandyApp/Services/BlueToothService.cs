@@ -21,7 +21,7 @@ namespace HandyApp.Services
         private ICharacteristic readCharacteristic;
         
         public string RcvdDataString { get; set; }
-        public ObservableCollection<string> BTDataRcvd { get; set; }
+        public ObservableCollection<string> BTDataRcvd { get; set; } = new ObservableRangeCollection<string>();
 
         public BlueToothService()
         {
@@ -37,10 +37,8 @@ namespace HandyApp.Services
             {
                 Adapter = CrossBluetoothLE.Current.Adapter;
                 await Adapter.ConnectToDeviceAsync(Device);
+
                 var service = await Device.GetServiceAsync(serviceGuid).ConfigureAwait(false);
-
-                var characteristics = await service.GetCharacteristicsAsync();
-
 
                 writeCharacteristic = await service.GetCharacteristicAsync(writeGuid).ConfigureAwait(false);
                 readCharacteristic = await service.GetCharacteristicAsync(readGuid).ConfigureAwait(false);

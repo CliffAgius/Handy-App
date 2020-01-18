@@ -28,7 +28,7 @@
             <StackLayout>
                 <ListView
                     x:Name="listView"
-                    ItemsSource="{Binding BTDataRcvd}" />
+                    ItemsSource="{Binding UARTDataRcvd}" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
