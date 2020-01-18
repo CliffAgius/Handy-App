@@ -1,11 +1,11 @@
-using Plugin.BLE.Abstractions.Contracts;
+using HandyApp.Services;
 using Xamarin.Forms;
 
 namespace HandyApp
 {
     public partial class App : Application
     {
-        public static IDevice device { get; set; }
+        public static BlueToothService BTService { get; set; }
 
         public App()
         {
@@ -15,6 +15,9 @@ namespace HandyApp
             Device.SetFlags(new[] { 
                 "SwipeView_Experimental"
             });
+
+            //Config the Bluetooth Service
+            BTService = new BlueToothService();
 
             InitializeComponent();
             MainPage = new AppShell();

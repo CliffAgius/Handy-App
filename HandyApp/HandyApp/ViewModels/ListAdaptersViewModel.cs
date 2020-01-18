@@ -15,6 +15,7 @@ using System.Linq;
 using Plugin.Permissions.Abstractions;
 using System.Threading;
 using Plugin.Permissions;
+using MvvmHelpers.Commands;
 
 namespace HandyApp.ViewModels
 {
@@ -49,12 +50,13 @@ namespace HandyApp.ViewModels
 
         private async void HandleSelectedDevice(DeviceListItemViewModel device)
         {
-            //Set the selected Device to the one we are going to use...
-            App.device = device.Device;
+            //Set the selected Adapter and Device to the one we are going to use...
+            App.BTService.Adapter = Adapter;
+            App.BTService.Device = device.Device;
             //Stop scanning if it's still active...
             await StopScan().ConfigureAwait(false);
             //Navigate to the Connected Page...
-            await Shell.Current.GoToAsync("deviceconnection");
+            await Shell.Current.GoToAsync("UARTControl");
         }
 
         public ListAdaptersViewModel(IUserDialogs dialogs)
@@ -71,8 +73,8 @@ namespace HandyApp.ViewModels
             Adapter.ScanTimeoutElapsed += Adapter_ScanTimeoutElapsed;
 
             //Set-up the commands...
-            StartScanBtn = new Command(async () => await StartScan().ConfigureAwait(false));
-            StopScanBtn = new Command(async () => await StopScan().ConfigureAwait(false));
+            StartScanBtn = new AsyncCommand(StartScan);
+            StopScanBtn = new AsyncCommand(StopScan);
         }
 
         private async void Adapter_ScanTimeoutElapsed(object sender, EventArgs e)

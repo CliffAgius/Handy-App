@@ -28,16 +28,16 @@ namespace HandyApp.Services
 
         }
 
-        public IAdapter Adapter { get; private set; }
-        public IDevice Hand { get; private set; }
+        public IAdapter Adapter { get; set; }
+        public IDevice Device { get; set; }
 
         public async Task Connect()
         {
             try
             {
                 Adapter = CrossBluetoothLE.Current.Adapter;
-                await Adapter.ConnectToDeviceAsync(Hand);
-                var service = await Hand.GetServiceAsync(serviceGuid).ConfigureAwait(false);
+                await Adapter.ConnectToDeviceAsync(Device);
+                var service = await Device.GetServiceAsync(serviceGuid).ConfigureAwait(false);
 
                 var characteristics = await service.GetCharacteristicsAsync();
 
@@ -58,6 +58,11 @@ namespace HandyApp.Services
         {
             try
             {
+                if (writeCharacteristic is null)
+                {
+                    Debug.WriteLine("The writeCharacteristic is Null so we can't write...");
+                    return;
+                }
                 UARTString += "\n\r";
 
                 byte[] bytes = Encoding.ASCII.GetBytes(UARTString);

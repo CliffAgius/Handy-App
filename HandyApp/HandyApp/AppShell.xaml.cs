@@ -15,7 +15,9 @@ namespace HandyApp
         {
             InitializeComponent();
 
-            Routing.RegisterRoute("deviceconnection", typeof(DeviceConnectionView));
+            Routing.RegisterRoute("BTConnection", typeof(ListAdaptersView));
+            Routing.RegisterRoute("UARTControl", typeof(UARTControlView));
+
         }
 
         internal async Task CloseFlyoutAsync()

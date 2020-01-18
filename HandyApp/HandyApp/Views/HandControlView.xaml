@@ -31,6 +31,8 @@
                 Grid.Column="0"
                 Margin="20"
                 Padding="0,10,0,0"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="G0"
                 ContentLayout="Top, 0"
                 CornerRadius="40"
                 FontSize="Medium"
@@ -41,26 +43,32 @@
                 Grid.Column="1"
                 Margin="20"
                 Padding="0,10,0,0"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="G1"
                 ContentLayout="Top, 0"
                 CornerRadius="40"
                 FontSize="Medium"
                 ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                Text="Palm" />
+                Text="Hook" />
             <Button
                 Grid.Row="2"
                 Grid.Column="0"
                 Margin="20"
                 Padding="0,10,0,0"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="G2"
                 ContentLayout="Top, 0"
                 CornerRadius="40"
                 FontSize="Medium"
                 ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                Text="Tripod" />
+                Text="Point" />
             <Button
                 Grid.Row="2"
                 Grid.Column="1"
                 Margin="20"
                 Padding="0,10,0,0"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="G3"
                 ContentLayout="Top, 0"
                 CornerRadius="40"
                 FontSize="Medium"
@@ -71,21 +79,25 @@
                 Grid.Column="0"
                 Margin="20"
                 Padding="0,10,0,0"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="G4"
                 ContentLayout="Top, 0"
                 CornerRadius="40"
                 FontSize="Medium"
                 ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                Text="Point" />
+                Text="Tripod" />
             <Button
                 Grid.Row="3"
                 Grid.Column="1"
                 Margin="20"
                 Padding="0,10,0,0"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="G5"
                 ContentLayout="Top, 0"
                 CornerRadius="40"
                 FontSize="Medium"
                 ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                Text="FANCY One" />
+                Text="Finger Roll" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

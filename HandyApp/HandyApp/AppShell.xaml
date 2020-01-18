@@ -75,6 +75,15 @@
             <ShellContent ContentTemplate="{DataTemplate local:Views.GripBuilderView}" />
         </Tab>
     </FlyoutItem>
+    <FlyoutItem Title="UART Control">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="{DynamicResource MaterialFontFamily}"
+                Glyph="{StaticResource BluetoothSettings}"
+                Color="{DynamicResource SystemBlue}" />
+        </FlyoutItem.Icon>
+        <ShellContent ContentTemplate="{DataTemplate local:Views.UARTControlView}" />
+    </FlyoutItem>
     <FlyoutItem Title="BT Connection">
         <FlyoutItem.Icon>
             <FontImageSource
