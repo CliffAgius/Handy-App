@@ -10,7 +10,7 @@ namespace HandyApp.ViewModels
     public class GripListViewModel : BaseViewModel
     {
 
-        public ObservableCollection<Grips> GripsCollection { get; private set; } = new ObservableCollection<Grips>();
+        public ObservableCollection<Grip> GripsCollection { get; private set; } = new ObservableCollection<Grip>();
 
         public GripListViewModel()
         {
@@ -19,12 +19,12 @@ namespace HandyApp.ViewModels
 
         void BuildGripsCollection()
         {
-            GripsCollection.Add(new Grips { ID = 0, GripNumber = 1, GripName = "Fist Grip" });
-            GripsCollection.Add(new Grips { ID = 1, GripNumber = 2, GripName = "Palm Grip" });
-            GripsCollection.Add(new Grips { ID = 2, GripNumber = 3, GripName = "Thumbs Up" });
-            GripsCollection.Add(new Grips { ID = 3, GripNumber = 4, GripName = "Point" });
-            GripsCollection.Add(new Grips { ID = 4, GripNumber = 5, GripName = "Pinch / OK" });
-            GripsCollection.Add(new Grips { ID = 5, GripNumber = 6, GripName = "Tripod" });
+            GripsCollection.Add(new Grip { ID = 0, GripNumber = 1, GripName = "Fist Grip" });
+            GripsCollection.Add(new Grip { ID = 1, GripNumber = 2, GripName = "Palm Grip" });
+            GripsCollection.Add(new Grip { ID = 2, GripNumber = 3, GripName = "Thumbs Up" });
+            GripsCollection.Add(new Grip { ID = 3, GripNumber = 4, GripName = "Point" });
+            GripsCollection.Add(new Grip { ID = 4, GripNumber = 5, GripName = "Pinch / OK" });
+            GripsCollection.Add(new Grip { ID = 5, GripNumber = 6, GripName = "Tripod" });
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using HandyApp.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace HandyApp.Views
@@ -9,6 +10,8 @@ namespace HandyApp.Views
         public GripBuilderView()
         {
             InitializeComponent();
+
+            BindingContext = new GripBuilderViewModel();
         }
     }
 }

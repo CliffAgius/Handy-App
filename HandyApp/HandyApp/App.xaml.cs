@@ -13,7 +13,9 @@ namespace HandyApp
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTcyNDY0QDMxMzcyZTMzMmUzMGpQaEhtTXRBQnNreTdHZ2dDNmRJQWdpZlY2Y01lK3VDZXp4MHl5NHBZb2s9");
 
             Device.SetFlags(new[] { 
-                "SwipeView_Experimental"
+                "SwipeView_Experimental",
+                "CarouselView_Experimental",
+                "IndicatorView_Experimental"
             });
 
             //Config the Bluetooth Service

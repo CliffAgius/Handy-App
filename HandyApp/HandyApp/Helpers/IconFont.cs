@@ -68,6 +68,8 @@
 		public const string FlashlightOff = "\uf245";
 		public const string Ghost = "\uf2a0";
 		public const string HandPointingRight = "\uf2c7";
+		public const string Heart = "\uf2d1";
+		public const string HeartOutline = "\uf2d5";
 		public const string Power = "\uf425";
 		public const string PowerSettings = "\uf426";
 		public const string Repeat = "\uf456";

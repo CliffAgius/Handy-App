@@ -4,14 +4,83 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:HandyApp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="GripPage"
     mc:Ignorable="d">
     <ContentPage.Content>
-        <StackLayout>
-            <Label
-                HorizontalOptions="CenterAndExpand"
-                Text="Build your grips here..."
-                VerticalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="600" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <CarouselView
+                x:Name="GripsCarousel"
+                Grid.Column="1"
+                ItemsSource="{Binding Grips}"
+                PeekAreaInsets="100"
+                VerticalOptions="CenterAndExpand">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame
+                                Margin="20"
+                                BackgroundColor="{Binding GripColor}"
+                                BorderColor="DarkGray"
+                                CornerRadius="20"
+                                HasShadow="True"
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="CenterAndExpand">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="10*" />
+                                        <RowDefinition Height="80*" />
+                                        <RowDefinition Height="10*" />
+                                    </Grid.RowDefinitions>
+                                    <Label
+                                        Grid.Row="0"
+                                        FontAttributes="Bold"
+                                        FontSize="Large"
+                                        HorizontalOptions="Start"
+                                        Text="{Binding GripNumber}"
+                                        VerticalOptions="Center" />
+                                    <Button
+                                        Grid.Row="0"
+                                        Padding="0,0,-50,0"
+                                        BackgroundColor="{Binding GripColor}"
+                                        Command="{Binding Source={x:Reference GripPage}, Path=BindingContext.FavoriteCommand}"
+                                        CommandParameter="{Binding .}"
+                                        FontFamily="{DynamicResource MaterialFontFamily}"
+                                        FontSize="Large"
+                                        HorizontalOptions="End"
+                                        Text="{Binding Source=FavoriteIcon, Path=local:ImageResource}" />
+                                    <Image
+                                        Grid.Row="1"
+                                        Aspect="AspectFill"
+                                        HorizontalOptions="Center"
+                                        Source="{Binding GripImageSrc}"
+                                        WidthRequest="150" />
+                                    <Label
+                                        Grid.Row="2"
+                                        FontAttributes="Bold"
+                                        FontSize="Large"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding GripName}"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView
+                Margin="40"
+                HorizontalOptions="Center"
+                IndicatorColor="LightGray"
+                IndicatorSize="10"
+                IndicatorView.ItemsSourceBy="GripsCarousel"
+                SelectedIndicatorColor="Black" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
