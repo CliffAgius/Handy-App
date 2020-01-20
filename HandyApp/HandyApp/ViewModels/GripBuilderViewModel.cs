@@ -68,7 +68,7 @@ namespace HandyApp.ViewModels
                 GripCommand = "G1",
                 GripColor = "Blue",
                 FavoriteIcon = IconFont.HeartOutline,
-                GripImageSrc = "HandyApp.Images.okhand.png",
+                GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
                 IsFavorite = false
             });
             source.Add(new Grip
@@ -78,7 +78,7 @@ namespace HandyApp.ViewModels
                 GripCommand = "G2",
                 GripColor = "Green",
                 FavoriteIcon = IconFont.Heart,
-                GripImageSrc = "HandyApp.Images.okhand.png",
+                GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
                 IsFavorite = false
             });
             source.Add(new Grip
@@ -88,7 +88,7 @@ namespace HandyApp.ViewModels
                 GripCommand = "G3",
                 GripColor = "#8E8E93",
                 FavoriteIcon = IconFont.HeartOutline,
-                GripImageSrc = "HandyApp.Images.okhand.png",
+                GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
                 IsFavorite = false
             });
             source.Add(new Grip
@@ -98,7 +98,7 @@ namespace HandyApp.ViewModels
                 GripCommand = "G4",
                 GripColor = "#8E8E93",
                 FavoriteIcon = IconFont.HeartOutline,
-                GripImageSrc = "HandyApp.Images.okhand.png",
+                GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
                 IsFavorite = false
             });
             source.Add(new Grip
@@ -108,7 +108,7 @@ namespace HandyApp.ViewModels
                 GripCommand = "G5",
                 GripColor = "#8E8E93",
                 FavoriteIcon = IconFont.HeartOutline,
-                GripImageSrc = "HandyApp.Images.okhand.png",
+                GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
                 IsFavorite = false
             });
 

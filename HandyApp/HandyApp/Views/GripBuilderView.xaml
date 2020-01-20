@@ -10,6 +10,10 @@
     mc:Ignorable="d">
     <ContentPage.Content>
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="80" />
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="600" />
@@ -17,6 +21,7 @@
             </Grid.ColumnDefinitions>
             <CarouselView
                 x:Name="GripsCarousel"
+                Grid.Row="0"
                 Grid.Column="1"
                 ItemsSource="{Binding Grips}"
                 PeekAreaInsets="100"
@@ -25,7 +30,7 @@
                     <DataTemplate>
                         <StackLayout>
                             <Frame
-                                Margin="20"
+                                Margin="10"
                                 BackgroundColor="{Binding GripColor}"
                                 BorderColor="DarkGray"
                                 CornerRadius="20"
@@ -33,6 +38,11 @@
                                 HorizontalOptions="CenterAndExpand"
                                 VerticalOptions="CenterAndExpand">
                                 <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="40" />
+                                    </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="10*" />
                                         <RowDefinition Height="80*" />
@@ -40,31 +50,38 @@
                                     </Grid.RowDefinitions>
                                     <Label
                                         Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
                                         FontAttributes="Bold"
-                                        FontSize="Large"
+                                        FontSize="120"
                                         HorizontalOptions="Start"
                                         Text="{Binding GripNumber}"
-                                        VerticalOptions="Center" />
+                                        VerticalOptions="Start" />
                                     <Button
                                         Grid.Row="0"
-                                        Padding="0,0,-50,0"
+                                        Grid.Column="1"
+                                        Grid.ColumnSpan="2"
                                         BackgroundColor="{Binding GripColor}"
                                         Command="{Binding Source={x:Reference GripPage}, Path=BindingContext.FavoriteCommand}"
                                         CommandParameter="{Binding .}"
                                         FontFamily="{DynamicResource MaterialFontFamily}"
-                                        FontSize="Large"
+                                        FontSize="44"
                                         HorizontalOptions="End"
-                                        Text="{Binding Source=FavoriteIcon, Path=local:ImageResource}" />
+                                        Text="{Binding FavoriteIcon}"
+                                        TextColor="Black" />
                                     <Image
                                         Grid.Row="1"
-                                        Aspect="AspectFill"
-                                        HorizontalOptions="Center"
+                                        Grid.Column="1"
+                                        Aspect="AspectFit"
+                                        HorizontalOptions="Fill"
                                         Source="{Binding GripImageSrc}"
-                                        WidthRequest="150" />
+                                        VerticalOptions="Fill" />
                                     <Label
                                         Grid.Row="2"
+                                        Grid.ColumnSpan="3"
                                         FontAttributes="Bold"
-                                        FontSize="Large"
+                                        FontSize="44"
                                         HorizontalOptions="Center"
                                         Text="{Binding GripName}"
                                         VerticalOptions="Center" />
@@ -75,12 +92,15 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
             <IndicatorView
-                Margin="40"
-                HorizontalOptions="Center"
+                Grid.Row="1"
+                Grid.ColumnSpan="3"
+                Margin="0,0,0,60"
+                HorizontalOptions="CenterAndExpand"
                 IndicatorColor="LightGray"
                 IndicatorSize="10"
                 IndicatorView.ItemsSourceBy="GripsCarousel"
-                SelectedIndicatorColor="Black" />
+                SelectedIndicatorColor="Black"
+                VerticalOptions="End" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
