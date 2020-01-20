@@ -9,22 +9,11 @@
     x:Name="GripPage"
     mc:Ignorable="d">
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="80" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="600" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <StackLayout>
             <CarouselView
                 x:Name="GripsCarousel"
-                Grid.Row="0"
-                Grid.Column="1"
                 ItemsSource="{Binding Grips}"
-                PeekAreaInsets="100"
+                PeekAreaInsets="60"
                 VerticalOptions="CenterAndExpand">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
@@ -92,8 +81,6 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
             <IndicatorView
-                Grid.Row="1"
-                Grid.ColumnSpan="3"
                 Margin="0,0,0,60"
                 HorizontalOptions="CenterAndExpand"
                 IndicatorColor="LightGray"
@@ -101,6 +88,6 @@
                 IndicatorView.ItemsSourceBy="GripsCarousel"
                 SelectedIndicatorColor="Black"
                 VerticalOptions="End" />
-        </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
