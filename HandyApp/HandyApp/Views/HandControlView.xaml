@@ -4,102 +4,88 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:HandyApp"
+    x:Name="HandControlPage"
     Title="Grips">
     <ContentPage.Content>
-        <ScrollView>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label
-                    Grid.Row="0"
-                    Grid.ColumnSpan="2"
-                    Padding="0,10,0,10"
-                    FontSize="Medium"
-                    HorizontalOptions="Center"
-                    TextColor="{DynamicResource SystemGray}">
-                    Select a button to toggle that grip.
-                </Label>
-                <Button
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="20"
-                    Padding="0,10,0,0"
-                    Command="{Binding ButtonCommand}"
-                    CommandParameter="G0"
-                    ContentLayout="Top, 0"
-                    CornerRadius="40"
-                    FontSize="Medium"
-                    ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                    Text="Fist" />
-                <Button
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="20"
-                    Padding="0,10,0,0"
-                    Command="{Binding ButtonCommand}"
-                    CommandParameter="G1"
-                    ContentLayout="Top, 0"
-                    CornerRadius="40"
-                    FontSize="Medium"
-                    ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                    Text="Hook" />
-                <Button
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Margin="20"
-                    Padding="0,10,0,0"
-                    Command="{Binding ButtonCommand}"
-                    CommandParameter="G2"
-                    ContentLayout="Top, 0"
-                    CornerRadius="40"
-                    FontSize="Medium"
-                    ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                    Text="Point" />
-                <Button
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Margin="20"
-                    Padding="0,10,0,0"
-                    Command="{Binding ButtonCommand}"
-                    CommandParameter="G3"
-                    ContentLayout="Top, 0"
-                    CornerRadius="40"
-                    FontSize="Medium"
-                    ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                    Text="Pinch" />
-                <Button
-                    Grid.Row="3"
-                    Grid.Column="0"
-                    Margin="20"
-                    Padding="0,10,0,0"
-                    Command="{Binding ButtonCommand}"
-                    CommandParameter="G4"
-                    ContentLayout="Top, 0"
-                    CornerRadius="40"
-                    FontSize="Medium"
-                    ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                    Text="Tripod" />
-                <Button
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    Margin="20"
-                    Padding="0,10,0,0"
-                    Command="{Binding ButtonCommand}"
-                    CommandParameter="G5"
-                    ContentLayout="Top, 0"
-                    CornerRadius="40"
-                    FontSize="Medium"
-                    ImageSource="{local:ImageResource HandyApp.Images.okhand.png}"
-                    Text="Finger Roll" />
-            </Grid>
-        </ScrollView>
+        <StackLayout>
+            <CarouselView
+                x:Name="GripsCarousel"
+                ItemsSource="{Binding Grips}"
+                PeekAreaInsets="60"
+                VerticalOptions="CenterAndExpand">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame
+                                Margin="10"
+                                BackgroundColor="{Binding GripColor}"
+                                BorderColor="DarkGray"
+                                CornerRadius="20"
+                                HasShadow="True"
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="40" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="40" />
+                                    </Grid.RowDefinitions>
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        FontAttributes="Bold"
+                                        FontSize="120"
+                                        HorizontalOptions="Start"
+                                        Text="{Binding GripNumber}"
+                                        VerticalOptions="Start" />
+                                    <Button
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Grid.ColumnSpan="2"
+                                        BackgroundColor="{Binding GripColor}"
+                                        Command="{Binding Source={x:Reference HandControlPage}, Path=BindingContext.FavoriteCommand}"
+                                        CommandParameter="{Binding .}"
+                                        FontFamily="{DynamicResource MaterialFontFamily}"
+                                        FontSize="Large"
+                                        HorizontalOptions="End"
+                                        Text="{Binding FavoriteIcon}"
+                                        TextColor="Black" />
+                                    <Image
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Aspect="AspectFit"
+                                        HorizontalOptions="FillAndExpand"
+                                        Source="{Binding GripImageSrc}"
+                                        VerticalOptions="FillAndExpand" />
+                                    <Label
+                                        Grid.Row="2"
+                                        Grid.ColumnSpan="3"
+                                        FontAttributes="Bold"
+                                        FontSize="Large"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding GripName}"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView
+                Margin="0,0,0,60"
+                HorizontalOptions="CenterAndExpand"
+                IndicatorColor="LightGray"
+                IndicatorSize="10"
+                IndicatorView.ItemsSourceBy="GripsCarousel"
+                SelectedIndicatorColor="Black"
+                VerticalOptions="End" />
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

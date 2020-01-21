@@ -6,7 +6,7 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:local="clr-namespace:HandyApp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="GripPage"
+    x:Name="GripBuilderPage"
     mc:Ignorable="d">
     <ContentPage.Content>
         <StackLayout>
@@ -52,7 +52,7 @@
                                         Grid.Column="1"
                                         Grid.ColumnSpan="2"
                                         BackgroundColor="{Binding GripColor}"
-                                        Command="{Binding Source={x:Reference GripPage}, Path=BindingContext.FavoriteCommand}"
+                                        Command="{Binding Source={x:Reference GripBuilderPage}, Path=BindingContext.FavoriteCommand}"
                                         CommandParameter="{Binding .}"
                                         FontFamily="{DynamicResource MaterialFontFamily}"
                                         FontSize="44"
@@ -70,7 +70,7 @@
                                         Grid.Row="2"
                                         Grid.ColumnSpan="3"
                                         FontAttributes="Bold"
-                                        FontSize="44"
+                                        FontSize="Large"
                                         HorizontalOptions="Center"
                                         Text="{Binding GripName}"
                                         VerticalOptions="Center" />
