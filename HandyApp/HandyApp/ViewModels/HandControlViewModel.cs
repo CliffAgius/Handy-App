@@ -7,16 +7,16 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace HandyApp.ViewModels
 {
     public class HandControlViewModel : BaseViewModel
     {
-        public ICommand ButtonCommand;
         IUserDialogs Dialogs;
         public ICommand FavoriteCommand { get; private set; }
-        public ICommand TappedCommand;
+        public ICommand TappedCommand { get; private set;  }
         public ObservableCollection<Grip> Grips { get; private set; }
 
         public HandControlViewModel(IUserDialogs dialogs)
@@ -32,19 +32,13 @@ namespace HandyApp.ViewModels
             Grips = gripsCollection.CreateGripsCollection();
 
             FavoriteCommand = new Command<Grip>(ActionFavoriteChangeCommand);
-            TappedCommand = new Command(ActionTappedCommand);
-            ButtonCommand = new Command<string>(ActionButtonCommand);
+            TappedCommand = new AsyncCommand<string>(ActionTappedCommand);
         }
 
-        private void ActionTappedCommand()
+        private async Task ActionTappedCommand(string gripUARTCmmand)
         {
-            Dialogs.Toast($"You tapped - ");
-        }
-
-        private async void ActionButtonCommand(string UARTCommand)
-        {
-            Dialogs.Toast($"Actioning {UARTCommand} move command...");
-            await App.BTService.SendUARTCommand(UARTCommand).ConfigureAwait(false);
+            Dialogs.Toast($"Sending the command to HANDY - {gripUARTCmmand}");
+            await App.BTService.SendUARTCommand(gripUARTCmmand).ConfigureAwait(false);
         }
 
         private void ActionFavoriteChangeCommand(Grip arg)

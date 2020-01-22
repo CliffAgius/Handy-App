@@ -23,6 +23,11 @@
                                 HasShadow="True"
                                 HorizontalOptions="CenterAndExpand"
                                 VerticalOptions="FillAndExpand">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={x:Reference HandControlPage}, Path=BindingContext.TappedCommand}"
+                                        CommandParameter="{Binding GripCommand}" />
+                                </Frame.GestureRecognizers>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="40" />
