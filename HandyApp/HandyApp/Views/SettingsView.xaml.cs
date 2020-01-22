@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Acr.UserDialogs;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace HandyApp.Views
@@ -9,6 +10,8 @@ namespace HandyApp.Views
         public SettingsView()
         {
             InitializeComponent();
+
+            BindingContext = new ViewModels.SettingsViewModel(UserDialogs.Instance);
         }
     }
 }
