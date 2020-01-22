@@ -2,8 +2,6 @@
 using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,12 +14,13 @@ namespace HandyApp.Services
         Guid serviceGuid = Guid.Parse("6E400001-B5A3-F393-E0A9-E50E24DCCA9E");
         Guid writeGuid = Guid.Parse("6e400002-b5a3-f393-e0a9-e50e24dcca9e");
         Guid readGuid = Guid.Parse("6e400003-b5a3-f393-e0a9-e50e24dcca9e");
-       
+
         private ICharacteristic writeCharacteristic;
         private ICharacteristic readCharacteristic;
+
+        public event EventHandler RcvdDataHandler;
         
         public string RcvdDataString { get; set; }
-        public ObservableCollection<string> BTDataRcvd { get; set; } = new ObservableRangeCollection<string>();
 
         public BlueToothService()
         {
@@ -43,7 +42,8 @@ namespace HandyApp.Services
                 writeCharacteristic = await service.GetCharacteristicAsync(writeGuid).ConfigureAwait(false);
                 readCharacteristic = await service.GetCharacteristicAsync(readGuid).ConfigureAwait(false);
 
-                MainThread.BeginInvokeOnMainThread(async () => {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
                     readCharacteristic.ValueUpdated += ReadCharacteristic_ValueUpdated;
                     await readCharacteristic.StartUpdatesAsync();
                 });
@@ -89,19 +89,18 @@ namespace HandyApp.Services
 
         private void ReadCharacteristic_ValueUpdated(object sender, Plugin.BLE.Abstractions.EventArgs.CharacteristicUpdatedEventArgs e)
         {
-            //MainThread.BeginInvokeOnMainThread(() =>
-            //{
+            try
+            {
                 if (e.Characteristic?.Value is object)
                 {
                     RcvdDataString = Encoding.UTF8.GetString(e.Characteristic.Value);
-                    //RcvdDataString += rcvdValue;
-                    //if (e.Characteristic.Value[e.Characteristic.Value.Length - 1] == 10)
-                    //{
-                        BTDataRcvd.Add(RcvdDataString);
-                      //  RcvdDataString = "";
-                    //}
+                    RcvdDataHandler.Invoke(this, null);
                 }
-            //});
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error recieving data - {ex.Message}");
+            }
         }
     }
 }

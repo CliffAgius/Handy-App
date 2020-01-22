@@ -16,6 +16,7 @@ namespace HandyApp.ViewModels
         public ICommand ButtonCommand;
         IUserDialogs Dialogs;
         public ICommand FavoriteCommand { get; private set; }
+        public ICommand TappedCommand;
         public ObservableCollection<Grip> Grips { get; private set; }
 
         public HandControlViewModel(IUserDialogs dialogs)
@@ -31,8 +32,13 @@ namespace HandyApp.ViewModels
             Grips = gripsCollection.CreateGripsCollection();
 
             FavoriteCommand = new Command<Grip>(ActionFavoriteChangeCommand);
-
+            TappedCommand = new Command(ActionTappedCommand);
             ButtonCommand = new Command<string>(ActionButtonCommand);
+        }
+
+        private void ActionTappedCommand()
+        {
+            Dialogs.Toast($"You tapped - ");
         }
 
         private async void ActionButtonCommand(string UARTCommand)

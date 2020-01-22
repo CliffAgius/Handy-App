@@ -33,7 +33,7 @@
                         Text="Clear" />
                 </StackLayout>
             </StackLayout>
-            <ScrollView>
+            <ScrollView HorizontalScrollBarVisibility="Always">
                 <Editor
                     AutoSize="TextChanges"
                     IsReadOnly="True"
