@@ -79,7 +79,7 @@
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="{DynamicResource MaterialFontFamily}"
-                Glyph="{StaticResource BluetoothSettings}"
+                Glyph="{StaticResource Bug}"
                 Color="{DynamicResource SystemBlue}" />
         </FlyoutItem.Icon>
         <ShellContent ContentTemplate="{DataTemplate local:Views.UARTControlView}" />
