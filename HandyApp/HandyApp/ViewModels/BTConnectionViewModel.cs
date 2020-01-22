@@ -54,7 +54,7 @@ namespace HandyApp.ViewModels
             //Stop scanning if it's still active...
             await StopScan().ConfigureAwait(false);
             //Navigate to the Connected Page...
-            await Shell.Current.GoToAsync("HandControl");
+            await Shell.Current.Navigation.PopToRootAsync();
         }
 
         public BTConnectionViewModel(IUserDialogs dialogs)
@@ -149,6 +149,12 @@ namespace HandyApp.ViewModels
                             return;
                         }
                     }
+                }
+
+                if (App.BTService?.Device?.State == Plugin.BLE.Abstractions.DeviceState.Connected)
+                {
+                    //We already have device connected so disconnect...
+                    await App.BTService.Disconnect();
                 }
 
                 if (IsStateOn && !IsRefreshing)

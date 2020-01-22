@@ -1,14 +1,9 @@
 ﻿using Acr.UserDialogs;
-using HandyApp.Services;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
-using Plugin.BLE;
-using Plugin.BLE.Abstractions.Contracts;
 using System;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Essentials;
 
 namespace HandyApp.ViewModels
 {
@@ -16,21 +11,30 @@ namespace HandyApp.ViewModels
     {
         private IUserDialogs Dialogs;
         public ICommand UARTCommand { get; }
+        public ICommand ClearCommand { get; }
 
         public ObservableRangeCollection<string> UARTDataRcvd { get; private set; } = new ObservableRangeCollection<string>();
+
+        public string UARTString { get; set; }
 
         public UARTControlViewModel(IUserDialogs dialogs)
         {
             try
             {
                 Dialogs = dialogs;
-                UARTCommand = new AsyncCommand<string>(SendUARTCommand);
+                UARTCommand = new AsyncCommand<string>(HandleSendUARTCommand);
+                ClearCommand = new Command(HandleClearCommand);
                 SetupBT().ConfigureAwait(false);                
             }
             catch (Exception ex)
             {
                 Dialogs.Alert($"Sorry there is a fault - {ex.Message}");
             }
+        }
+
+        private void HandleClearCommand()
+        {
+            UARTString = "";
         }
 
         private async Task SetupBT()
@@ -50,8 +54,8 @@ namespace HandyApp.ViewModels
         {
             try
             {
-                UARTDataRcvd.ReplaceRange(App.BTService.BTDataRcvd);
-                OnPropertyChanged(nameof(UARTDataRcvd));
+                UARTString += App.BTService.RcvdDataString;
+                OnPropertyChanged(nameof(UARTString));
             }
             catch (Exception ex)
             {
@@ -60,7 +64,7 @@ namespace HandyApp.ViewModels
             
         }
 
-        private async Task SendUARTCommand(string UARTString)
+        private async Task HandleSendUARTCommand(string UARTString)
         {
             try
             {
