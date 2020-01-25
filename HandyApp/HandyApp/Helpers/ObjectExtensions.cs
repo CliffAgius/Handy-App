@@ -12,18 +12,18 @@ namespace HandyApp.Helpers
             return propertyInfo.Select(f => new Variance
             {
                 Property = f.Name,
-                ValueA = f.GetValue(val1),
-                ValueB = f.GetValue(val2)
+                OldValue = f.GetValue(val1),
+                NewValue = f.GetValue(val2)
             })
-                .Where(v => !v.ValueA.Equals(v.ValueB))
+                .Where(v => !v.OldValue.Equals(v.NewValue))
                 .ToList();
         }
 
         public class Variance
         {
             public string Property { get; set; }
-            public object ValueA { get; set; }
-            public object ValueB { get; set; }
+            public object OldValue { get; set; }
+            public object NewValue { get; set; }
         }
 
     }

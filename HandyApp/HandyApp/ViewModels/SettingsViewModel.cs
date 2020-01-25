@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static HandyApp.Helpers.ObjectExtensions;
 
 namespace HandyApp.ViewModels
 {
@@ -17,12 +18,8 @@ namespace HandyApp.ViewModels
         public ICommand ResetCommand { get; private set; }
         public ICommand GetSystemDiagCommand { get; private set; }
 
-        public string HoldTime { get; set; }
-        public SelectedHand SelectedHand { get; set; }
-        public string PeakThreshold { get; set; }
-        public bool MotorsEnabled { get; set; }
-        public bool DemoModeEnabled { get; set; }
-        public MuscleMode MuscleMode { get; set; }
+        public HandSettings CurrentHandSettings { get; set; }
+        public HandSettings UserHandSettings { get; set; }
 
         public List<string> HandNames
         {
@@ -72,12 +69,25 @@ namespace HandyApp.ViewModels
 
         private void SetValues()
         {
-            HoldTime = "600";
-            SelectedHand = SelectedHand.Left;
-            PeakThreshold = "300";
-            MotorsEnabled = true;
-            DemoModeEnabled = false;
-            MuscleMode = MuscleMode.Simple;
+            CurrentHandSettings = new HandSettings
+            {
+                HoldTime = "600",
+                CurrentHand = SelectedHand.Left,
+                PeakThreshold = "300",
+                MotorsEnabled = true,
+                DemoModeEnabled = false,
+                MuscleMode = MuscleMode.Simple
+            };
+
+            UserHandSettings = new HandSettings
+            {
+                HoldTime = "600",
+                CurrentHand = SelectedHand.Left,
+                PeakThreshold = "300",
+                MotorsEnabled = true,
+                DemoModeEnabled = false,
+                MuscleMode = MuscleMode.Simple
+            };
         }
 
         private async Task ActionGetSystemDiagCommand()
@@ -130,12 +140,34 @@ namespace HandyApp.ViewModels
             {
                 if (actionSave)
                 {
-                    await App.BTService.SendUARTCommand($"T{HoldTime}");
-                    await App.BTService.SendUARTCommand($"U{PeakThreshold}");
-                    await App.BTService.SendUARTCommand($"H{SelectedHand + 1}");
-                    await App.BTService.SendUARTCommand($"M{MuscleMode + 1}");
+                    List<Variance> variances = CurrentHandSettings.DetailedCompare(UserHandSettings);
 
-
+                    foreach (var item in variances)
+                    {
+                        switch (item.Property)
+                        {
+                            case "HoldTime":
+                                await App.BTService.SendUARTCommand($"T{item.NewValue}");
+                                break;
+                            case "CurrentHand":
+                                await App.BTService.SendUARTCommand($"H{(int)item.NewValue}");
+                                break;
+                            case "PeakThreshold":
+                                await App.BTService.SendUARTCommand($"U{item.NewValue}");
+                                break;
+                            case "MotorsEnabled":
+                                await App.BTService.SendUARTCommand("A3");
+                                break;
+                            case "DemoModeEnabled":
+                                await App.BTService.SendUARTCommand("A0");
+                                break;
+                            case "MuscleMode":
+                                await App.BTService.SendUARTCommand($"M{(int)item.NewValue}");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
