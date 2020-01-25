@@ -15,7 +15,6 @@ namespace HandyApp.Views
         public GripListView()
         {
             InitializeComponent();
-            BindingContext = new ViewModels.GripListViewModel();
         }
     }
 }

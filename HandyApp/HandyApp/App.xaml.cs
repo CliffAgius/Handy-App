@@ -10,7 +10,7 @@ namespace HandyApp
         public App()
         {
             //Register Syncfusion license
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTcyNDY0QDMxMzcyZTMzMmUzMGpQaEhtTXRBQnNreTdHZ2dDNmRJQWdpZlY2Y01lK3VDZXp4MHl5NHBZb2s9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjAxNjQ3QDMxMzcyZTM0MmUzMENBWTdDaW9UNHpieHNZNkZwVmNhMjdkVEVDMHh0d01nYnBVU01GQkdGUEk9");
 
             Device.SetFlags(new[] { 
                 "SwipeView_Experimental",

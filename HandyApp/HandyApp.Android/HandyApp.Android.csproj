@@ -72,7 +72,7 @@
       <Version>1.6.1-beta</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfListView">
-      <Version>17.4.0.41</Version>
+      <Version>17.4.0.39</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.ViewPager">
       <Version>28.0.0.3</Version>

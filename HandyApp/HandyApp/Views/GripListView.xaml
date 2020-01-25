@@ -1,21 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:synfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HandyApp.Views.GripListView">
+<ContentPage
+    x:Class="HandyApp.Views.GripListView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:synfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:vm="clr-namespace:HandyApp.ViewModels">
 
+    <ContentPage.BindingContext>
+        <vm:GripListViewModel />
+    </ContentPage.BindingContext>
     <StackLayout>
-        <synfusion:SfListView x:Name="listView" 
-                         ItemsSource="{Binding GripsCollection}"  ItemSize="60"  
-                         DragStartMode="OnHold" HorizontalOptions="CenterAndExpand">
+        <synfusion:SfListView
+            x:Name="listView"
+            DragStartMode="OnHold"
+            HorizontalOptions="CenterAndExpand"
+            ItemSize="100"
+            ItemsSource="{Binding Grips}">
             <synfusion:SfListView.ItemTemplate>
                 <DataTemplate>
-                    <Frame BorderColor="#262728" Padding="10" Margin="5">
-                        <Label TextColor="#474747" FontSize="Medium" Text="{Binding GripName}" HorizontalTextAlignment="Center" />
-                    </Frame>
+                    <ViewCell>
+                        <Frame
+                            Margin="5"
+                            Padding="10"
+                            BorderColor="{Binding GripColor}"
+                            CornerRadius="20"
+                            HasShadow="True">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Grid.Column="0"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="FillAndExpand"
+                                    Source="{Binding GripImageSrc}"
+                                    VerticalOptions="Fill" />
+                                <Label
+                                    Grid.Column="1"
+                                    FontSize="Medium"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding GripName}"
+                                    TextColor="#474747"
+                                    VerticalTextAlignment="Center" />
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
                 </DataTemplate>
             </synfusion:SfListView.ItemTemplate>
         </synfusion:SfListView>
-        <Button Text="Save" TextColor="White" BackgroundColor="#2164a8" Padding="40" Margin="30" VerticalOptions="End" HorizontalOptions="Center"/>
+        <Button
+            Margin="10"
+            Padding="20"
+            BackgroundColor="#2164a8"
+            HorizontalOptions="Center"
+            Text="Save"
+            TextColor="White"
+            VerticalOptions="End" />
     </StackLayout>
 </ContentPage>
