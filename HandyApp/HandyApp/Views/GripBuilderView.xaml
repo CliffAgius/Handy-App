@@ -7,87 +7,142 @@
     xmlns:local="clr-namespace:HandyApp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="GripBuilderPage"
+    Title="Grip Builder"
     mc:Ignorable="d">
     <ContentPage.Content>
-        <StackLayout>
-            <CarouselView
-                x:Name="GripsCarousel"
-                ItemsSource="{Binding Grips}"
-                PeekAreaInsets="60"
-                VerticalOptions="CenterAndExpand">
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Frame
-                                Margin="10"
-                                BackgroundColor="{Binding GripColor}"
-                                BorderColor="DarkGray"
-                                CornerRadius="20"
-                                HasShadow="True"
-                                HorizontalOptions="CenterAndExpand"
-                                VerticalOptions="CenterAndExpand">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="40" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="10*" />
-                                        <RowDefinition Height="80*" />
-                                        <RowDefinition Height="10*" />
-                                    </Grid.RowDefinitions>
-                                    <Label
-                                        Grid.Row="0"
-                                        Grid.RowSpan="2"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="2"
-                                        FontAttributes="Bold"
-                                        FontSize="120"
-                                        HorizontalOptions="Start"
-                                        Text="{Binding GripNumber}"
-                                        VerticalOptions="Start" />
-                                    <Button
-                                        Grid.Row="0"
-                                        Grid.Column="1"
-                                        Grid.ColumnSpan="2"
-                                        BackgroundColor="{Binding GripColor}"
-                                        Command="{Binding Source={x:Reference GripBuilderPage}, Path=BindingContext.FavoriteCommand}"
-                                        CommandParameter="{Binding .}"
-                                        FontFamily="{DynamicResource MaterialFontFamily}"
-                                        FontSize="44"
-                                        HorizontalOptions="End"
-                                        Text="{Binding FavoriteIcon}"
-                                        TextColor="Black" />
-                                    <Image
-                                        Grid.Row="1"
-                                        Grid.Column="1"
-                                        Aspect="AspectFit"
-                                        HorizontalOptions="Fill"
-                                        Source="{Binding GripImageSrc}"
-                                        VerticalOptions="Fill" />
-                                    <Label
-                                        Grid.Row="2"
-                                        Grid.ColumnSpan="3"
-                                        FontAttributes="Bold"
-                                        FontSize="Large"
-                                        HorizontalOptions="Center"
-                                        Text="{Binding GripName}"
-                                        VerticalOptions="Center" />
-                                </Grid>
-                            </Frame>
-                        </StackLayout>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
-            <IndicatorView
-                Margin="0,0,0,60"
+        <ScrollView>
+            <Grid
+                Margin="10"
                 HorizontalOptions="CenterAndExpand"
-                IndicatorColor="LightGray"
-                IndicatorSize="10"
-                IndicatorView.ItemsSourceBy="GripsCarousel"
-                SelectedIndicatorColor="Black"
-                VerticalOptions="End" />
-        </StackLayout>
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="320" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Margin="20"
+                    FontSize="Medium"
+                    HorizontalTextAlignment="Center"
+                    Text="Set a Position and click add to save in the sequence." />
+                <Frame
+                    Grid.Row="1"
+                    BorderColor="green"
+                    CornerRadius="20">
+                    <Grid
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="60" />
+                            <RowDefinition Height="60" />
+                            <RowDefinition Height="60" />
+                            <RowDefinition Height="60" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            FontSize="Caption"
+                            HorizontalOptions="Start"
+                            Text="Open"
+                            TextColor="Blue" />
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            FontSize="Caption"
+                            HorizontalOptions="End"
+                            Text="Closed"
+                            TextColor="Blue" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            FontSize="Medium"
+                            Text="F0 - Thumb"
+                            VerticalTextAlignment="Center" />
+                        <Slider
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            HorizontalOptions="FillAndExpand"
+                            Maximum="1000"
+                            Minimum="0"
+                            MinimumTrackColor="{StaticResource SystemBlue}"
+                            VerticalOptions="Center"
+                            Value="0" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            FontSize="Medium"
+                            Text="F1 - Index"
+                            VerticalTextAlignment="Center" />
+                        <Slider
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            HorizontalOptions="FillAndExpand"
+                            Maximum="1000"
+                            Minimum="0"
+                            MinimumTrackColor="{StaticResource SystemBlue}"
+                            VerticalOptions="Center"
+                            Value="0" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            FontSize="Medium"
+                            Text="F2 - Middle"
+                            VerticalTextAlignment="Center" />
+                        <Slider
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            HorizontalOptions="FillAndExpand"
+                            Maximum="1000"
+                            Minimum="0"
+                            MinimumTrackColor="{StaticResource SystemBlue}"
+                            VerticalOptions="Center"
+                            Value="0" />
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            FontSize="Medium"
+                            Text="F3/4 - Pinky"
+                            VerticalTextAlignment="Center" />
+                        <Slider
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            HorizontalOptions="FillAndExpand"
+                            Maximum="1000"
+                            Minimum="0"
+                            MinimumTrackColor="{StaticResource SystemBlue}"
+                            VerticalOptions="Center"
+                            Value="0" />
+                    </Grid>
+                </Frame>
+                <Frame
+                    Grid.Row="2"
+                    BorderColor="green"
+                    CornerRadius="20">
+                    <Label Text="Grip Positions" />
+                </Frame>
+
+
+                <Button
+                    Grid.Row="3"
+                    BackgroundColor="Green"
+                    HorizontalOptions="Start"
+                    Text="Add"
+                    VerticalOptions="End" />
+                <Button
+                    Grid.Row="3"
+                    BackgroundColor="Green"
+                    HorizontalOptions="End"
+                    Text="Save"
+                    VerticalOptions="End" />
+
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

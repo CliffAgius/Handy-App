@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:synfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:vm="clr-namespace:HandyApp.ViewModels"
-    x:Name="GripListPage">
+    x:Name="GripListPage"
+    Title="Grip List">
 
     <ContentPage.BindingContext>
         <vm:GripListViewModel />
@@ -19,7 +20,7 @@
             ItemsSource="{Binding Grips}">
             <synfusion:SfListView.ItemTemplate>
                 <DataTemplate>
-                    <SwipeView>
+                    <!--<SwipeView>
                         <SwipeView.RightItems>
                             <SwipeItems Mode="Execute">
                                 <SwipeItemView
@@ -32,34 +33,34 @@
                                     </Grid>
                                 </SwipeItemView>
                             </SwipeItems>
-                        </SwipeView.RightItems>
-                        <Frame
-                            Margin="5"
-                            Padding="10"
-                            BorderColor="{Binding GripColor}"
-                            CornerRadius="20"
-                            HasShadow="True">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Image
-                                    Grid.Column="0"
-                                    Aspect="AspectFit"
-                                    HorizontalOptions="FillAndExpand"
-                                    Source="{Binding GripImageSrc}"
-                                    VerticalOptions="Fill" />
-                                <Label
-                                    Grid.Column="1"
-                                    FontSize="Medium"
-                                    HorizontalTextAlignment="Center"
-                                    Text="{Binding GripName}"
-                                    TextColor="#474747"
-                                    VerticalTextAlignment="Center" />
-                            </Grid>
-                        </Frame>
-                    </SwipeView>
+                        </SwipeView.RightItems>-->
+                    <Frame
+                        Margin="5"
+                        Padding="10"
+                        BorderColor="{Binding GripColor}"
+                        CornerRadius="20"
+                        HasShadow="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                Grid.Column="0"
+                                Aspect="AspectFit"
+                                HorizontalOptions="FillAndExpand"
+                                Source="{Binding GripImageSrc}"
+                                VerticalOptions="Fill" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="Medium"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding GripName}"
+                                TextColor="#474747"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                    </Frame>
+                    <!--</SwipeView>-->
                 </DataTemplate>
             </synfusion:SfListView.ItemTemplate>
         </synfusion:SfListView>
