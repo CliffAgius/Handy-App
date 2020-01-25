@@ -4,7 +4,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:synfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-    xmlns:vm="clr-namespace:HandyApp.ViewModels">
+    xmlns:vm="clr-namespace:HandyApp.ViewModels"
+    x:Name="GripListPage">
 
     <ContentPage.BindingContext>
         <vm:GripListViewModel />
@@ -18,7 +19,20 @@
             ItemsSource="{Binding Grips}">
             <synfusion:SfListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItemView
+                                    Command="{Binding Path=BindingContext.DeleteGripCommand, Source={x:Reference Name=GripListPage}}"
+                                    CommandParameter="{Binding .}">
+                                    <Grid
+                                        BackgroundColor="Red"
+                                        WidthRequest="120">
+                                        <Label Text="DELETE" />
+                                    </Grid>
+                                </SwipeItemView>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
                         <Frame
                             Margin="5"
                             Padding="10"
@@ -45,7 +59,7 @@
                                     VerticalTextAlignment="Center" />
                             </Grid>
                         </Frame>
-                    </ViewCell>
+                    </SwipeView>
                 </DataTemplate>
             </synfusion:SfListView.ItemTemplate>
         </synfusion:SfListView>
