@@ -1,4 +1,5 @@
-﻿using HandyApp.ViewModels;
+﻿using Acr.UserDialogs;
+using HandyApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,7 @@ namespace HandyApp.Views
         {
             InitializeComponent();
 
-            BindingContext = new GripBuilderViewModel();
+            BindingContext = new GripBuilderViewModel(UserDialogs.Instance);
         }
     }
 }

@@ -70,7 +70,8 @@
                                 HorizontalOptions="End"
                                 Increment="10"
                                 Maximum="100"
-                                Minimum="0" />
+                                Minimum="0"
+                                Value="{Binding AnimationStepperValue}" />
                         </StackLayout>
                         <Label
                             Grid.Row="1"
@@ -152,19 +153,29 @@
                     Grid.Row="2"
                     BorderColor="green"
                     CornerRadius="20">
-                    <Label Text="Grip Positions" />
+                    <!--<ListView
+                        Header="Grip Positions"
+                        IsEnabled="False"
+                        ItemsSource="{Binding gripPositionCSVs}" />-->
                 </Frame>
-
-
                 <Button
                     Grid.Row="3"
                     BackgroundColor="Green"
+                    Command="{Binding AddCommand}"
                     HorizontalOptions="Start"
                     Text="Add"
                     VerticalOptions="End" />
                 <Button
                     Grid.Row="3"
                     BackgroundColor="Green"
+                    Command="{Binding ClearCommand}"
+                    HorizontalOptions="Center"
+                    Text="Clear"
+                    VerticalOptions="End" />
+                <Button
+                    Grid.Row="3"
+                    BackgroundColor="Green"
+                    Command="{Binding SaveCommand}"
                     HorizontalOptions="End"
                     Text="Save"
                     VerticalOptions="End" />
