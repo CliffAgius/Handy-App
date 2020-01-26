@@ -10,38 +10,20 @@ namespace HandyApp.ViewModels
 {
     public class GripBuilderViewModel : BaseViewModel
     {
-        public ICommand FavoriteCommand { get; private set; }
+        public ICommand AddCommand { get; private set; }
+        public ICommand SaveCommand { get; private set; }
 
-        public ObservableCollection<Grip> Grips { get; private set; }
+        public int AnimationStepNo { get; set; }
+
+        public int F0Value { get; set; }
+        public int F1Value { get; set; }
+        public int F2Value { get; set; }
+        public int F34Value { get; set; }
 
         public GripBuilderViewModel()
         {
-            GripsCollection gripsCollection = new GripsCollection();
-            Grips = gripsCollection.CreateGripsCollection();
-
-            FavoriteCommand = new MvvmHelpers.Commands.Command<Grip>(ActionFavoriteChangeCommand);
+            AnimationStepNo = 0;
         }
 
-        private void ActionFavoriteChangeCommand(Grip arg)
-        {
-            try
-            {
-                arg.IsFavorite = !arg.IsFavorite;
-                if (arg.IsFavorite)
-                {
-                    arg.FavoriteIcon = IconFont.Heart;
-                }
-                else
-                {
-                    arg.FavoriteIcon = IconFont.HeartOutline;
-                }
-                Grips[Grips.FirstOrDefault(x => x.GripNumber == arg.GripNumber).GripNumber - 1] = arg;
-                OnPropertyChanged(nameof(Grips));
-            }
-            catch (Exception ex)
-            {
-                
-            }
-        }
     }
 }

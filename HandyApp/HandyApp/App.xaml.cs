@@ -1,4 +1,6 @@
+using HandyApp.Models;
 using HandyApp.Services;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
 
 namespace HandyApp
@@ -6,6 +8,7 @@ namespace HandyApp
     public partial class App : Application
     {
         public static BlueToothService BTService { get; set; }
+        public static ObservableCollection<Grip> Grips { get; set; }
 
         public App()
         {

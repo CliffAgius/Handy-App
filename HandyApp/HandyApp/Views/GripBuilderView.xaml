@@ -16,14 +16,14 @@
                 HorizontalOptions="CenterAndExpand"
                 VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100" />
-                    <RowDefinition Height="320" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="350" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Label
                     Grid.Row="0"
-                    Margin="20"
+                    Margin="5"
                     FontSize="Medium"
                     HorizontalTextAlignment="Center"
                     Text="Set a Position and click add to save in the sequence." />
@@ -35,6 +35,7 @@
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
                             <RowDefinition Height="20" />
                             <RowDefinition Height="60" />
                             <RowDefinition Height="60" />
@@ -47,78 +48,104 @@
                         </Grid.ColumnDefinitions>
                         <Label
                             Grid.Row="0"
+                            Grid.Column="0"
+                            FontSize="Medium"
+                            Text="Animation Step"
+                            VerticalTextAlignment="Center" />
+                        <StackLayout
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Orientation="Horizontal">
+                            <Label
+                                Padding="5,0,5,0"
+                                BackgroundColor="LightSeaGreen"
+                                FontSize="Medium"
+                                MinimumWidthRequest="80"
+                                Text="{Binding AnimationStepNo}"
+                                TextColor="White"
+                                VerticalTextAlignment="Center" />
+                            <Stepper
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                HorizontalOptions="End"
+                                Increment="10"
+                                Maximum="100"
+                                Minimum="0" />
+                        </StackLayout>
+                        <Label
+                            Grid.Row="1"
                             Grid.Column="1"
                             FontSize="Caption"
                             HorizontalOptions="Start"
                             Text="Open"
                             TextColor="Blue" />
                         <Label
-                            Grid.Row="0"
+                            Grid.Row="1"
                             Grid.Column="1"
                             FontSize="Caption"
                             HorizontalOptions="End"
                             Text="Closed"
                             TextColor="Blue" />
                         <Label
-                            Grid.Row="1"
+                            Grid.Row="2"
                             Grid.Column="0"
                             FontSize="Medium"
                             Text="F0 - Thumb"
                             VerticalTextAlignment="Center" />
                         <Slider
-                            Grid.Row="1"
+                            Grid.Row="2"
                             Grid.Column="1"
                             HorizontalOptions="FillAndExpand"
-                            Maximum="1000"
+                            Maximum="100"
                             Minimum="0"
                             MinimumTrackColor="{StaticResource SystemBlue}"
                             VerticalOptions="Center"
-                            Value="0" />
+                            Value="{Binding F0Value}" />
                         <Label
-                            Grid.Row="2"
+                            Grid.Row="3"
                             Grid.Column="0"
                             FontSize="Medium"
                             Text="F1 - Index"
                             VerticalTextAlignment="Center" />
                         <Slider
-                            Grid.Row="2"
+                            Grid.Row="3"
                             Grid.Column="1"
                             HorizontalOptions="FillAndExpand"
-                            Maximum="1000"
+                            Maximum="100"
                             Minimum="0"
                             MinimumTrackColor="{StaticResource SystemBlue}"
                             VerticalOptions="Center"
-                            Value="0" />
+                            Value="{Binding F1Value}" />
                         <Label
-                            Grid.Row="3"
+                            Grid.Row="4"
                             Grid.Column="0"
                             FontSize="Medium"
                             Text="F2 - Middle"
                             VerticalTextAlignment="Center" />
                         <Slider
-                            Grid.Row="3"
+                            Grid.Row="4"
                             Grid.Column="1"
                             HorizontalOptions="FillAndExpand"
-                            Maximum="1000"
+                            Maximum="100"
                             Minimum="0"
                             MinimumTrackColor="{StaticResource SystemBlue}"
                             VerticalOptions="Center"
-                            Value="0" />
+                            Value="{Binding F2Value}" />
                         <Label
-                            Grid.Row="4"
+                            Grid.Row="5"
                             Grid.Column="0"
                             FontSize="Medium"
                             Text="F3/4 - Pinky"
                             VerticalTextAlignment="Center" />
                         <Slider
-                            Grid.Row="4"
+                            Grid.Row="5"
                             Grid.Column="1"
                             HorizontalOptions="FillAndExpand"
-                            Maximum="1000"
+                            Maximum="100"
                             Minimum="0"
                             MinimumTrackColor="{StaticResource SystemBlue}"
                             VerticalOptions="Center"
-                            Value="0" />
+                            Value="{Binding F34Value}" />
                     </Grid>
                 </Frame>
                 <Frame
