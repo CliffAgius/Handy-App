@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace HandyApp.ViewModels
@@ -43,6 +44,18 @@ namespace HandyApp.ViewModels
             AddCommand = new Command(ActionAddCommand);
             ClearCommand = new Command(ActionClearCommand);
             SaveCommand = new Command(ActionSaveCommand);
+        }
+
+        private async Task MoveFinger(int fingerNo, int positionVlaue)
+        {
+            try
+            {
+                await App.BTService.SendUARTCommand($"F{fingerNo} P{positionVlaue}").ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error while moving the finger - {ex.Message}");
+            }
         }
 
         private void ActionAddCommand()
