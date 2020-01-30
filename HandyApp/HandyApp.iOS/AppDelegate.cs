@@ -1,7 +1,4 @@
 using Syncfusion.ListView.XForms.iOS;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 using Foundation;
 using UIKit;
@@ -23,7 +20,6 @@ namespace HandyApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
             SfListViewRenderer.Init();
