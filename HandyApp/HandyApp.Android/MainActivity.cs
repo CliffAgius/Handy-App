@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Android;
 using Acr.UserDialogs;
 using Plugin.Permissions;
+using Sharpnado.Presentation.Forms.Droid;
 
 namespace HandyApp.Droid
 {
@@ -22,6 +23,7 @@ namespace HandyApp.Droid
             UserDialogs.Init(() => (this));
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
+            SharpnadoInitializer.Initialize();
             FormsMaterial.Init(this, savedInstanceState);
             LoadApplication(new App());
         }

@@ -3,7 +3,7 @@
     x:Class="HandyApp.Views.GripListView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:synfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
     xmlns:vm="clr-namespace:HandyApp.ViewModels"
     x:Name="GripListPage"
     Title="Grip List">
@@ -12,58 +12,68 @@
         <vm:GripListViewModel />
     </ContentPage.BindingContext>
     <StackLayout>
-        <synfusion:SfListView
-            x:Name="listView"
-            DragStartMode="OnHold"
-            HorizontalOptions="CenterAndExpand"
-            ItemSize="100"
-            ItemsSource="{Binding Grips}">
-            <synfusion:SfListView.ItemTemplate>
+        <renderedViews:HorizontalListView
+            CollectionPadding="16"
+            ColumnCount="1"
+            EnableDragAndDrop="True"
+            ItemHeight="160"
+            ItemSpacing="8"
+            ItemsSource="{Binding Grips}"
+            ListLayout="Grid"
+            VerticalOptions="FillAndExpand">
+            <renderedViews:HorizontalListView.ItemTemplate>
                 <DataTemplate>
-                    <!--<SwipeView>
-                        <SwipeView.RightItems>
-                            <SwipeItems Mode="Execute">
-                                <SwipeItemView
-                                    Command="{Binding Path=BindingContext.DeleteGripCommand, Source={x:Reference Name=GripListPage}}"
-                                    CommandParameter="{Binding .}">
-                                    <Grid
-                                        BackgroundColor="Red"
-                                        WidthRequest="120">
-                                        <Label Text="DELETE" />
-                                    </Grid>
-                                </SwipeItemView>
-                            </SwipeItems>
-                        </SwipeView.RightItems>-->
-                    <Frame
-                        Margin="5"
-                        Padding="10"
-                        BorderColor="{Binding GripColor}"
-                        CornerRadius="20"
-                        HasShadow="True">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Image
-                                Grid.Column="0"
-                                Aspect="AspectFit"
-                                HorizontalOptions="FillAndExpand"
-                                Source="{Binding GripImageSrc}"
-                                VerticalOptions="Fill" />
-                            <Label
-                                Grid.Column="1"
-                                FontSize="Medium"
-                                HorizontalTextAlignment="Center"
-                                Text="{Binding GripName}"
-                                TextColor="#474747"
-                                VerticalTextAlignment="Center" />
-                        </Grid>
-                    </Frame>
-                    <!--</SwipeView>-->
+                    <renderedViews:DraggableViewCell
+                        x:Name="DraggableViewCell"
+                        IsDraggable="True">
+                        <ContentView>
+                            <renderedViews:MaterialFrame
+                                Margin="4"
+                                Padding="5"
+                                BorderColor="{Binding GripColor}"
+                                Elevation="4">
+
+                                <Frame.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding Source={x:Reference DraggableViewCell}, Path=IsDragAndDropping}"
+                                        TargetType="renderedViews:MaterialFrame"
+                                        Value="True">
+                                        <Setter Property="Elevation" Value="8" />
+                                    </DataTrigger>
+                                </Frame.Triggers>
+
+                                <Grid
+                                    ColumnSpacing="0"
+                                    RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="2*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="3*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.RowSpan="2"
+                                        Grid.Column="0"
+                                        Aspect="AspectFit"
+                                        HorizontalOptions="Center"
+                                        Source="{Binding GripImageSrc}" />
+                                    <Label
+                                        Grid.RowSpan="2"
+                                        Grid.Column="2"
+                                        Margin="5"
+                                        FontSize="Large"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding GripName}"
+                                        VerticalTextAlignment="Center" />
+                                </Grid>
+                            </renderedViews:MaterialFrame>
+                        </ContentView>
+                    </renderedViews:DraggableViewCell>
                 </DataTemplate>
-            </synfusion:SfListView.ItemTemplate>
-        </synfusion:SfListView>
+            </renderedViews:HorizontalListView.ItemTemplate>
+        </renderedViews:HorizontalListView>
         <Button
             Margin="10"
             Padding="20"
