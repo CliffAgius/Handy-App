@@ -104,5 +104,7 @@
 		public const string GestureTapHold = "\ufd53";
 		public const string TransferDown = "\ufd7d";
 		public const string Settings = "\uf493";
+		public const string ArmFlex = "\uf008f";
+		public const string ArmFlexOutline = "\uf0090";
 	}
 }

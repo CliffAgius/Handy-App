@@ -102,4 +102,13 @@
         </FlyoutItem.Icon>
         <ShellContent ContentTemplate="{DataTemplate local:Views.SettingsView}" />
     </FlyoutItem>
+    <FlyoutItem Title="Muscle Sensor Check">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="{DynamicResource MaterialFontFamily}"
+                Glyph="{StaticResource ArmFlex}"
+                Color="{DynamicResource SystemBlue}" />
+        </FlyoutItem.Icon>
+        <ShellContent ContentTemplate="{DataTemplate local:Views.MuscleSensorCheckView}" />
+    </FlyoutItem>
 </Shell>

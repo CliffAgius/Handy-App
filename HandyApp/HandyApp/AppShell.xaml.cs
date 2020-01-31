@@ -16,6 +16,7 @@ namespace HandyApp
             Routing.RegisterRoute("HandControl", typeof(HandControlView));
             Routing.RegisterRoute("BTConnection", typeof(BTConnectionView));
             Routing.RegisterRoute("UARTControl", typeof(UARTControlView));
+            Routing.RegisterRoute("MuscleSensorCheck", typeof(MuscleSensorCheckView));
         }
 
         internal async Task CloseFlyoutAsync()

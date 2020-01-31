@@ -58,6 +58,8 @@
             <x:String x:Key="BluetoothSettings">&#xf0b3;</x:String>
             <x:String x:Key="Settings">&#xf493;</x:String>
             <x:String x:Key="Bug">&#xf0e4;</x:String>
+            <x:String x:Key="ArmFlex">&#xf008;</x:String>
+            <x:String x:Key="ArmFlexOutlinr">&#xf0090;</x:String>
 
             <!--  Shell  -->
             <Color x:Key="ShellTabBarBackgroundColor">#F5F5F5</Color>
