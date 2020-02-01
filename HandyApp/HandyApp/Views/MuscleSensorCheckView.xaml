@@ -35,13 +35,14 @@
                 FontSize="30"
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
-                Text="Open -&gt; Close -&gt; Change Grip then repeat."
+                Text="Open -&gt; Close -&gt; Change Grip"
                 TextColor="{StaticResource SystemBlue}" />
             <Button
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
                 Margin="40,0,40,0"
                 Command="{Binding StartMeasurementCommand}"
+                IsEnabled="{Binding IsBusy}"
                 Text="Start"
                 VerticalOptions="End" />
             <Slider
@@ -50,30 +51,44 @@
                 Grid.Column="0"
                 BackgroundColor="{StaticResource SystemGreen}"
                 IsEnabled="False"
-                Rotation="90"
-                VerticalOptions="CenterAndExpand" />
+                Maximum="100"
+                Minimum="0"
+                Rotation="-90"
+                VerticalOptions="CenterAndExpand"
+                Value="{Binding OpenSensorValue}" />
             <Slider
                 x:Name="CloseSensor"
                 Grid.Row="2"
                 Grid.Column="1"
                 BackgroundColor="{StaticResource SystemGreen}"
                 IsEnabled="False"
-                Rotation="90"
-                VerticalOptions="CenterAndExpand" />
+                Maximum="100"
+                Minimum="0"
+                Rotation="-90"
+                VerticalOptions="CenterAndExpand"
+                Value="{Binding CloseSensorValue}" />
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
                 FontSize="Large"
                 HorizontalTextAlignment="Center"
-                Text="100"
+                Text="{Binding OpenSensorValue}"
                 TextColor="{StaticResource SystemBlue}" />
             <Label
                 Grid.Row="3"
                 Grid.Column="1"
                 FontSize="Large"
                 HorizontalTextAlignment="Center"
-                Text="100"
+                Text="{Binding CloseSensorValue}"
                 TextColor="{StaticResource SystemBlue}" />
+            <Button
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                Margin="40,0,40,40"
+                Command="{Binding ProcessCommand}"
+                IsEnabled="{Binding ProcessBtnEnabled}"
+                Text="Send for Processing"
+                VerticalOptions="End" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
