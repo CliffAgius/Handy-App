@@ -5,13 +5,13 @@ using Xamarin.Forms.Xaml;
 namespace HandyApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HandControlView : ContentPage
+    public partial class BTConnectionView : ContentPage
     {
-        public HandControlView()
+        public BTConnectionView()
         {
             InitializeComponent();
 
-            BindingContext = new ViewModels.HandControlViewModel(UserDialogs.Instance);
+            BindingContext = new ViewModels.BTConnectionViewModel(UserDialogs.Instance);
         }
     }
 }

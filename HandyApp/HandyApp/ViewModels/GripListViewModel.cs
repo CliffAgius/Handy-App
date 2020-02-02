@@ -1,28 +1,37 @@
-﻿using Acr.Collections;
+﻿//using Acr.Collections;
 using HandyApp.Models;
+using MvvmHelpers;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using Xamarin.Forms;
 
 namespace HandyApp.ViewModels
 {
-    public class GripListViewModel : ViewModel
+    public class GripListViewModel : BaseViewModel
     {
-
-        public ObservableCollection<Grips> GripsCollection { get; private set; } = new ObservableCollection<Grips>();
+        public Command<Grip> DeleteGripCommand { get; private set; }
+        public ObservableCollection<Grip> Grips { get; private set; } = new ObservableCollection<Grip>();
 
         public GripListViewModel()
         {
-            BuildGripsCollection();
+            GripsCollection gripsCollection = new GripsCollection();
+            Grips = gripsCollection.CreateGripsCollection();
+
+            DeleteGripCommand = new Command<Grip>(ActionDeleteGripCommand);
         }
 
-        void BuildGripsCollection()
+        private void ActionDeleteGripCommand(Grip obj)
         {
-            GripsCollection.Add(new Grips { ID = 0, GripNumber = 1, GripName = "Fist Grip" });
-            GripsCollection.Add(new Grips { ID = 1, GripNumber = 2, GripName = "Palm Grip" });
-            GripsCollection.Add(new Grips { ID = 2, GripNumber = 3, GripName = "Thumbs Up" });
-            GripsCollection.Add(new Grips { ID = 3, GripNumber = 4, GripName = "Point" });
-            GripsCollection.Add(new Grips { ID = 4, GripNumber = 5, GripName = "Pinch / OK" });
-            GripsCollection.Add(new Grips { ID = 5, GripNumber = 6, GripName = "Tripod" });
+            try
+            {
+                Grips.Remove(obj);
+                OnPropertyChanged();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error deleting the grip - {ex.Message}");
+            }
         }
     }
 }

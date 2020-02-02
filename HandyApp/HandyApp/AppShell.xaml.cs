@@ -1,6 +1,5 @@
 ﻿using HandyApp.Views;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -14,7 +13,10 @@ namespace HandyApp
         {
             InitializeComponent();
 
-            Routing.RegisterRoute("deviceconnection", typeof(DeviceConnectionView));
+            Routing.RegisterRoute("HandControl", typeof(HandControlView));
+            Routing.RegisterRoute("BTConnection", typeof(BTConnectionView));
+            Routing.RegisterRoute("UARTControl", typeof(UARTControlView));
+            Routing.RegisterRoute("MuscleSensorCheck", typeof(MuscleSensorCheckView));
         }
 
         internal async Task CloseFlyoutAsync()

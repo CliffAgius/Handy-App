@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HandyApp.Views.MuscleSensorCheckView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <!--  Warning  -->
+            <Label
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Margin="10,20,10,20"
+                FontSize="44"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Text="When you are ready follow the sequence of:"
+                TextColor="{StaticResource SystemBlue}" />
+            <Label
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="10,20,10,20"
+                FontSize="30"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Text="Open -&gt; Close -&gt; Change Grip"
+                TextColor="{StaticResource SystemBlue}" />
+            <Button
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="40,0,40,0"
+                Command="{Binding StartMeasurementCommand}"
+                IsEnabled="{Binding IsBusy}"
+                Text="Start"
+                VerticalOptions="End" />
+            <Slider
+                x:Name="OpenSensor"
+                Grid.Row="2"
+                Grid.Column="0"
+                BackgroundColor="{StaticResource SystemGreen}"
+                IsEnabled="False"
+                Maximum="100"
+                Minimum="0"
+                Rotation="-90"
+                VerticalOptions="CenterAndExpand"
+                Value="{Binding OpenSensorValue}" />
+            <Slider
+                x:Name="CloseSensor"
+                Grid.Row="2"
+                Grid.Column="1"
+                BackgroundColor="{StaticResource SystemGreen}"
+                IsEnabled="False"
+                Maximum="100"
+                Minimum="0"
+                Rotation="-90"
+                VerticalOptions="CenterAndExpand"
+                Value="{Binding CloseSensorValue}" />
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                FontSize="Large"
+                HorizontalTextAlignment="Center"
+                Text="{Binding OpenSensorValue}"
+                TextColor="{StaticResource SystemBlue}" />
+            <Label
+                Grid.Row="3"
+                Grid.Column="1"
+                FontSize="Large"
+                HorizontalTextAlignment="Center"
+                Text="{Binding CloseSensorValue}"
+                TextColor="{StaticResource SystemBlue}" />
+            <Button
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                Margin="40,0,40,40"
+                Command="{Binding ProcessCommand}"
+                IsEnabled="{Binding ProcessBtnEnabled}"
+                Text="Send for Processing"
+                VerticalOptions="End" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

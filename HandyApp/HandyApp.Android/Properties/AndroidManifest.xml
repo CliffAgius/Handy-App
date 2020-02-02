@@ -1,16 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.CASoftware.HandyApp" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="28" />
+	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="29" />
 	<application android:label="HandyApp.Android"></application>
-  
-  <uses-permission android:name="android.permission.BLUETOOTH"/>
-  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-	<uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
-  <!--this is necessary for Android v6+ to get the device name and address-->
-  <uses-permission android:name="android.permission.LOCATION_HARDWARE" />
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-  <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
-
+	<uses-permission android:name="android.permission.BLUETOOTH" />
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+	<!--this is necessary for Android v6+ to get the device name and address-->
+	<uses-permission android:name="android.permission.LOCATION_HARDWARE" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
 </manifest>

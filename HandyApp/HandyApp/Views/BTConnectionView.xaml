@@ -1,0 +1,53 @@
+﻿<ContentPage
+    x:Class="HandyApp.Views.BTConnectionView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converter="clr-namespace:HandyApp.Converters"
+    Title="List BlueTooth Devices"
+    Shell.TabBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:NegateBooleanConverter x:Key="inverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <Button
+                    Margin="20,20,20,0"
+                    Command="{Binding StartScanBtn}"
+                    IsEnabled="{Binding IsScanning, Converter={StaticResource inverter}}"
+                    Text="Start Scanning" />
+                <ListView
+                    IsPullToRefreshEnabled="True"
+                    IsRefreshing="{Binding IsScanning, Mode=OneTime}"
+                    ItemsSource="{Binding Devices}"
+                    RefreshCommand="{Binding ScanCommand}"
+                    SelectedItem="{Binding SelectedDevice, Mode=TwoWay}">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ActivityIndicator
+                    IsRunning="{Binding IsScanning}"
+                    IsVisible="True"
+                    VerticalOptions="Center" />
+                <Button
+                    Margin="20,0,20,20"
+                    Command="{Binding StopScanBtn}"
+                    IsEnabled="{Binding IsScanning}"
+                    Text="Stop Scanning" />
+            </StackLayout>
+            <Label
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="{Binding StateText}"
+                TextColor="Blue" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -19,41 +19,56 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Acr.Core" Version="3.0.1" />
-    <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
-    <PackageReference Include="Acr.XamForms" Version="4.0.1" />
-    <PackageReference Include="LiveXAML" Version="2.1.59" />
-    <PackageReference Include="Plugin.BluetoothLE" Version="6.2.3" />
-    <PackageReference Include="ReactiveUI.Fody" Version="10.0.0-preview.3" />
-    <PackageReference Include="ReactiveUI.XamForms" Version="10.0.0-preview.3" />
-    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.1.0.38" />
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.62955-pre2" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.35" />
+    <PackageReference Include="Plugin.BLE" Version="2.1.1" />
+    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.1-beta" />
+    <PackageReference Include="Sharpnado.Forms.HorizontalListView" Version="1.4.0" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.4.0.39" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991537" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Forms.DebugRainbows" Version="1.1.4" />
+    <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.4.0.991537" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\ListAdaptersView.xaml.cs">
-      <DependentUpon>ListAdaptersView.xaml</DependentUpon>
+    <Compile Update="Views\UARTControlView.xaml.cs">
+      <DependentUpon>UARTControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GripBuilderView.xaml.cs">
+      <DependentUpon>GripBuilderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BTConnectionView.xaml.cs">
+      <DependentUpon>BTConnectionView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\GripListView.xaml.cs">
       <DependentUpon>GripListView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
+    <Compile Update="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\DeviceConnectionView.xaml">
+    <EmbeddedResource Update="Views\MuscleSensorCheckView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\UARTControlView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\GripBuilderView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\HandControlView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ListAdaptersView.xaml">
+    <EmbeddedResource Update="Views\BTConnectionView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\GripListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SettingsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

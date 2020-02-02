@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HandyApp.Views.UARTControlView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="{Binding DeviceName}"
+    Visual="Material">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Enter UART Command:" />
+                    <Entry
+                        x:Name="entry"
+                        HorizontalOptions="FillAndExpand"
+                        IsSpellCheckEnabled="False"
+                        Placeholder="UART Command"
+                        PlaceholderColor="LightGray"
+                        Text="" />
+                </StackLayout>
+                <StackLayout
+                    HorizontalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                    <Button
+                        Command="{Binding UARTCommand}"
+                        CommandParameter="{Binding Source={x:Reference entry}, Path=Text}"
+                        HorizontalOptions="Center"
+                        Text="SEND" />
+                    <Button
+                        Command="{Binding ClearCommand}"
+                        HorizontalOptions="Center"
+                        Text="Clear" />
+                </StackLayout>
+            </StackLayout>
+            <ScrollView HorizontalScrollBarVisibility="Always">
+                <Editor
+                    AutoSize="TextChanges"
+                    IsReadOnly="True"
+                    Text="{Binding UARTString}"
+                    VerticalOptions="FillAndExpand" />
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

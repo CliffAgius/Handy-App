@@ -1,17 +1,18 @@
 ﻿using Acr.UserDialogs;
+using HandyApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace HandyApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HandControlView : ContentPage
+    public partial class GripBuilderView : ContentPage
     {
-        public HandControlView()
+        public GripBuilderView()
         {
             InitializeComponent();
 
-            BindingContext = new ViewModels.HandControlViewModel(UserDialogs.Instance);
+            BindingContext = new GripBuilderViewModel(UserDialogs.Instance);
         }
     }
 }

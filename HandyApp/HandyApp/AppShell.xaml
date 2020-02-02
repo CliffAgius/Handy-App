@@ -1,73 +1,114 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Shell xmlns="http://xamarin.com/schemas/2014/forms"
-       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:HandyApp"
-       Route="handyapp"
-       RouteHost="casoftware.com"
-       RouteScheme="app"
-       FlyoutBehavior="Flyout"
-       Title="HandyApp"
-       x:Class="HandyApp.AppShell">
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="HandyApp.AppShell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:HandyApp"
+    Title="HandyApp"
+    FlyoutBehavior="Flyout"
+    FlyoutHeaderBehavior="Fixed"
+    Shell.NavBarIsVisible="True"
+    Shell.TabBarIsVisible="True"
+    Visual="Material">
 
-    <!-- 
-        Styles and Resources 
-    
-    -->
+    <!--  Styles and Resources  -->
     <Shell.Resources>
         <ResourceDictionary>
-            <Color x:Key="NavigationPrimary">#2196F3</Color>
-            <Style x:Key="BaseStyle"
-                   TargetType="Element">
-                <Setter Property="Shell.ShellBackgroundColor"
-                        Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="Shell.ShellForegroundColor"
-                        Value="White" />
-                <Setter Property="Shell.ShellTitleColor"
-                        Value="White" />
-                <Setter Property="Shell.ShellDisabledColor"
-                        Value="#B4FFFFFF" />
-                <Setter Property="Shell.ShellUnselectedColor"
-                        Value="#95FFFFFF" />
-                <Setter Property="Shell.ShellTabBarBackgroundColor"
-                        Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="Shell.ShellTabBarForegroundColor"
-                        Value="White" />
-                <Setter Property="Shell.ShellTabBarUnselectedColor"
-                        Value="#95FFFFFF" />
-                <Setter Property="Shell.ShellTabBarTitleColor"
-                        Value="White" />
+            <Style
+                x:Key="BaseStyle"
+                TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.ForegroundColor" Value="{DynamicResource SystemWhite}" />
+                <Setter Property="Shell.TitleColor" Value="{DynamicResource SystemWhite}" />
+                <Setter Property="Shell.DisabledColor" Value="{StaticResource DisabledColor}" />
+                <Setter Property="Shell.UnselectedColor" Value="{StaticResource UnselectedColor}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{DynamicResource SystemWhite}" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{DynamicResource UnselectedColor}" />
+                <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource SystemWhite}" />
             </Style>
-            <Style TargetType="ShellItem"
-                   BasedOn="{StaticResource BaseStyle}" />
+            <Style
+                BasedOn="{StaticResource BaseStyle}"
+                TargetType="ShellItem" />
         </ResourceDictionary>
     </Shell.Resources>
 
+    <!--  Flyout Header  -->
     <Shell.FlyoutHeader>
-        <StackLayout Padding="0,20,0,10"
-                     BackgroundColor="White">
-            <Image Source="{local:ImageResource HandyApp.Images.okhand.png}"
-                   Aspect="AspectFit"
-                   VerticalOptions="StartAndExpand"
-                   HorizontalOptions="FillAndExpand" />
+        <StackLayout
+            Padding="0,20,0,10"
+            BackgroundColor="White">
+            <Image
+                Aspect="AspectFit"
+                HorizontalOptions="FillAndExpand"
+                Source="{local:ImageResource HandyApp.Images.okhand.png}"
+                VerticalOptions="StartAndExpand" />
         </StackLayout>
     </Shell.FlyoutHeader>
 
-    <!-- Your Pages -->
-    <ShellItem FlyoutIcon="bluetooth_blue.png"
-               Title="BT Connection"
-               Shell.TabBarIsVisible="True"
-               Shell.NavBarIsVisible="True">
-        <ShellSection>
-            <ShellContent Title="BT Connection"
-                          ContentTemplate="{DataTemplate local:Views.ListAdaptersView}" />
-        </ShellSection>
-    </ShellItem>
-    <ShellContent Title="Grip Selection"
-                  FlyoutIcon="hand.png"
-                  Icon="hand.png"
-                  ContentTemplate="{DataTemplate local:Views.HandControlView}" />
-    <ShellContent Title="Grip Order"
-                  FlyoutIcon="hand_okay.png"
-                  Icon="hand_okay.png"
-                  ContentTemplate="{DataTemplate local:Views.GripListView}" />
+    <!--  Pages  -->
+    <FlyoutItem
+        Title="BT Connection"
+        FlyoutDisplayOptions="AsMultipleItems"
+        FlyoutIcon="bluetooth_blue.png">
+        <Tab Title="Grip Selection">
+            <Tab.Icon>
+                <FontImageSource
+                    FontFamily="{DynamicResource MaterialFontFamily}"
+                    Glyph="{StaticResource HandPointingUp}"
+                    Color="{DynamicResource SystemBlue}" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate local:Views.HandControlView}" />
+        </Tab>
+        <Tab Title="Grip Order">
+            <Tab.Icon>
+                <FontImageSource
+                    FontFamily="{DynamicResource MaterialFontFamily}"
+                    Glyph="{StaticResource ArrangeBringForward}"
+                    Color="{DynamicResource SystemBlue}" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate local:Views.GripListView}" />
+        </Tab>
+        <Tab
+            Title="Grip Builder"
+            FlyoutIcon="hand_okay.png"
+            Icon="hand_okay.png">
+            <ShellContent ContentTemplate="{DataTemplate local:Views.GripBuilderView}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="UART Control">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="{DynamicResource MaterialFontFamily}"
+                Glyph="{StaticResource Bug}"
+                Color="{DynamicResource SystemBlue}" />
+        </FlyoutItem.Icon>
+        <ShellContent ContentTemplate="{DataTemplate local:Views.UARTControlView}" />
+    </FlyoutItem>
+    <FlyoutItem Title="BT Connection">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="{DynamicResource MaterialFontFamily}"
+                Glyph="{StaticResource BluetoothSettings}"
+                Color="{DynamicResource SystemBlue}" />
+        </FlyoutItem.Icon>
+        <ShellContent ContentTemplate="{DataTemplate local:Views.BTConnectionView}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Settings">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="{DynamicResource MaterialFontFamily}"
+                Glyph="{StaticResource Settings}"
+                Color="{DynamicResource SystemBlue}" />
+        </FlyoutItem.Icon>
+        <ShellContent ContentTemplate="{DataTemplate local:Views.SettingsView}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Muscle Sensor Check">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="{DynamicResource MaterialFontFamily}"
+                Glyph="{StaticResource ArmFlex}"
+                Color="{DynamicResource SystemBlue}" />
+        </FlyoutItem.Icon>
+        <ShellContent ContentTemplate="{DataTemplate local:Views.MuscleSensorCheckView}" />
+    </FlyoutItem>
 </Shell>

@@ -1,10 +1,8 @@
 using Syncfusion.ListView.XForms.iOS;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 using Foundation;
 using UIKit;
+using Sharpnado.Presentation.Forms.iOS;
 
 namespace HandyApp.iOS
 {
@@ -23,10 +21,10 @@ namespace HandyApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-
-            global::Xamarin.Forms.Forms.SetFlags("Shell_Experimental", "Visual_Experimental", "CollectionView_Experimental");
-global::Xamarin.Forms.Forms.Init();
-SfListViewRenderer.Init();
+            global::Xamarin.Forms.Forms.Init();
+            global::Xamarin.Forms.FormsMaterial.Init();
+            SfListViewRenderer.Init();
+            SharpnadoInitializer.Initialize();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

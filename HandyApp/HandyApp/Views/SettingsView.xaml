@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HandyApp.Views.SettingsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:HandyApp.Converters"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Visual="Material"
+    mc:Ignorable="d">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IntEnumConverter x:Key="IntEnum" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--  Warning  -->
+                <Label
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="WARNING - Changing these settings can stop handy working..."
+                    TextColor="Red" />
+                <!--  Which Hand  -->
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    FontSize="Large"
+                    Text="Hand (L/R)"
+                    VerticalOptions="Center" />
+                <Picker
+                    Title="{Binding CurrentHandSettings.CurrentHand, Mode=OneTime}"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding HandNames}"
+                    SelectedIndex="{Binding UserHandSettings.CurrentHand, Converter={StaticResource IntEnum}}"
+                    VerticalOptions="Center" />
+
+                <!--  Hold Time  -->
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    FontSize="Large"
+                    HorizontalOptions="Start"
+                    Text="Hold Time (ms)"
+                    VerticalOptions="Center" />
+                <Entry
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="{Binding CurrentHandSettings.HoldTime, Mode=OneTime}"
+                    Text="{Binding UserHandSettings.HoldTime}"
+                    VerticalTextAlignment="Center" />
+
+                <!--  Peak Threshold  -->
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    FontSize="Large"
+                    HorizontalOptions="Start"
+                    Text="Peak Threshold (ms)"
+                    VerticalOptions="Center" />
+                <Entry
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    MaxLength="4"
+                    Placeholder="{Binding CurrentHandSettings.PeakThreshold, Mode=OneTime}"
+                    Text="{Binding UserHandSettings.PeakThreshold}"
+                    VerticalTextAlignment="Center" />
+
+                <!--  Enable/Disable Motors  -->
+                <Label
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    FontSize="Large"
+                    HorizontalOptions="Start"
+                    Text="Motors Enabled"
+                    VerticalOptions="Center" />
+                <Switch
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    HorizontalOptions="Start"
+                    IsToggled="{Binding UserHandSettings.MotorsEnabled}" />
+
+                <!--  Toggle Demo Mode  -->
+                <Label
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    FontSize="Large"
+                    HorizontalOptions="Start"
+                    Text="Enable Demo Mode"
+                    VerticalOptions="Center" />
+                <Switch
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    HorizontalOptions="Start"
+                    IsToggled="{Binding UserHandSettings.DemoModeEnabled}" />
+
+                <!--  Muscle Mode  -->
+                <Label
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    FontSize="Large"
+                    HorizontalOptions="Start"
+                    Text="Muscle Mode"
+                    VerticalOptions="Center" />
+                <Picker
+                    Title="{Binding CurrentHandSettings.MuscleMode, Mode=OneTime}"
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding MuscleModes}"
+                    SelectedIndex="{Binding UserHandSettings.MuscleMode, Converter={StaticResource IntEnum}}"
+                    VerticalOptions="Center" />
+
+                <!--  Get System Diagnostics  -->
+                <Button
+                    Grid.Row="7"
+                    Grid.ColumnSpan="2"
+                    Command="{Binding GetSystemDiagCommand}"
+                    Text="Get System Diagnostics" />
+
+                <!--  Reset/Save Buttons  -->
+                <Button
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    Command="{Binding ResetCommand}"
+                    MinimumHeightRequest="150"
+                    Text="Reset" />
+
+                <Button
+                    Grid.Row="9"
+                    Grid.Column="1"
+                    Command="{Binding SaveCommand}"
+                    Text="Save" />
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
+
+
+
+<!--
+    Set:
+    
+    /Hand (L/R)
+    /Hold Time
+    /Peak Threshold
+    /Muscle Control Mode (Off, STandard, Muscle)
+    /Toggle Demo Mode
+    /Enable/Disable Motors
+    BT Name change
+    Get system Diagnostics
+    Save Config to EEPROM
+    Reset to Factory (Have confirm Dialog...)
+    
+    *** LATER ***
+    *Dark/Light Mode for App.
+    *Muscle Graph the readings.
+    *Motor set-up - Analouge input and Inverted or not (Which direction)
+    *FDR Sensor Min/Max/Analouge Port for each one.
+-->
