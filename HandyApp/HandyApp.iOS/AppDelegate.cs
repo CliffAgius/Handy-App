@@ -1,5 +1,3 @@
-using Syncfusion.ListView.XForms.iOS;
-
 using Foundation;
 using UIKit;
 using Sharpnado.Presentation.Forms.iOS;
@@ -23,7 +21,6 @@ namespace HandyApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
-            SfListViewRenderer.Init();
             SharpnadoInitializer.Initialize();
             LoadApplication(new App());
 
