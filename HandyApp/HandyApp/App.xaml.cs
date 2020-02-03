@@ -37,13 +37,13 @@ namespace HandyApp
         {
             // Handle when your app starts
 
-//#if !DEBUG
+#if !DEBUG
             AppCenter.Start($"ios={AppCenteriOS};" +
                 $"android={AppCenterAndroid};", 
                 typeof(Analytics), 
                 typeof(Crashes),
                 typeof(Distribute));
-//#endif
+#endif
         }
 
         protected override void OnSleep()
