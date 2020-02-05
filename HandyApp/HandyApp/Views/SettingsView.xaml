@@ -26,7 +26,6 @@
                     <RowDefinition Height="80" />
                     <RowDefinition Height="100" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="100" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -41,7 +40,8 @@
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
                     Text="WARNING - Changing these settings can stop handy working..."
-                    TextColor="Red" />
+                    TextColor="{StaticResource SystemRed}" />
+
                 <!--  Which Hand  -->
                 <Label
                     Grid.Row="1"
@@ -105,7 +105,9 @@
                     Grid.Row="4"
                     Grid.Column="1"
                     HorizontalOptions="Start"
-                    IsToggled="{Binding UserHandSettings.MotorsEnabled}" />
+                    IsToggled="{Binding UserHandSettings.MotorsEnabled}"
+                    OnColor="{StaticResource SystemGray}"
+                    ThumbColor="{StaticResource SystemBlue}" />
 
                 <!--  Toggle Demo Mode  -->
                 <Label
@@ -119,7 +121,9 @@
                     Grid.Row="5"
                     Grid.Column="1"
                     HorizontalOptions="Start"
-                    IsToggled="{Binding UserHandSettings.DemoModeEnabled}" />
+                    IsToggled="{Binding UserHandSettings.DemoModeEnabled}"
+                    OnColor="{StaticResource SystemGray}"
+                    ThumbColor="{StaticResource SystemBlue}" />
 
                 <!--  Muscle Mode  -->
                 <Label
@@ -142,22 +146,28 @@
                 <Button
                     Grid.Row="7"
                     Grid.ColumnSpan="2"
+                    BackgroundColor="{StaticResource SystemBlue}"
                     Command="{Binding GetSystemDiagCommand}"
-                    Text="Get System Diagnostics" />
+                    Text="System Diagnostics"
+                    VerticalOptions="CenterAndExpand" />
 
                 <!--  Reset/Save Buttons  -->
                 <Button
-                    Grid.Row="9"
+                    Grid.Row="8"
                     Grid.Column="0"
+                    BackgroundColor="{StaticResource SystemGreen}"
                     Command="{Binding ResetCommand}"
                     MinimumHeightRequest="150"
-                    Text="Reset" />
+                    Text="Reset"
+                    VerticalOptions="StartAndExpand" />
 
                 <Button
-                    Grid.Row="9"
+                    Grid.Row="8"
                     Grid.Column="1"
+                    BackgroundColor="{StaticResource SystemGreen}"
                     Command="{Binding SaveCommand}"
-                    Text="Save" />
+                    Text="Save"
+                    VerticalOptions="StartAndExpand" />
             </Grid>
         </ScrollView>
     </ContentPage.Content>

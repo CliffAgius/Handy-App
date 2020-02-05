@@ -3,15 +3,22 @@
     x:Class="HandyApp.Views.MuscleSensorCheckView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converter="clr-namespace:HandyApp.Converters"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:IntStringConverter x:Key="intToString" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="2*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -19,42 +26,42 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!--  Warning  -->
-            <Label
+            <StackLayout
                 Grid.Row="0"
-                Grid.ColumnSpan="2"
-                Margin="10,20,10,20"
-                FontSize="44"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
-                Text="When you are ready follow the sequence of:"
-                TextColor="{StaticResource SystemBlue}" />
-            <Label
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
-                Margin="10,20,10,20"
-                FontSize="30"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
-                Text="Open -&gt; Close -&gt; Change Grip"
-                TextColor="{StaticResource SystemBlue}" />
+                Grid.ColumnSpan="2">
+                <Label
+                    Margin="10,20,10,20"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="When you are ready follow the sequence of:"
+                    TextColor="{StaticResource SystemBlue}" />
+                <Label
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Open -&gt; Close -&gt; Change Grip"
+                    TextColor="{StaticResource SystemBlue}" />
+            </StackLayout>
             <Button
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
                 Margin="40,0,40,0"
+                BackgroundColor="{StaticResource SystemGreen}"
                 Command="{Binding StartMeasurementCommand}"
                 IsEnabled="{Binding IsBusy}"
                 Text="Start"
-                VerticalOptions="End" />
+                VerticalOptions="Start" />
             <Slider
                 x:Name="OpenSensor"
                 Grid.Row="2"
                 Grid.Column="0"
                 BackgroundColor="{StaticResource SystemGreen}"
                 IsEnabled="False"
-                Maximum="100"
+                Maximum="1000"
                 Minimum="0"
                 Rotation="-90"
-                VerticalOptions="CenterAndExpand"
+                VerticalOptions="StartAndExpand"
                 Value="{Binding OpenSensorValue}" />
             <Slider
                 x:Name="CloseSensor"
@@ -62,29 +69,30 @@
                 Grid.Column="1"
                 BackgroundColor="{StaticResource SystemGreen}"
                 IsEnabled="False"
-                Maximum="100"
+                Maximum="1000"
                 Minimum="0"
                 Rotation="-90"
-                VerticalOptions="CenterAndExpand"
+                VerticalOptions="StartAndExpand"
                 Value="{Binding CloseSensorValue}" />
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
                 FontSize="Large"
                 HorizontalTextAlignment="Center"
-                Text="{Binding OpenSensorValue}"
-                TextColor="{StaticResource SystemBlue}" />
+                Text="{Binding OpenSensorValue, Converter={StaticResource intToString}}"
+                TextColor="{StaticResource SystemGreen}" />
             <Label
                 Grid.Row="3"
                 Grid.Column="1"
                 FontSize="Large"
                 HorizontalTextAlignment="Center"
-                Text="{Binding CloseSensorValue}"
-                TextColor="{StaticResource SystemBlue}" />
+                Text="{Binding CloseSensorValue, Converter={StaticResource intToString}}"
+                TextColor="{StaticResource SystemGreen}" />
             <Button
                 Grid.Row="3"
                 Grid.ColumnSpan="2"
                 Margin="40,0,40,40"
+                BackgroundColor="{StaticResource SystemGreen}"
                 Command="{Binding ProcessCommand}"
                 IsEnabled="{Binding ProcessBtnEnabled}"
                 Text="Send for Processing"

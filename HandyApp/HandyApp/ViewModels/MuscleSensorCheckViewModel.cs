@@ -5,8 +5,10 @@ using MvvmHelpers.Commands;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace HandyApp.ViewModels
 {
@@ -15,14 +17,21 @@ namespace HandyApp.ViewModels
         private IUserDialogs Dialogs;
         private int openSensorValue;
         private int closeSensorValue;
+        private int SensorReadCount = 0;
         private List<SensorData> SensorValues = new List<SensorData>();
 
         public AsyncCommand StartMeasurementCommand { get; private set; }
         public AsyncCommand ProcessCommand { get; set; }
 
+        public string UARTRcvd { get; set; }
+
         public int OpenSensorValue
         {
-            get => openSensorValue;
+            get
+            {
+                return openSensorValue;
+            }
+
             set
             {
                 openSensorValue = value;
@@ -31,7 +40,11 @@ namespace HandyApp.ViewModels
         }
         public int CloseSensorValue
         {
-            get => closeSensorValue;
+            get
+            {
+                return closeSensorValue;
+            }
+
             set
             {
                 closeSensorValue = value;
@@ -43,41 +56,39 @@ namespace HandyApp.ViewModels
 
         public MuscleSensorCheckViewModel(IUserDialogs dialog)
         {
-            Dialogs = dialog;
-            StartMeasurementCommand = new AsyncCommand(ActionStartMeasurement);
-            ProcessCommand = new AsyncCommand(ActionProcessing);
-            IsBusy = true;
-            ProcessBtnEnabled = true;
-            OpenSensorValue = 0;
-            CloseSensorValue = 0;
+            try
+            {
+                Dialogs = dialog;
+                StartMeasurementCommand = new AsyncCommand(ActionStartMeasurement);
+                ProcessCommand = new AsyncCommand(ActionProcessing);
+                IsBusy = true;
+                ProcessBtnEnabled = true;
+                OpenSensorValue = 0;
+                CloseSensorValue = 0;
 
-            ////REMOVE ME....
-            //AddDummySensorData();
-            ////***************
+                //Listen to the UART replies...
+                App.BTService.RcvdDataHandler += BTService_RcvdDataHandler;
 
-            //Listen to the UART replies...
-            App.BTService.RcvdDataHandler += BTService_RcvdDataHandler;
+            }
+            catch (Exception ex)
+            {
+                Dialogs.Alert($"Sorry an error during page set-up - {ex.Message}");
+            }
         }
-
-        //private void AddDummySensorData()
-        //{
-        //    SensorValues.Add(new SensorData { OpenSensorReading = 10, CloseSensorReading = 20 });
-        //    SensorValues.Add(new SensorData { OpenSensorReading = 20, CloseSensorReading = 30 });
-        //    SensorValues.Add(new SensorData { OpenSensorReading = 13, CloseSensorReading = 40 });
-        //    SensorValues.Add(new SensorData { OpenSensorReading = 45, CloseSensorReading = 50 });
-        //    SensorValues.Add(new SensorData { OpenSensorReading = 464, CloseSensorReading = 60 });
-        //    SensorValues.Add(new SensorData { OpenSensorReading = 456, CloseSensorReading = 70 });
-        //    SensorValues.Add(new SensorData { OpenSensorReading = 1076, CloseSensorReading = 80 });
-        //    SensorValues.Add(new SensorData { OpenSensorReading = 1045, CloseSensorReading = 90 });
-
-        //}
 
         private async Task ActionStartMeasurement()
         {
-            IsBusy = false;
-            await App.BTService.SendUARTCommand("A7").ConfigureAwait(false);
-            OpenSensorValue = 50;
-            CloseSensorValue = 50;
+            try
+            {
+                IsBusy = false;
+                SensorReadCount = 0;
+                await App.BTService.SendUARTCommand("M0");
+                await App.BTService.SendUARTCommand("A7");
+            }
+            catch (Exception ex)
+            {
+                Dialogs.Alert($"Sorry an error sneding the command - {ex.Message}");
+            }
         }
 
 
@@ -107,16 +118,56 @@ namespace HandyApp.ViewModels
         {
             try
             {
-                string UARTString = App.BTService.RcvdDataString;
-                if (!UARTString.Contains("*"))
+                MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    //SensorValues.Add(UARTString);
-                }
+                    UARTRcvd += App.BTService.RcvdDataString;
+                    if (UARTRcvd.Contains("A7"))
+                    {
+                        UARTRcvd = "";
+                    }
+                    if (UARTRcvd.EndsWith("\r\n") && UARTRcvd.Length > 4)
+                    {
+                        string[] command = UARTRcvd.Split('-');
+                        if (command.Length is 2)
+                        {
+                            SensorValues.Add(new SensorData
+                            {
+                                OpenSensorReading = int.Parse(command[0].Trim()),
+                                CloseSensorReading = int.Parse(command[1].Trim()),
+                                SensorReadDate = DateTime.UtcNow,
+                                UserID = DeviceInfo.Name
+                            });
+
+                            SensorReadCount++;
+                            UARTRcvd = "";
+
+                            if (SensorReadCount >= 20)
+                            {
+                                OpenSensorValue = 0;
+                                CloseSensorValue = 0;
+                                IsBusy = true;
+                                _ = EndOfSensorReadings();
+                            }
+                            else
+                            {
+                                OpenSensorValue = int.Parse(command[0].Trim());
+                                CloseSensorValue = int.Parse(command[1].Trim());
+                            }
+                        }
+                    }
+                });
             }
             catch (Exception ex)
             {
                 Dialogs.Alert($"Sorry an error while recieving the command - {ex.Message}");
             }
+        }
+
+        private async Task EndOfSensorReadings()
+        {
+            OpenSensorValue = SensorValues.Max(o => o.OpenSensorReading);
+            CloseSensorValue = SensorValues.Max(c => c.CloseSensorReading);
+            await App.BTService.SendUARTCommand("M2");
         }
     }
 }
