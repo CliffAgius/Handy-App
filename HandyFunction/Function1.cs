@@ -7,6 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace HandyFunction
 {
@@ -19,15 +20,19 @@ namespace HandyFunction
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            string name = req.Query["name"];
+            string sensorList = req.Query["sensorJSON"];
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
+            List<SensorData> result = JsonConvert.DeserializeObject<List<SensorData>>(sensorList);
 
-            return name != null
-                ? (ActionResult)new OkObjectResult($"Hello, {name}")
-                : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
+            return sensorList != null
+                ? (ActionResult)new OkObjectResult($"Data Recieved... {result.Count}")
+                : new BadRequestObjectResult("Please pass Sensor data in the query string or in the request body");
         }
+    }
+
+    public class SensorData
+    {
+        public int OpenSensorReading { get; set; }
+        public int CloseSensorReading { get; set; }
     }
 }
