@@ -23,9 +23,7 @@
             VerticalOptions="FillAndExpand">
             <renderedViews:HorizontalListView.ItemTemplate>
                 <DataTemplate>
-                    <renderedViews:DraggableViewCell
-                        x:Name="DraggableViewCell"
-                        IsDraggable="True">
+                    <renderedViews:DraggableViewCell x:Name="DraggableViewCell" IsDraggable="True">
                         <ContentView>
                             <renderedViews:MaterialFrame
                                 Margin="4"
@@ -43,6 +41,7 @@
                                 </Frame.Triggers>
 
                                 <Grid
+                                    BackgroundColor="{Binding GripColor}"
                                     ColumnSpacing="0"
                                     RowSpacing="0">
                                     <Grid.RowDefinitions>
@@ -58,11 +57,13 @@
                                         Grid.Column="0"
                                         Aspect="AspectFit"
                                         HorizontalOptions="Center"
+                                        IsAnimationPlaying="True"
                                         Source="{Binding GripImageSrc}" />
                                     <Label
                                         Grid.RowSpan="2"
-                                        Grid.Column="2"
+                                        Grid.Column="1"
                                         Margin="5"
+                                        FontAttributes="Bold"
                                         FontSize="Large"
                                         HorizontalTextAlignment="Center"
                                         Text="{Binding GripName}"

@@ -28,7 +28,8 @@
             <!--  Warning  -->
             <StackLayout
                 Grid.Row="0"
-                Grid.ColumnSpan="2">
+                Grid.ColumnSpan="2"
+                Margin="0,0,0,10">
                 <Label
                     Margin="10,20,10,20"
                     FontSize="Large"
@@ -40,7 +41,7 @@
                     FontSize="Large"
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
-                    Text="Open -&gt; Close -&gt; Change Grip"
+                    Text="Open -&gt; Close -&gt; Change Grip!"
                     TextColor="{StaticResource SystemBlue}" />
             </StackLayout>
             <Button
@@ -56,7 +57,7 @@
                 x:Name="OpenSensor"
                 Grid.Row="2"
                 Grid.Column="0"
-                BackgroundColor="{StaticResource SystemGreen}"
+                BackgroundColor="{StaticResource SystemGray}"
                 IsEnabled="False"
                 Maximum="1000"
                 Minimum="0"
@@ -92,7 +93,7 @@
                 Grid.Row="3"
                 Grid.ColumnSpan="2"
                 Margin="40,0,40,40"
-                BackgroundColor="{StaticResource SystemGreen}"
+                BackgroundColor="{StaticResource SystemBlue}"
                 Command="{Binding ProcessCommand}"
                 IsEnabled="{Binding ProcessBtnEnabled}"
                 Text="Send for Processing"
