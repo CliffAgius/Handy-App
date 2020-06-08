@@ -79,14 +79,13 @@ namespace HandyApp.Services
 
                 byte[] bytes = Encoding.ASCII.GetBytes(UARTString);
                 await writeCharacteristic.WriteAsync(bytes).ConfigureAwait(false);
-                //var test = readCharacteristic.ReadAsync().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Sorry an error while sending command - {ex.Message}");
             }
         }
-
+        
         private void ReadCharacteristic_ValueUpdated(object sender, Plugin.BLE.Abstractions.EventArgs.CharacteristicUpdatedEventArgs e)
         {
             try

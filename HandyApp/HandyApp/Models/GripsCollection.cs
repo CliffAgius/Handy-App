@@ -15,7 +15,7 @@ namespace HandyApp.Models
                 GripNumber = 1,
                 GripName = "Fist",
                 GripCommand = "G0",
-                GripColor = "Red",
+                GripColor = "#99FF0000",
                 FavoriteIcon = IconFont.HeartOutline,
                 GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
                 IsFavorite = false
@@ -25,7 +25,7 @@ namespace HandyApp.Models
                 GripNumber = 2,
                 GripName = "Hook",
                 GripCommand = "G1",
-                GripColor = "Blue",
+                GripColor = "#9900FF00",
                 FavoriteIcon = IconFont.HeartOutline,
                 GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
                 IsFavorite = false
@@ -35,7 +35,7 @@ namespace HandyApp.Models
                 GripNumber = 3,
                 GripName = "Point",
                 GripCommand = "G2",
-                GripColor = "Green",
+                GripColor = "#990000FF",
                 FavoriteIcon = IconFont.Heart,
                 GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
                 IsFavorite = false
@@ -45,7 +45,7 @@ namespace HandyApp.Models
                 GripNumber = 4,
                 GripName = "Pinch",
                 GripCommand = "G3",
-                GripColor = "#8E8E93",
+                GripColor = "#998E8E93",
                 FavoriteIcon = IconFont.HeartOutline,
                 GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
                 IsFavorite = false
@@ -55,7 +55,7 @@ namespace HandyApp.Models
                 GripNumber = 5,
                 GripName = "Tripod",
                 GripCommand = "G4",
-                GripColor = "#8E8E93",
+                GripColor = "#998E8E93",
                 FavoriteIcon = IconFont.HeartOutline,
                 GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
                 IsFavorite = false
@@ -65,7 +65,7 @@ namespace HandyApp.Models
                 GripNumber = 6,
                 GripName = "Finger Roll",
                 GripCommand = "G5",
-                GripColor = "#8E8E93",
+                GripColor = "#998E8E93",
                 FavoriteIcon = IconFont.HeartOutline,
                 GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
                 IsFavorite = false
