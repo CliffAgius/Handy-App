@@ -138,11 +138,11 @@ namespace HandyApp.ViewModels
                 if (Device.RuntimePlatform == Device.Android)
                 {
                     var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
-                    if (status != PermissionStatus.Granted)
+                    if (status != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
                     {
                         var permissionResult = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
 
-                        if (permissionResult.First().Value != PermissionStatus.Granted)
+                        if (permissionResult.First().Value != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
                         {
                             Dialogs.Toast("Location Permission denied (please allow). Not scanning.");
                             CrossPermissions.Current.OpenAppSettings();

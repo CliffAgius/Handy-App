@@ -17,7 +17,7 @@ namespace HandyApp.Models
                 GripCommand = "G0",
                 GripColor = "#99FF0000",
                 FavoriteIcon = IconFont.HeartOutline,
-                GripImageSrc = ImageSource.FromResource("HandyApp.Images.Handy-Fist.gif"),
+                GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
                 IsFavorite = false
             });
             source.Add(new Grip

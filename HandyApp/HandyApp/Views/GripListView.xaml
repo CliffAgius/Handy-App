@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
+    xmlns:snFrame="clr-namespace:Sharpnado.MaterialFrame;assembly=Sharpnado.MaterialFrame"
     xmlns:vm="clr-namespace:HandyApp.ViewModels"
     x:Name="GripListPage"
     Title="Grip List">
@@ -25,7 +26,7 @@
                 <DataTemplate>
                     <renderedViews:DraggableViewCell x:Name="DraggableViewCell" IsDraggable="True">
                         <ContentView>
-                            <renderedViews:MaterialFrame
+                            <snFrame:MaterialFrame
                                 Margin="4"
                                 Padding="5"
                                 BorderColor="{Binding GripColor}"
@@ -34,16 +35,13 @@
                                 <Frame.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Source={x:Reference DraggableViewCell}, Path=IsDragAndDropping}"
-                                        TargetType="renderedViews:MaterialFrame"
+                                        TargetType="snFrame:MaterialFrame"
                                         Value="True">
                                         <Setter Property="Elevation" Value="8" />
                                     </DataTrigger>
                                 </Frame.Triggers>
 
-                                <Grid
-                                    BackgroundColor="{Binding GripColor}"
-                                    ColumnSpacing="0"
-                                    RowSpacing="0">
+                                <Grid ColumnSpacing="0" RowSpacing="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="2*" />
                                         <RowDefinition Height="*" />
@@ -57,19 +55,17 @@
                                         Grid.Column="0"
                                         Aspect="AspectFit"
                                         HorizontalOptions="Center"
-                                        IsAnimationPlaying="True"
                                         Source="{Binding GripImageSrc}" />
                                     <Label
                                         Grid.RowSpan="2"
-                                        Grid.Column="1"
+                                        Grid.Column="2"
                                         Margin="5"
-                                        FontAttributes="Bold"
                                         FontSize="Large"
                                         HorizontalTextAlignment="Center"
                                         Text="{Binding GripName}"
                                         VerticalTextAlignment="Center" />
                                 </Grid>
-                            </renderedViews:MaterialFrame>
+                            </snFrame:MaterialFrame>
                         </ContentView>
                     </renderedViews:DraggableViewCell>
                 </DataTemplate>
