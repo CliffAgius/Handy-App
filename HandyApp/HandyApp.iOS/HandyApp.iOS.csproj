@@ -202,13 +202,13 @@
       <Version>1.5.3.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.6.0.800</Version>
+      <Version>4.6.0.847</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.DebugRainbows">
       <Version>1.1.4</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.Visual.Material">
-      <Version>4.6.0.800</Version>
+      <Version>4.6.0.847</Version>
     </PackageReference>
   </ItemGroup>
 </Project>

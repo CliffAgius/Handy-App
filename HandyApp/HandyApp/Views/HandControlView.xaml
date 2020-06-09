@@ -35,7 +35,7 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="40" />
                                         <RowDefinition Height="*" />
-                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="60" />
                                     </Grid.RowDefinitions>
                                     <Label
                                         Grid.Row="0"
@@ -61,8 +61,9 @@
                                         TextColor="Black" />
                                     <Image
                                         Grid.Row="1"
-                                        Grid.Column="1"
-                                        Aspect="AspectFit"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="3"
+                                        Aspect="AspectFill"
                                         HorizontalOptions="FillAndExpand"
                                         Source="{Binding GripImageSrc}"
                                         VerticalOptions="FillAndExpand" />
@@ -70,10 +71,11 @@
                                         Grid.Row="2"
                                         Grid.ColumnSpan="3"
                                         FontAttributes="Bold"
-                                        FontSize="Large"
-                                        HorizontalOptions="Center"
+                                        FontSize="54"
+                                        HorizontalOptions="CenterAndExpand"
+                                        HorizontalTextAlignment="Center"
                                         Text="{Binding GripName}"
-                                        VerticalOptions="Center" />
+                                        VerticalOptions="Start" />
                                 </Grid>
                             </Frame>
                         </StackLayout>
