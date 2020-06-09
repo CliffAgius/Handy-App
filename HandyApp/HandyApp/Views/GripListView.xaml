@@ -9,9 +9,17 @@
     x:Name="GripListPage"
     Title="Grip List">
 
-    <ContentPage.BindingContext>
-        <vm:GripListViewModel />
-    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding SaveCommand}" Text="Save" />
+        <!--<Button
+            Margin="0,10,20,5"
+            Padding="10"
+            BackgroundColor="#2164a8"
+            HorizontalOptions="End"
+            Text="Save"
+            TextColor="White"
+            VerticalOptions="End" />-->
+    </ContentPage.ToolbarItems>
     <StackLayout>
         <renderedViews:HorizontalListView
             CollectionPadding="16"
@@ -71,13 +79,5 @@
                 </DataTemplate>
             </renderedViews:HorizontalListView.ItemTemplate>
         </renderedViews:HorizontalListView>
-        <Button
-            Margin="10"
-            Padding="20"
-            BackgroundColor="#2164a8"
-            HorizontalOptions="Center"
-            Text="Save"
-            TextColor="White"
-            VerticalOptions="End" />
     </StackLayout>
 </ContentPage>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Acr.UserDialogs;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace HandyApp.Views
         public GripListView()
         {
             InitializeComponent();
+            BindingContext = new ViewModels.GripListViewModel(UserDialogs.Instance);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace HandyApp.Models
                 GripCommand = "G0",
                 GripColor = "#99FF0000",
                 FavoriteIcon = IconFont.HeartOutline,
-                GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
+                GripImageSrc = "handy_fist.gif",
                 IsFavorite = false
             });
             source.Add(new Grip
@@ -27,7 +27,7 @@ namespace HandyApp.Models
                 GripCommand = "G1",
                 GripColor = "#9900FF00",
                 FavoriteIcon = IconFont.HeartOutline,
-                GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
+                GripImageSrc = "handy_palm.gif",
                 IsFavorite = false
             });
             source.Add(new Grip
@@ -37,7 +37,7 @@ namespace HandyApp.Models
                 GripCommand = "G2",
                 GripColor = "#990000FF",
                 FavoriteIcon = IconFont.Heart,
-                GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
+                GripImageSrc = "handy_point.gif",
                 IsFavorite = false
             });
             source.Add(new Grip
@@ -47,7 +47,7 @@ namespace HandyApp.Models
                 GripCommand = "G3",
                 GripColor = "#998E8E93",
                 FavoriteIcon = IconFont.HeartOutline,
-                GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
+                GripImageSrc = "handy_pinch.gif",
                 IsFavorite = false
             });
             source.Add(new Grip
@@ -57,17 +57,7 @@ namespace HandyApp.Models
                 GripCommand = "G4",
                 GripColor = "#998E8E93",
                 FavoriteIcon = IconFont.HeartOutline,
-                GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
-                IsFavorite = false
-            });
-            source.Add(new Grip
-            {
-                GripNumber = 6,
-                GripName = "Finger Roll",
-                GripCommand = "G5",
-                GripColor = "#998E8E93",
-                FavoriteIcon = IconFont.HeartOutline,
-                GripImageSrc = ImageSource.FromResource("HandyApp.Images.okhand.png"),
+                GripImageSrc = "handy_ok.gif",
                 IsFavorite = false
             });
 
