@@ -14,7 +14,7 @@ namespace HandyApp.Droid
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.3.99.43")]
 	public partial class Resource
 	{
 		
@@ -13805,19 +13805,19 @@ namespace HandyApp.Droid
 			public const int hand = 2131165284;
 			
 			// aapt resource value: 0x7F070067
-			public const int handy_fist = 2131165287;
+			public const int handyfist = 2131165287;
 			
 			// aapt resource value: 0x7F070068
-			public const int handy_ok = 2131165288;
+			public const int handyok = 2131165288;
 			
 			// aapt resource value: 0x7F070069
-			public const int handy_palm = 2131165289;
+			public const int handypalm = 2131165289;
 			
 			// aapt resource value: 0x7F07006A
-			public const int handy_pinch = 2131165290;
+			public const int handypinch = 2131165290;
 			
 			// aapt resource value: 0x7F07006B
-			public const int handy_point = 2131165291;
+			public const int handypoint = 2131165291;
 			
 			// aapt resource value: 0x7F070065
 			public const int hand_okay = 2131165285;

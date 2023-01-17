@@ -17,7 +17,7 @@ namespace HandyApp.Models
                 GripCommand = "G0",
                 GripColor = "#99FF0000",
                 FavoriteIcon = IconFont.HeartOutline,
-                GripImageSrc = "handy_fist.gif",
+                GripImageSrc = "handyfist.gif",
                 IsFavorite = false
             });
             source.Add(new Grip
@@ -27,7 +27,7 @@ namespace HandyApp.Models
                 GripCommand = "G1",
                 GripColor = "#9900FF00",
                 FavoriteIcon = IconFont.HeartOutline,
-                GripImageSrc = "handy_palm.gif",
+                GripImageSrc = "handypalm.gif",
                 IsFavorite = false
             });
             source.Add(new Grip
@@ -37,7 +37,7 @@ namespace HandyApp.Models
                 GripCommand = "G2",
                 GripColor = "#990000FF",
                 FavoriteIcon = IconFont.Heart,
-                GripImageSrc = "handy_point.gif",
+                GripImageSrc = "handypoint.gif",
                 IsFavorite = false
             });
             source.Add(new Grip
@@ -47,7 +47,7 @@ namespace HandyApp.Models
                 GripCommand = "G3",
                 GripColor = "#998E8E93",
                 FavoriteIcon = IconFont.HeartOutline,
-                GripImageSrc = "handy_pinch.gif",
+                GripImageSrc = "handypinch.gif",
                 IsFavorite = false
             });
             source.Add(new Grip
@@ -57,7 +57,7 @@ namespace HandyApp.Models
                 GripCommand = "G4",
                 GripColor = "#998E8E93",
                 FavoriteIcon = IconFont.HeartOutline,
-                GripImageSrc = "handy_ok.gif",
+                GripImageSrc = "handyok.gif",
                 IsFavorite = false
             });
 
